@@ -19,9 +19,9 @@ const imageBlendShapes = document.getElementById("image-blend-shapes");
 const videoBlendShapes = document.getElementById("video-blend-shapes");
 
 let faceLandmarker;
-let runningMode: "IMAGE" | "VIDEO" = "IMAGE";
-let enableWebcamButton: HTMLButtonElement;
-let webcamRunning: Boolean = false;
+let runningMode = "IMAGE";
+let enableWebcamButton;
+let webcamRunning = false;
 const videoWidth = 480;
 
 // Before we can use HandLandmarker class we must wait for it to finish
@@ -34,11 +34,11 @@ async function createFaceLandmarker() {
   faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
     baseOptions: {
       modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
-      delegate: "GPU"
+      delegate: "GPU",
     },
     outputFaceBlendshapes: true,
     runningMode,
-    numFaces: 1
+    numFaces: 1,
   });
   demosSection.classList.remove("invisible");
 }
@@ -52,13 +52,13 @@ createFaceLandmarker();
 // In this demo, we have put all our clickable images in divs with the
 // CSS class 'detectionOnClick'. Lets get all the elements that have
 // this class.
-const imageContainers = document.getElementsByClassName("detectOnClick");
+// const imageContainers = document.getElementsByClassName("detectOnClick");
 
 // Now let's go through all of these and add a click event listener.
-for (let imageContainer of imageContainers) {
-  // Add event listener to the child element whichis the img element.
-  imageContainer.children[0].addEventListener("click", handleClick);
-}
+// for (let imageContainer of imageContainers) {
+//   // Add event listener to the child element whichis the img element.
+//   imageContainer.children[0].addEventListener("click", handleClick);
+// }
 
 // When an image is clicked, let's detect it and display results!
 async function handleClick(event) {
@@ -83,7 +83,7 @@ async function handleClick(event) {
   // which we wait to complete and then call a function to
   // print out the results of the prediction.
   const faceLandmarkerResult = faceLandmarker.detect(event.target);
-  const canvas = document.createElement("canvas") as HTMLCanvasElement;
+  const canvas = document.createElement("canvas");
   canvas.setAttribute("class", "canvas");
   canvas.setAttribute("width", event.target.naturalWidth + "px");
   canvas.setAttribute("height", event.target.naturalHeight + "px");
@@ -127,7 +127,7 @@ async function handleClick(event) {
       { color: "#E0E0E0" }
     );
     drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LIPS, {
-      color: "#E0E0E0"
+      color: "#E0E0E0",
     });
     drawingUtils.drawConnectors(
       landmarks,
@@ -147,10 +147,8 @@ async function handleClick(event) {
 // Demo 2: Continuously grab image from webcam stream and detect it.
 ********************************************************************/
 
-const video = document.getElementById("webcam") as HTMLVideoElement;
-const canvasElement = document.getElementById(
-  "output_canvas"
-) as HTMLCanvasElement;
+const video = document.getElementById("webcam");
+const canvasElement = document.getElementById("output_canvas");
 
 const canvasCtx = canvasElement.getContext("2d");
 
@@ -162,9 +160,7 @@ function hasGetUserMedia() {
 // If webcam supported, add event listener to button for when user
 // wants to activate it.
 if (hasGetUserMedia()) {
-  enableWebcamButton = document.getElementById(
-    "webcamButton"
-  ) as HTMLButtonElement;
+  enableWebcamButton = document.getElementById("webcamButton");
   enableWebcamButton.addEventListener("click", enableCam);
 } else {
   console.warn("getUserMedia() is not supported by your browser");
@@ -187,7 +183,7 @@ function enableCam(event) {
 
   // getUsermedia parameters.
   const constraints = {
-    video: true
+    video: true,
   };
 
   // Activate the webcam stream.
@@ -275,13 +271,13 @@ async function predictWebcam() {
   }
 }
 
-function drawBlendShapes(el: HTMLElement, blendShapes: any[]) {
+function drawBlendShapes(el, blendShapes) {
   if (!blendShapes.length) {
     return;
   }
 
   console.log(blendShapes[0]);
-  
+
   let htmlMaker = "";
   blendShapes[0].categories.map((shape) => {
     htmlMaker += `
