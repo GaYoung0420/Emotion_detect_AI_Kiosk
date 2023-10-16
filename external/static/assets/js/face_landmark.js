@@ -61,87 +61,87 @@ createFaceLandmarker();
 // }
 
 // When an image is clicked, let's detect it and display results!
-async function handleClick(event) {
-  if (!faceLandmarker) {
-    console.log("Wait for faceLandmarker to load before clicking!");
-    return;
-  }
+// async function handleClick(event) {
+//   if (!faceLandmarker) {
+//     console.log("Wait for faceLandmarker to load before clicking!");
+//     return;
+//   }
 
-  if (runningMode === "VIDEO") {
-    runningMode = "IMAGE";
-    await faceLandmarker.setOptions({ runningMode });
-  }
-  // Remove all landmarks drawed before
-  const allCanvas = event.target.parentNode.getElementsByClassName("canvas");
-  for (var i = allCanvas.length - 1; i >= 0; i--) {
-    const n = allCanvas[i];
-    n.parentNode.removeChild(n);
-  }
+//   if (runningMode === "VIDEO") {
+//     runningMode = "IMAGE";
+//     await faceLandmarker.setOptions({ runningMode });
+//   }
+//   // Remove all landmarks drawed before
+//   const allCanvas = event.target.parentNode.getElementsByClassName("canvas");
+//   for (var i = allCanvas.length - 1; i >= 0; i--) {
+//     const n = allCanvas[i];
+//     n.parentNode.removeChild(n);
+//   }
 
-  // We can call faceLandmarker.detect as many times as we like with
-  // different image data each time. This returns a promise
-  // which we wait to complete and then call a function to
-  // print out the results of the prediction.
-  const faceLandmarkerResult = faceLandmarker.detect(event.target);
-  const canvas = document.createElement("canvas");
-  canvas.setAttribute("class", "canvas");
-  canvas.setAttribute("width", event.target.naturalWidth + "px");
-  canvas.setAttribute("height", event.target.naturalHeight + "px");
-  canvas.style.left = "0px";
-  canvas.style.top = "0px";
-  canvas.style.width = `${event.target.width}px`;
-  canvas.style.height = `${event.target.height}px`;
+// We can call faceLandmarker.detect as many times as we like with
+// different image data each time. This returns a promise
+// which we wait to complete and then call a function to
+// print out the results of the prediction.
+//   const faceLandmarkerResult = faceLandmarker.detect(event.target);
+//   const canvas = document.createElement("canvas");
+//   canvas.setAttribute("class", "canvas");
+//   canvas.setAttribute("width", event.target.naturalWidth + "px");
+//   canvas.setAttribute("height", event.target.naturalHeight + "px");
+//   canvas.style.left = "0px";
+//   canvas.style.top = "0px";
+//   canvas.style.width = `${event.target.width}px`;
+//   canvas.style.height = `${event.target.height}px`;
 
-  event.target.parentNode.appendChild(canvas);
-  const ctx = canvas.getContext("2d");
-  const drawingUtils = new DrawingUtils(ctx);
-  for (const landmarks of faceLandmarkerResult.faceLandmarks) {
-    drawingUtils.drawConnectors(
-      landmarks,
-      FaceLandmarker.FACE_LANDMARKS_TESSELATION,
-      { color: "#C0C0C070", lineWidth: 1 }
-    );
-    drawingUtils.drawConnectors(
-      landmarks,
-      FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
-      { color: "#FF3030" }
-    );
-    drawingUtils.drawConnectors(
-      landmarks,
-      FaceLandmarker.FACE_LANDMARKS_RIGHT_EYEBROW,
-      { color: "#FF3030" }
-    );
-    drawingUtils.drawConnectors(
-      landmarks,
-      FaceLandmarker.FACE_LANDMARKS_LEFT_EYE,
-      { color: "#30FF30" }
-    );
-    drawingUtils.drawConnectors(
-      landmarks,
-      FaceLandmarker.FACE_LANDMARKS_LEFT_EYEBROW,
-      { color: "#30FF30" }
-    );
-    drawingUtils.drawConnectors(
-      landmarks,
-      FaceLandmarker.FACE_LANDMARKS_FACE_OVAL,
-      { color: "#E0E0E0" }
-    );
-    drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LIPS, {
-      color: "#E0E0E0",
-    });
-    drawingUtils.drawConnectors(
-      landmarks,
-      FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS,
-      { color: "#FF3030" }
-    );
-    drawingUtils.drawConnectors(
-      landmarks,
-      FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS,
-      { color: "#30FF30" }
-    );
-  }
-  drawBlendShapes(imageBlendShapes, faceLandmarkerResult.faceBlendshapes);
-}
+//   event.target.parentNode.appendChild(canvas);
+//   const ctx = canvas.getContext("2d");
+//   const drawingUtils = new DrawingUtils(ctx);
+//   for (const landmarks of faceLandmarkerResult.faceLandmarks) {
+//     drawingUtils.drawConnectors(
+//       landmarks,
+//       FaceLandmarker.FACE_LANDMARKS_TESSELATION,
+//       { color: "#C0C0C070", lineWidth: 1 }
+//     );
+//     drawingUtils.drawConnectors(
+//       landmarks,
+//       FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
+//       { color: "#FF3030" }
+//     );
+//     drawingUtils.drawConnectors(
+//       landmarks,
+//       FaceLandmarker.FACE_LANDMARKS_RIGHT_EYEBROW,
+//       { color: "#FF3030" }
+//     );
+//     drawingUtils.drawConnectors(
+//       landmarks,
+//       FaceLandmarker.FACE_LANDMARKS_LEFT_EYE,
+//       { color: "#30FF30" }
+//     );
+//     drawingUtils.drawConnectors(
+//       landmarks,
+//       FaceLandmarker.FACE_LANDMARKS_LEFT_EYEBROW,
+//       { color: "#30FF30" }
+//     );
+//     drawingUtils.drawConnectors(
+//       landmarks,
+//       FaceLandmarker.FACE_LANDMARKS_FACE_OVAL,
+//       { color: "#E0E0E0" }
+//     );
+//     drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LIPS, {
+//       color: "#E0E0E0",
+//     });
+//     drawingUtils.drawConnectors(
+//       landmarks,
+//       FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS,
+//       { color: "#FF3030" }
+//     );
+//     drawingUtils.drawConnectors(
+//       landmarks,
+//       FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS,
+//       { color: "#30FF30" }
+//     );
+//   }
+//   drawBlendShapes(imageBlendShapes, faceLandmarkerResult.faceBlendshapes);
+// }
 
 /********************************************************************
 // Demo 2: Continuously grab image from webcam stream and detect it.
@@ -173,13 +173,13 @@ function enableCam(event) {
     return;
   }
 
-  if (webcamRunning === true) {
-    webcamRunning = false;
-    enableWebcamButton.innerText = "ENABLE PREDICTIONS";
-  } else {
-    webcamRunning = true;
-    enableWebcamButton.innerText = "DISABLE PREDICTIONS";
-  }
+  // if (webcamRunning === true) {
+  //   webcamRunning = false;
+  //   enableWebcamButton.innerText = "ENABLE PREDICTIONS";
+  // } else {
+  //   webcamRunning = true;
+  //   enableWebcamButton.innerText = "DISABLE PREDICTIONS";
+  // }
 
   // getUsermedia parameters.
   const constraints = {
@@ -196,6 +196,7 @@ function enableCam(event) {
 let lastVideoTime = -1;
 let results = undefined;
 const drawingUtils = new DrawingUtils(canvasCtx);
+
 async function predictWebcam() {
   const radio = video.videoHeight / video.videoWidth;
   video.style.width = videoWidth + "px";
