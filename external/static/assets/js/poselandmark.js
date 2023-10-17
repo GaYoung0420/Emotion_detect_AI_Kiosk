@@ -71,7 +71,15 @@ async function handleClick(event) {
 
   if (runningMode === "VIDEO") {
     runningMode = "IMAGE";
-    await poseLandmarker.setOptions({ runningMode: "IMAGE" });
+    await poseLandmarker.setOptions({
+      runningMode: "IMAGE",
+      upperBodyOnly: true,
+      modelComplexity: 1,
+      smoothLandmarks: true,
+      enableSegmentation: false,
+      minDetectionConfidence: 0.5,
+      minTrackingConfidence: 0.5,
+    });
   }
   // Remove all landmarks drawed before
   const allCanvas = event.target.parentNode.getElementsByClassName("canvas");
@@ -159,10 +167,16 @@ function enableCam(event) {
 
 let lastVideoTime = -1;
 async function predictWebcam() {
-  canvasElement.style.height = videoHeight;
-  video.style.height = videoHeight;
-  canvasElement.style.width = videoWidth;
-  video.style.width = videoWidth;
+  // canvasElement.style.height = videoHeight;
+  // video.style.height = videoHeight;
+  // canvasElement.style.width = videoWidth;
+  // video.style.width = videoWidth;
+
+  canvasElement.style.width = video.videoWidth;
+  canvasElement.style.height = video.videoHeight;
+  canvasElement.width = video.videoWidth;
+  canvasElement.height = video.videoHeight;
+
   // Now let's start detecting the stream.
   if (runningMode === "IMAGE") {
     runningMode = "VIDEO";

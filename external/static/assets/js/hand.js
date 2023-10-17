@@ -86,12 +86,15 @@ const predictWebcam = async () => {
     let startTimeMs = performance.now();
     if (lastVideoTime !== video.currentTime) {
       lastVideoTime = video.currentTime;
-      const results = handLandmarker.detectForVideo(video, startTimeMs);
+      const results_handLandmarker = handLandmarker.detectForVideo(
+        video,
+        startTimeMs
+      );
 
       canvasCtx.save();
       canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-      if (results.landmarks) {
-        for (const landmarks of results.landmarks) {
+      if (results_handLandmarker.landmarks) {
+        for (const landmarks of results_handLandmarker.landmarks) {
           drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
             color: "#00FF00",
             lineWidth: 5,
