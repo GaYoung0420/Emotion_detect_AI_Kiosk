@@ -13,14 +13,20 @@
 // limitations under the License.
 
 import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
-const { FaceLandmarker, FilesetResolver, DrawingUtils, HandLandmarker } =
-  vision;
+const {
+  FaceLandmarker,
+  FilesetResolver,
+  DrawingUtils,
+  HandLandmarker,
+  PoseLandmarker,
+} = vision;
 const demosSection = document.getElementById("demos");
 const imageBlendShapes = document.getElementById("image-blend-shapes");
 const videoBlendShapes = document.getElementById("video-blend-shapes");
 
-let faceLandmarker;
-let handLandmarker;
+let faceLandmarker = undefined;
+let handLandmarker = undefined;
+let poseLandmarker = undefined;
 let runningMode = "IMAGE";
 let webcamRunning = false;
 const videoWidth = 480;
@@ -31,7 +37,6 @@ const videoWidth = 480;
 
 const video = document.getElementById("webcam");
 const canvasElement = document.getElementById("output_canvas");
-
 const canvasCtx = canvasElement.getContext("2d");
 
 // Check if webcam access is supported.
@@ -63,7 +68,16 @@ const enableCam = async () => {
     numHands: 2,
   });
 
-  if (!faceLandmarker && !handLandmarker) {
+  poseLandmarker = await PoseLandmarker.createFromOptions(filesetResolver, {
+    baseOptions: {
+      modelAssetPath: `https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task`,
+      delegate: "GPU",
+    },
+    runningMode: runningMode,
+    numPoses: 2,
+  });
+
+  if (!faceLandmarker && !handLandmarker && poseLandmarker) {
     console.log("Wait! faceLandmarker not loaded yet.");
     return;
   }
