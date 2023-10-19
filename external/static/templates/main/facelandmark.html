@@ -45,6 +45,9 @@ limitations under the License. -->
     ></script>
 
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script defer src="/external/static/library/face-api.min.js"></script>
+
     <link href="/external/static/assets/css/test.css" rel="stylesheet" />
   </head>
   <body>
@@ -52,14 +55,14 @@ limitations under the License. -->
 
     <section id="demos">
       <div id="liveView" class="videoView">
-        <button id="webcamButton" class="mdc-button mdc-button--raised">
+        <!-- <button id="webcamButton" class="mdc-button mdc-button--raised">
           <span class="mdc-button__ripple"></span>
           <span class="mdc-button__label">ENABLE WEBCAM</span>
-        </button>
+        </button> -->
         <div style="position: relative">
           <video
             id="webcam"
-            style="position: abso"
+            style="position: absolute"
             autoplay
             playsinline
           ></video>

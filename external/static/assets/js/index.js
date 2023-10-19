@@ -41,7 +41,7 @@ function startVideo() {
           displaySize
         );
         faceapi.draw.drawDetections(canvas, resizedDetections);
-        faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+        // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
         faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
       } catch (error) {
         console.error(error);
@@ -64,14 +64,12 @@ video.addEventListener("playing", () => {
   setInterval(async () => {
     const detections = await faceapi
       .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
-      .withFaceLandmarks()
       .withFaceExpressions();
 
     // 캔버스를 지우고, 감지된 얼굴의 위치, 특징, 표정을 캔버스에 그립니다.
     const resizedDetections = faceapi.resizeResults(detections, displaySize);
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
     faceapi.draw.drawDetections(canvas, resizedDetections);
-    faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
   }, 100);
 });
