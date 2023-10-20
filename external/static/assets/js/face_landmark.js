@@ -130,6 +130,14 @@ let results_poseLandmarker = undefined;
 let results_expression = undefined;
 const drawingUtils = new DrawingUtils(canvasCtx);
 
+let isEyeBlinkDetected = false;
+let eyeBlinkStartTime = 0;
+
+let DetectRaisingArmPose = false; // 팔을 들고 있는 것
+let DetectPointingGesture = false; // 포인팅하는 손
+let DetectNegativeExpression; //부정적인 표정
+let DetectGrimaceFace = false; // 눈을 찡그림
+
 // 웹캠 비디오 스트림에서 얼굴과 손을 감지하고 해당 랜드마크를 캔버스에 그리는 함수
 async function predictWebcam() {
   // 캔버스의 크기를 웹캠 비디오의 크기에 맞게 조정합니다.
@@ -166,29 +174,17 @@ async function predictWebcam() {
   drawGesturePredict(results_gestureRecognizer);
 
   // 얼굴의 랜드마크를 캔버스에 그리는 함수를 호출합니다.
-
   drawFaceMarker(results_faceLandmarker);
 
-  // 감정 Detector
-  results_expression = expressionDetection();
+  // console.log(DetectNegativeExpression);
 
-  if (
-    results_gestureRecognizer.landmarks[0] != undefined &&
-    results_gestureRecognizer.landmarks[0][14] != undefined &&
-    results_poseLandmarker.landmarks[0][13] != undefined &&
-    results_poseLandmarker.landmarks[0][20] != undefined &&
-    results_poseLandmarker.landmarks[0][19] != undefined &&
-    results_gestureRecognizer.gestures[0][0] != undefined &&
-    results_faceLandmarker.faceBlendshapes[0] != undefined &&
-    results_faceLandmarker.faceBlendshapes[0].categories[9] != undefined &&
-    results_faceLandmarker.faceBlendshapes[0].categories[10] != undefined
-  ) {
-    predictTroubleContext(
-      results_faceLandmarker,
-      results_gestureRecognizer,
-      results_poseLandmarker
-    );
-  }
+  // 감정 Detector
+  expressionDetection();
+
+  // 눈 찡그림 인식
+  isEyeBlinkDetectedFunc(results_faceLandmarker);
+
+  isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker);
 
   // 웹캠이 실행 중일 경우, 브라우저가 준비될 때마다 이 함수를 다시 호출하여 지속적으로 예측합니다.
   if (webcamRunning === true) {
@@ -197,10 +193,8 @@ async function predictWebcam() {
 }
 
 // 키오스크 사용시 어려움을 겪는 것을 확인하기 위한 함수
-let isEyeBlinkDetected = false;
-let eyeBlinkStartTime = 0;
+
 function predictTroubleContext(
-  results_faceLandmarker,
   results_gestureRecognizer,
   results_poseLandmarker
 ) {
@@ -211,26 +205,57 @@ function predictTroubleContext(
     2. 표정의 변화(emotion deteting), 터치 지속 시간, 
   
   */
+}
 
-  let rightElbow_position = results_poseLandmarker.landmarks[0][14];
-  let leftElbow_position = results_poseLandmarker.landmarks[0][13];
-  let rightIndex_position = results_poseLandmarker.landmarks[0][20];
-  let leftIndex_position = results_poseLandmarker.landmarks[0][19];
+function isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker) {
+  /*
+    1. 터치를 하려고 하는 자세를 확인
+        // 팔꿈치(14 - right elbow or 13 - left elbow)가 손(20 - right index, 19 - left index)보다 아래에 위치하면 손을 들고 있는 자세
+        // Pointing gesture를 취하고 있으면 터치를 할려고하는 자세를 확인할 수 있음
+  
+  */
 
-  let pointing_gesture = results_gestureRecognizer.gestures[0][0];
-
-  let eyeBlinkLeft = results_faceLandmarker.faceBlendshapes[0].categories[9];
-  let eyeBlinkRight = results_faceLandmarker.faceBlendshapes[0].categories[10];
+  const landmarksPoseLandmarker = results_poseLandmarker.landmarks[0];
+  const gestures = results_gestureRecognizer.gestures[0];
 
   if (
-    (rightElbow_position.y < rightIndex_position.y ||
-      leftElbow_position.y < leftIndex_position.y) &&
-    pointing_gesture.categoryName === "Pointing_Up"
+    landmarksPoseLandmarker &&
+    landmarksPoseLandmarker[13] !== undefined &&
+    landmarksPoseLandmarker[14] !== undefined &&
+    landmarksPoseLandmarker[20] !== undefined &&
+    landmarksPoseLandmarker[19] !== undefined &&
+    gestures &&
+    gestures[0] !== undefined
   ) {
-    console.log("터치 직전 확인");
-    let currentTime = Date.now();
-    let elapsedTime = (currentTime - eyeBlinkStartTime) / 1000; // 경과 시간(초) 계산
+    let rightElbow_position = landmarksPoseLandmarker[14];
+    let leftElbow_position = landmarksPoseLandmarker[13];
+    let rightIndex_position = landmarksPoseLandmarker[20];
+    let leftIndex_position = landmarksPoseLandmarker[19];
 
+    let pointing_gesture = gestures[0];
+    if (
+      (rightElbow_position.y < rightIndex_position.y ||
+        leftElbow_position.y < leftIndex_position.y) &&
+      pointing_gesture.categoryName === "Pointing_Up"
+    ) {
+      console.log("터치 직전 확인");
+    }
+  }
+}
+
+// 눈 찡그림 인식
+function isEyeBlinkDetectedFunc(results_faceLandmarker) {
+  const faceBlendshapes = results_faceLandmarker.faceBlendshapes[0];
+  let currentTime = Date.now();
+  let elapsedTime = (currentTime - eyeBlinkStartTime) / 1000; // 경과 시간(초) 계산
+  if (
+    faceBlendshapes &&
+    faceBlendshapes.categories[9] !== undefined &&
+    faceBlendshapes.categories[10] !== undefined
+  ) {
+    let eyeBlinkLeft = results_faceLandmarker.faceBlendshapes[0].categories[9];
+    let eyeBlinkRight =
+      results_faceLandmarker.faceBlendshapes[0].categories[10];
     if (eyeBlinkLeft.score > 0.3 && eyeBlinkRight.score > 0.3) {
       // 찡그림이 감지됨
       if (!isEyeBlinkDetected) {
@@ -240,14 +265,60 @@ function predictTroubleContext(
       } else if (elapsedTime >= 1) {
         // 찡그림이 지속되고 3초 이상 경과한 경우
         console.log("찡그림");
+        DetectGrimaceFace = true;
       }
     } else {
       // 찡그림이 감지되지 않음
       isEyeBlinkDetected = false;
-      console.log("찡그림X");
+      DetectGrimaceFace = false;
+      // console.log("찡그림X");
     }
   }
 }
+
+// 표정 Recognition 하는 함수
+async function expressionDetection() {
+  // 표정 detect
+  const detections = await faceapi
+    .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
+    .withFaceExpressions();
+
+  let maxExpression = undefined;
+  if (detections[0] != undefined) {
+    let expressionsResult = [
+      { name: "neutral", value: detections[0].expressions.neutral },
+      { name: "happy", value: detections[0].expressions.happy },
+      { name: "sad", value: detections[0].expressions.sad },
+      { name: "angry", value: detections[0].expressions.angry },
+      { name: "fearful", value: detections[0].expressions.fearful },
+      { name: "disgusted", value: detections[0].expressions.disgusted },
+      { name: "surprised", value: detections[0].expressions.surprised },
+    ];
+
+    maxExpression = expressionsResult.reduce((max, current) => {
+      return max.value > current.value ? max : current;
+    }, expressionsResult[0]);
+
+    if (
+      maxExpression.name === "sad" ||
+      maxExpression.name === "angry" ||
+      maxExpression.name === "fearful" ||
+      maxExpression.name === "disgusted" ||
+      maxExpression.name === "surprised"
+    ) {
+      DetectNegativeExpression = true;
+      console.log(
+        "부정적 표정 감지: ",
+        maxExpression.name,
+        maxExpression.value
+      );
+    } else {
+      DetectNegativeExpression = false;
+    }
+  }
+}
+
+//////////////////////////////// Drawing ********************************
 //주어진 results_gestureRecognizer 객체를 기반으로 화면에 손의 특징점 및 제스처를 그리는 함수
 function drawGesturePredict(results_gestureRecognizer) {
   // 캔버스 컨텍스트를 저장하고 캔버스를 지웁니다.
@@ -285,33 +356,6 @@ function drawGesturePredict(results_gestureRecognizer) {
     // console.log(gestureOutput); // 콘솔에 제스처 정보 출력
   } else {
     // console.log("none"); // 만약 제스처가 없다면 "none" 출력
-  }
-}
-
-async function expressionDetection() {
-  // 표정 detect
-  const detections = await faceapi
-    .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
-    .withFaceExpressions();
-
-  let maxExpression = undefined;
-  if (detections[0] != undefined) {
-    let expressionsResult = [
-      { name: "neutral", value: detections[0].expressions.neutral },
-      { name: "happy", value: detections[0].expressions.happy },
-      { name: "sad", value: detections[0].expressions.sad },
-      { name: "angry", value: detections[0].expressions.angry },
-      { name: "fearful", value: detections[0].expressions.fearful },
-      { name: "disgusted", value: detections[0].expressions.disgusted },
-      { name: "surprised", value: detections[0].expressions.surprised },
-    ];
-
-    maxExpression = expressionsResult.reduce((max, current) => {
-      return max.value > current.value ? max : current;
-    }, expressionsResult[0]);
-
-    // console.log("현재 표정: ", maxExpression.name, maxExpression.value);
-    return maxExpression;
   }
 }
 
@@ -374,6 +418,7 @@ function drawFaceMarker(results_faceLandmarker) {
   }
 }
 
+// pose 그리는 함수
 function detectPoseLandmarks() {
   let startTimeMs = performance.now();
   let results_poseLandmarker;
