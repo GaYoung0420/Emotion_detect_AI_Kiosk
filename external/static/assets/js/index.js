@@ -18,36 +18,36 @@ function startVideo() {
   // 비디오 스트림에서 track을 가져옵니다.
   const videoStream = video.captureStream();
 
-  // 비디오 트랙이 추가될 때마다 실행되는 이벤트 리스너를 설정합니다.
-  videoStream.addEventListener("addtrack", () => {
-    // 비디오 트랙과 관련된 ImageCapture 객체를 생성합니다.
-    const videoTrack = videoStream.getVideoTracks()[0];
-    const imageCapture = new ImageCapture(videoTrack);
+  // // 비디오 트랙이 추가될 때마다 실행되는 이벤트 리스너를 설정합니다.
+  // videoStream.addEventListener("addtrack", () => {
+  //   // 비디오 트랙과 관련된 ImageCapture 객체를 생성합니다.
+  //   const videoTrack = videoStream.getVideoTracks()[0];
+  //   const imageCapture = new ImageCapture(videoTrack);
 
-    // 일정 시간 간격으로 비디오 프레임을 캡처하고 얼굴을 감지하여 화면에 표시합니다.
-    setInterval(async () => {
-      try {
-        // 비디오 프레임을 가져와서 얼굴 감지 및 표현을 수행합니다.
-        const bitmap = await imageCapture.grabFrame();
-        const detections = await faceapi
-          .detectAllFaces(bitmap, new faceapi.TinyFaceDetectorOptions())
-          .withFaceLandmarks()
-          .withFaceExpressions();
+  //   // 일정 시간 간격으로 비디오 프레임을 캡처하고 얼굴을 감지하여 화면에 표시합니다.
+  //   // setInterval(async () => {
+  //   //   try {
+  //   //     // 비디오 프레임을 가져와서 얼굴 감지 및 표현을 수행합니다.
+  //   //     const bitmap = await imageCapture.grabFrame();
+  //   //     const detections = await faceapi
+  //   //       .detectAllFaces(bitmap, new faceapi.TinyFaceDetectorOptions())
+  //   //       .withFaceLandmarks()
+  //   //       .withFaceExpressions();
 
-        // 캔버스를 지우고, 감지된 얼굴의 위치, 특징, 표정을 캔버스에 그립니다.
-        canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-        const resizedDetections = faceapi.resizeResults(
-          detections,
-          displaySize
-        );
-        faceapi.draw.drawDetections(canvas, resizedDetections);
-        // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-        faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
-      } catch (error) {
-        console.error(error);
-      }
-    }, 100);
-  });
+  //   //     // 캔버스를 지우고, 감지된 얼굴의 위치, 특징, 표정을 캔버스에 그립니다.
+  //   //     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+  //   //     const resizedDetections = faceapi.resizeResults(
+  //   //       detections,
+  //   //       displaySize
+  //   //     );
+  //   //     faceapi.draw.drawDetections(canvas, resizedDetections);
+  //   //     // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+  //   //     faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+  //   //   } catch (error) {
+  //   //     console.error(error);
+  //   //   }
+  //   // }, 100);
+  // });
 }
 
 // 비디오가 재생될 때 실행되는 이벤트 리스너를 설정합니다.

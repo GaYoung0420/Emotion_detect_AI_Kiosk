@@ -31,20 +31,37 @@ let gestureRecognizer = undefined;
 let runningMode = "IMAGE";
 let webcamRunning = false;
 const videoWidth = 480;
-
+const videoHeight = 1000;
 // Before we can use HandLandmarker class we must wait for it to finish
 // loading. Machine Learning models can be large and take a moment to
 // get everything needed to run.
 
-const video = document.getElementById("webcam");
+const video = document.getElementById("video");
 const canvasElement = document.getElementById("output_canvas");
 const canvasCtx = canvasElement.getContext("2d");
 
-// Check if webcam access is supported.
-const hasGetUserMedia = () => !!navigator.mediaDevices?.getUserMedia;
+// 비디오 파일을 로드하는 함수
+async function loadVideo() {
+  const videoFile = "/external/static/assets/video/20230714_152319.mp4"; // 비디오 파일 경로 설정
+  video.src = videoFile;
 
-// 미디어파이프의 모델을 초기화하고 웹캠 스트림을 활성화하여 감지된 얼굴, 손, 포즈, 제스처 등을 예측하는 모델 로드하는 함수
-const enableCam = async () => {
+  // 비디오가 로드될 때까지 기다립니다.
+  await video.load();
+
+  // 비디오가 로드된 후 미디어파이프 모델을 초기화하고 예측 함수(predictVideo)를 호출합니다.
+  video.addEventListener("loadeddata", async () => {
+    await initMediaPipeModels();
+  });
+
+  video.addEventListener("playing", () => {
+    setInterval(async () => {
+      predictWebcam();
+    }, 100);
+  });
+}
+
+// 미디어파이프 모델을 초기화하는 함수
+async function initMediaPipeModels() {
   // FilesetResolver를 사용하여 미디어파이프 모델을 로드합니다.
   const filesetResolver = await FilesetResolver.forVisionTasks(
     "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
@@ -59,7 +76,6 @@ const enableCam = async () => {
     },
     runningMode: "VIDEO",
     outputFaceBlendshapes: true,
-    runningMode,
     numFaces: 1,
   });
 
@@ -71,7 +87,7 @@ const enableCam = async () => {
       delegate: "GPU",
     },
     runningMode: "VIDEO",
-    numPoses: 2,
+    numPoses: 1,
   });
 
   // 제스처 인식 모델을 초기화합니다.
@@ -85,6 +101,7 @@ const enableCam = async () => {
         delegate: "GPU",
       },
       runningMode: "VIDEO",
+      num_hands: 2,
     }
   );
 
@@ -93,27 +110,7 @@ const enableCam = async () => {
     console.log("Wait! model is not loaded yet.");
     return;
   }
-
-  // getUserMedia()를 지원하는지 확인하고 웹캠 스트림을 활성화합니다.
-  if (hasGetUserMedia()) {
-    // getUserMedia()의 매개변수를 설정합니다.
-    const constraints = {
-      video: true,
-    };
-    // 웹캠 스트림을 활성화하고 예측 함수(predictWebcam)를 호출합니다.
-    navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-      video.srcObject = stream;
-      video.addEventListener("loadeddata", predictWebcam);
-      webcamRunning = true;
-      console.log("Webcam");
-    });
-  } else {
-    // getUserMedia()를 지원하지 않는 경우 경고 메시지를 출력합니다.
-    console.warn("getUserMedia() is not supported by your browser");
-  }
-};
-
-// enableCam();
+}
 
 // faceapi.js에서 사용되는 여러 모델을 비동기적으로 로드합니다.
 Promise.all([
@@ -121,7 +118,7 @@ Promise.all([
   faceapi.nets.faceLandmark68Net.loadFromUri("/external/static/assets/models"),
   faceapi.nets.faceRecognitionNet.loadFromUri("/external/static/assets/models"),
   faceapi.nets.faceExpressionNet.loadFromUri("/external/static/assets/models"),
-]).then(enableCam); // 모든 모델이 성공적으로 로드되면 startVideo 함수를 호출합니다.
+]).then(loadVideo); // 모든 모델이 성공적으로 로드되면 startVideo 함수를 호출합니다.
 
 let lastVideoTime = -1;
 let results_faceLandmarker = undefined;
@@ -149,6 +146,11 @@ async function predictWebcam() {
   canvasElement.width = video.videoWidth;
   canvasElement.height = video.videoHeight;
 
+  // canvasElement.style.height = videoHeight;
+  // video.style.height = videoHeight;
+  // canvasElement.style.width = videoWidth;
+  // video.style.width = videoWidth;
+
   // 미디어파이프 모델을 실행하는 모드를 설정합니다.
   // 'IMAGE' 모드에서 'VIDEO' 모드로 변경합니다.
   if (runningMode === "IMAGE") {
@@ -156,46 +158,46 @@ async function predictWebcam() {
     await faceLandmarker.setOptions({ runningMode: runningMode });
   }
 
-  // 현재 시간을 기록합니다.
-  let startTimeMs = performance.now();
-  let nowInMs = Date.now();
-  // 비디오의 현재 시간이 이전과 다를 경우에만 감지 및 예측을 수행합니다.
-  if (lastVideoTime !== video.currentTime) {
-    lastVideoTime = video.currentTime;
+  function detectFrame() {
+    // 현재 시간을 기록합니다.
+    let startTimeMs = performance.now();
+    let nowInMs = Date.now();
+    // 비디오의 현재 시간이 이전과 다를 경우에만 감지 및 예측을 수행합니다.
+    if (lastVideoTime !== video.currentTime) {
+      lastVideoTime = video.currentTime;
 
-    // 웹캠 비디오에서 얼굴과 손을 감지하고 랜드마크를 가져옵니다.
-    results_gestureRecognizer = gestureRecognizer.recognizeForVideo(
-      video,
-      nowInMs
-    );
+      // 웹캠 비디오에서 얼굴과 손을 감지하고 랜드마크를 가져옵니다.
+      results_gestureRecognizer = gestureRecognizer.recognizeForVideo(
+        video,
+        nowInMs
+      );
+    }
+    results_faceLandmarker = faceLandmarker.detectForVideo(video, startTimeMs);
+
+    results_poseLandmarker = detectPoseLandmarks();
+
+    // 손의 랜드마크를 캔버스에 그리는 함수
+    drawGesturePredict(results_gestureRecognizer);
+
+    // 얼굴의 랜드마크를 캔버스에 그리는 함수
+    drawFaceMarker(results_faceLandmarker);
+
+    // console.log(DetectNegativeExpression);
+
+    // 감정 Detector
+    expressionDetection();
+
+    // 눈 찡그림 인식
+    isEyeBlinkDetectedFunc(results_faceLandmarker);
+
+    isMouthOpen(results_faceLandmarker);
+
+    // 손을 포인팅하여 들고있는 자세 인식
+    isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker);
   }
-  results_faceLandmarker = faceLandmarker.detectForVideo(video, startTimeMs);
 
-  results_poseLandmarker = detectPoseLandmarks();
-
-  // 손의 랜드마크를 캔버스에 그리는 함수
-  drawGesturePredict(results_gestureRecognizer);
-
-  // 얼굴의 랜드마크를 캔버스에 그리는 함수
-  drawFaceMarker(results_faceLandmarker);
-
-  // console.log(DetectNegativeExpression);
-
-  // 감정 Detector
-  expressionDetection();
-
-  // 눈 찡그림 인식
-  isEyeBlinkDetectedFunc(results_faceLandmarker);
-
-  isMouthOpen(results_faceLandmarker);
-
-  // 손을 포인팅하여 들고있는 자세 인식
-  isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker);
-
-  // 웹캠이 실행 중일 경우, 브라우저가 준비될 때마다 이 함수를 다시 호출하여 지속적으로 예측합니다.
-  if (webcamRunning === true) {
-    window.requestAnimationFrame(predictWebcam);
-  }
+  // 최초 한 번 감지를 시작합니다.
+  detectFrame();
 }
 
 // 키오스크 사용시 어려움을 겪는 것을 확인하기 위한 함수
@@ -239,12 +241,16 @@ function isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker) {
     let leftIndex_position = landmarksPoseLandmarker[19];
 
     let pointing_gesture = gestures[0];
+
+    console.log(gestures);
     if (
-      (rightElbow_position.y < rightIndex_position.y ||
-        leftElbow_position.y < leftIndex_position.y) &&
-      pointing_gesture.categoryName === "Pointing_Up"
+      rightElbow_position.y < rightIndex_position.y ||
+      leftElbow_position.y < leftIndex_position.y
     ) {
-      console.log("터치 직전 확인");
+      console.log("손 들었음");
+    }
+    if (pointing_gesture.categoryName === "Pointing_Up") {
+      console.log("Pointing_Up");
     }
   }
 }
@@ -320,6 +326,7 @@ async function expressionDetection() {
     .withFaceExpressions();
 
   let maxExpression = undefined;
+
   if (detections[0] != undefined) {
     let expressionsResult = [
       { name: "neutral", value: detections[0].expressions.neutral },
@@ -330,17 +337,17 @@ async function expressionDetection() {
       { name: "disgusted", value: detections[0].expressions.disgusted },
       { name: "surprised", value: detections[0].expressions.surprised },
     ];
-
     maxExpression = expressionsResult.reduce((max, current) => {
       return max.value > current.value ? max : current;
     }, expressionsResult[0]);
 
     if (
-      maxExpression.name === "sad" ||
-      maxExpression.name === "angry" ||
-      maxExpression.name === "fearful" ||
-      maxExpression.name === "disgusted" ||
-      maxExpression.name === "surprised"
+      (maxExpression.name === "sad" ||
+        maxExpression.name === "angry" ||
+        maxExpression.name === "fearful" ||
+        maxExpression.name === "disgusted" ||
+        maxExpression.name === "surprised") &&
+      maxExpression.value > 0.7
     ) {
       DetectNegativeExpression = true;
       console.log(
