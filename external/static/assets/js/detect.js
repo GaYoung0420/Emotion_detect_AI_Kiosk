@@ -131,12 +131,15 @@ let results_expression = undefined;
 const drawingUtils = new DrawingUtils(canvasCtx);
 
 let isEyeBlinkDetected = false;
+let isJawOpen = false;
 let eyeBlinkStartTime = 0;
+let JawOpenStartTime = 0;
 
 let DetectRaisingArmPose = false; // 팔을 들고 있는 것
 let DetectPointingGesture = false; // 포인팅하는 손
 let DetectNegativeExpression; //부정적인 표정
 let DetectGrimaceFace = false; // 눈을 찡그림
+let DetectJawOpen = false; // 눈을 찡그림
 
 // 웹캠 비디오 스트림에서 얼굴과 손을 감지하고 해당 랜드마크를 캔버스에 그리는 함수
 async function predictWebcam() {
@@ -170,10 +173,10 @@ async function predictWebcam() {
 
   results_poseLandmarker = detectPoseLandmarks();
 
-  // 손의 랜드마크를 캔버스에 그리는 함수를 호출합니다.
+  // 손의 랜드마크를 캔버스에 그리는 함수
   drawGesturePredict(results_gestureRecognizer);
 
-  // 얼굴의 랜드마크를 캔버스에 그리는 함수를 호출합니다.
+  // 얼굴의 랜드마크를 캔버스에 그리는 함수
   drawFaceMarker(results_faceLandmarker);
 
   // console.log(DetectNegativeExpression);
@@ -184,6 +187,9 @@ async function predictWebcam() {
   // 눈 찡그림 인식
   isEyeBlinkDetectedFunc(results_faceLandmarker);
 
+  isMouthOpen(results_faceLandmarker);
+
+  // 손을 포인팅하여 들고있는 자세 인식
   isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker);
 
   // 웹캠이 실행 중일 경우, 브라우저가 준비될 때마다 이 함수를 다시 호출하여 지속적으로 예측합니다.
@@ -271,6 +277,36 @@ function isEyeBlinkDetectedFunc(results_faceLandmarker) {
       // 찡그림이 감지되지 않음
       isEyeBlinkDetected = false;
       DetectGrimaceFace = false;
+      // console.log("찡그림X");
+    }
+  }
+}
+
+// 입 벌림 인식
+function isMouthOpen(results_faceLandmarker) {
+  const faceBlendshapes = results_faceLandmarker.faceBlendshapes[0];
+  // console.log(faceBlendshapes.categories[25]);
+  let currentTime = Date.now();
+  // console.log(faceBlendshapes.categories[25]);
+  // let elapsedTime = (currentTime - eyeBlinkStartTime) / 1000; // 경과 시간(초) 계산
+  if (faceBlendshapes && faceBlendshapes.categories[25] !== undefined) {
+    let jawOpen = faceBlendshapes.categories[25];
+    if (jawOpen.score > 0.1) {
+      console.log("입벌림 " + jawOpen.score);
+
+      // 입벌림이 감지됨
+      // if (!isJawOpen) {
+      //   // 처음으로 찡그림이 감지된 경우, 시작 시간을 기록
+      //   JawOpenStartTime = currentTime;
+      //   isJawOpen = true;
+      // } else if (elapsedTime >= 3) {
+      //   // 입벌림이 지속되고 3초 이상 경과한 경우
+      //   DetectJawOpen = true;
+      // }
+    } else {
+      // 입벌림이 감지되지 않음
+      isJawOpen = false;
+      DetectJawOpen = false;
       // console.log("찡그림X");
     }
   }
