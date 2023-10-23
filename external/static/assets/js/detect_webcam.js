@@ -117,10 +117,10 @@ const enableCam = async () => {
 
 // faceapi.js에서 사용되는 여러 모델을 비동기적으로 로드합니다.
 Promise.all([
-  faceapi.nets.tinyFaceDetector.loadFromUri("/external/static/assets/models"),
-  faceapi.nets.faceLandmark68Net.loadFromUri("/external/static/assets/models"),
-  faceapi.nets.faceRecognitionNet.loadFromUri("/external/static/assets/models"),
-  faceapi.nets.faceExpressionNet.loadFromUri("/external/static/assets/models"),
+  faceapi.nets.tinyFaceDetector.loadFromUri("../models"),
+  faceapi.nets.faceLandmark68Net.loadFromUri("../models"),
+  faceapi.nets.faceRecognitionNet.loadFromUri("../models"),
+  faceapi.nets.faceExpressionNet.loadFromUri("../models"),
 ]).then(enableCam); // 모든 모델이 성공적으로 로드되면 startVideo 함수를 호출합니다.
 
 let lastVideoTime = -1;
