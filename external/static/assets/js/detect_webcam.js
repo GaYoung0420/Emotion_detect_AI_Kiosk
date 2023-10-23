@@ -180,10 +180,10 @@ async function predictWebcam() {
   results_poseLandmarker = detectPoseLandmarks();
 
   // 손의 랜드마크를 캔버스에 그리는 함수
-  // drawGesturePredict(results_gestureRecognizer);
+  drawGesturePredict(results_gestureRecognizer);
 
   // 얼굴의 랜드마크를 캔버스에 그리는 함수
-  // drawFaceMarker(results_faceLandmarker);
+  drawFaceMarker(results_faceLandmarker);
 
   // console.log(DetectNegativeExpression);
 
@@ -245,6 +245,12 @@ function predictTroubleContext() {
   displayResult("negativeExpressionResult", DetectNegativeExpression);
   displayResult("grimaceFaceResult", DetectGrimaceFace);
   displayResult("jawOpenResult", DetectJawOpen);
+
+  // 1. 터치를 할려고 하는가 (자세 확인)
+  // if (DetectRaisingArmPose) {
+  //   if (DetectGrimaceFace) {
+  //   }
+  // }
 }
 
 function isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker) {

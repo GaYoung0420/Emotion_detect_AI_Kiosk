@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Kiosk</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      canvas {
+        position: absolute;
+      }
+    </style>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script defer src="/external/static/library/face-api.min.js"></script>
+    <script defer src="/external/static/assets/js/index.js"></script>
+  </head>
+  <body>
+    <video id="video" width="720" height="560" autoplay muted>
+      <source
+        src="/external/static/assets/video/20230714_152319.mp4"
+        type="video/mp4"
+      />
+    </video>
+  </body>
+</html>
