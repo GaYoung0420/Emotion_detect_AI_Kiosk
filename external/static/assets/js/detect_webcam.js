@@ -169,15 +169,21 @@ async function predictWebcam() {
       nowInMs
     );
   }
+  DetectRaisingArmPose = false; // 팔을 들고 있는 것
+  DetectPointingGesture = false; // 포인팅하는 손
+  DetectNegativeExpression; //부정적인 표정
+  DetectGrimaceFace = false; // 눈을 찡그림
+  DetectJawOpen = false; // 눈을 찡그림
+
   results_faceLandmarker = faceLandmarker.detectForVideo(video, startTimeMs);
 
   results_poseLandmarker = detectPoseLandmarks();
 
   // 손의 랜드마크를 캔버스에 그리는 함수
-  drawGesturePredict(results_gestureRecognizer);
+  // drawGesturePredict(results_gestureRecognizer);
 
   // 얼굴의 랜드마크를 캔버스에 그리는 함수
-  drawFaceMarker(results_faceLandmarker);
+  // drawFaceMarker(results_faceLandmarker);
 
   // console.log(DetectNegativeExpression);
 
@@ -192,6 +198,8 @@ async function predictWebcam() {
   // 손을 포인팅하여 들고있는 자세 인식
   isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker);
 
+  predictTroubleContext();
+
   // 웹캠이 실행 중일 경우, 브라우저가 준비될 때마다 이 함수를 다시 호출하여 지속적으로 예측합니다.
   if (webcamRunning === true) {
     window.requestAnimationFrame(predictWebcam);
@@ -200,17 +208,43 @@ async function predictWebcam() {
 
 // 키오스크 사용시 어려움을 겪는 것을 확인하기 위한 함수
 
-function predictTroubleContext(
-  results_gestureRecognizer,
-  results_poseLandmarker
-) {
+function predictTroubleContext() {
   /*
-    1. 터치를 하려고 하는 자세를 확인
-        // 팔꿈치(14 - right elbow or 13 - left elbow)가 손(20 - right index, 19 - left index)보다 아래에 위치하면 손을 들고 있는 자세
-        // Pointing gesture를 취하고 있으면 터치를 할려고하는 자세를 확인할 수 있음
-    2. 표정의 변화(emotion deteting), 터치 지속 시간, 
+    1. 터치를 하려고 하는 자세를 확인 (행동)
+      # isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker);
+      - 팔꿈치(14 - right elbow or 13 - left elbow)가 손(20 - right index, 19 - left index)보다 아래에 위치하면 손을 들고 있는 자세
+      - Pointing gesture를 취하고 있으면 터치를 할려고하는 자세를 확인할 수 있음
+    2. 표정의 detect(emotion deteting)
+      # expressionDetection()
+      - 부정적인 감정들("sad", "angry", "fearful", "disgusted", "surprised")을 detect
+      # isEyeBlinkDetectedFunc(results_faceLandmarker)
+      - 눈 찌뿌리는 것을 detect
+      # isMouthOpen(results_faceLandmarker)
+      - 입 벌리고 있는 것을 detect
+    3. 터치 시간
+
+    let DetectRaisingArmPose = false; // 팔을 들고 있는 것
+    let DetectPointingGesture = false; // 포인팅하는 손
+    let DetectNegativeExpression; //부정적인 표정
+    let DetectGrimaceFace = false; // 눈을 찡그림
+    let DetectJawOpen = false; // 눈을 찡그림
   
   */
+
+  // JavaScript 코드에서 결과를 HTML에 표시하는 부분
+  // 결과를 HTML 요소에 표시하고 true일 경우 텍스트 색상을 파란색으로 변경하는 함수
+  function displayResult(labelId, value) {
+    const resultElement = document.getElementById(labelId);
+    resultElement.textContent = `${labelId}: ${value}`;
+    resultElement.style.color = value ? "blue" : "black";
+  }
+
+  // 함수 호출 예시
+  displayResult("raisingArmPoseResult", DetectRaisingArmPose);
+  displayResult("pointingGestureResult", DetectPointingGesture);
+  displayResult("negativeExpressionResult", DetectNegativeExpression);
+  displayResult("grimaceFaceResult", DetectGrimaceFace);
+  displayResult("jawOpenResult", DetectJawOpen);
 }
 
 function isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker) {
@@ -243,10 +277,12 @@ function isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker) {
       rightElbow_position.y < rightIndex_position.y ||
       leftElbow_position.y < leftIndex_position.y
     ) {
-      console.log("팔 들었음");
+      DetectRaisingArmPose = true; // 팔을 들고 있는 것
+      // console.log("팔 들었음");
     }
     if (pointing_gesture.categoryName === "Pointing_Up") {
-      console.log("Pointing_Up");
+      DetectPointingGesture = true; // 포인팅하는 손
+      // console.log("Pointing_Up");
     }
   }
 }
@@ -272,7 +308,7 @@ function isEyeBlinkDetectedFunc(results_faceLandmarker) {
         isEyeBlinkDetected = true;
       } else if (elapsedTime >= 1) {
         // 찡그림이 지속되고 3초 이상 경과한 경우
-        console.log("찡그림");
+        // console.log("찡그림");
         DetectGrimaceFace = true;
       }
     } else {
@@ -294,7 +330,7 @@ function isMouthOpen(results_faceLandmarker) {
   if (faceBlendshapes && faceBlendshapes.categories[25] !== undefined) {
     let jawOpen = faceBlendshapes.categories[25];
     if (jawOpen.score > 0.1) {
-      console.log("입벌림 " + jawOpen.score);
+      // console.log("입벌림 " + jawOpen.score);
 
       // 입벌림이 감지됨
       // if (!isJawOpen) {
@@ -303,7 +339,7 @@ function isMouthOpen(results_faceLandmarker) {
       //   isJawOpen = true;
       // } else if (elapsedTime >= 3) {
       //   // 입벌림이 지속되고 3초 이상 경과한 경우
-      //   DetectJawOpen = true;
+      DetectJawOpen = true;
       // }
     } else {
       // 입벌림이 감지되지 않음
@@ -343,14 +379,14 @@ async function expressionDetection() {
         maxExpression.name === "fearful" ||
         maxExpression.name === "disgusted" ||
         maxExpression.name === "surprised") &&
-      maxExpression.value > 0.7
+      maxExpression.value > 0.8
     ) {
       DetectNegativeExpression = true;
-      console.log(
-        "부정적 표정 감지: ",
-        maxExpression.name,
-        maxExpression.value
-      );
+      // console.log(
+      //   "부정적 표정 감지: ",
+      //   maxExpression.name,
+      //   maxExpression.value
+      // );
     } else {
       DetectNegativeExpression = false;
     }
