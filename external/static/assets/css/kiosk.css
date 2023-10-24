@@ -13,11 +13,8 @@ body {
   width: 100%; /* 화면 가로 길이에 꽉 차도록 설정 */
   height: 100%; /* 화면 세로 길이에 꽉 차도록 설정 */
   max-width: 1080px;
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
+  background-color: #fafafa;
   border: black 2px solid;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .header {
@@ -25,3 +22,4 @@ body {
   height: 109px;
   border: black 2px solid;
 }
+     
