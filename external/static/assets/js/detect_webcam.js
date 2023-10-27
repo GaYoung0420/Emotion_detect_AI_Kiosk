@@ -29,16 +29,24 @@ let faceLandmarker = undefined;
 let poseLandmarker = undefined;
 let gestureRecognizer = undefined;
 let runningMode = "IMAGE";
-let webcamRunning = false;
+let webcam1Running = false;
+let webcam2Running = false;
 const videoWidth = 480;
 
 // Before we can use HandLandmarker class we must wait for it to finish
 // loading. Machine Learning models can be large and take a moment to
 // get everything needed to run.
 
-const video = document.getElementById("webcam");
-const canvasElement = document.getElementById("output_canvas");
-const canvasCtx = canvasElement.getContext("2d");
+const video1 = document.getElementById("webcam1");
+const canvasElement1 = document.getElementById("output_canvas1");
+const canvasCtx1 = canvasElement1.getContext("2d");
+
+const video2 = document.getElementById("webcam2");
+const canvasElement2 = document.getElementById("output_canvas2");
+const canvasCtx2 = canvasElement2.getContext("2d");
+
+let deviceId1 = null;
+let deviceId2 = null;
 
 // Check if webcam access is supported.
 const hasGetUserMedia = () => !!navigator.mediaDevices?.getUserMedia;
@@ -94,6 +102,27 @@ const enableCam = async () => {
     return;
   }
 
+  const test = async () => {
+    await navigator.mediaDevices
+      .enumerateDevices()
+      .then((devices) => {
+        devices.forEach((device) => {
+          if (device.kind === "videoinput") {
+            if (device.label === "SPC-A1200MB Webcam (0c45:6340)")
+              deviceId1 = device.deviceId;
+            else if (device.label === "SC-FD110B PC Camera (1bcf:2284)")
+              deviceId2 = device.deviceId;
+          }
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  test();
+
+  /*
+  # 원래 코드
   // getUserMedia()를 지원하는지 확인하고 웹캠 스트림을 활성화합니다.
   if (hasGetUserMedia()) {
     // getUserMedia()의 매개변수를 설정합니다.
@@ -107,6 +136,58 @@ const enableCam = async () => {
       webcamRunning = true;
       console.log("Webcam");
     });
+  } else {
+    // getUserMedia()를 지원하지 않는 경우 경고 메시지를 출력합니다.
+    console.warn("getUserMedia() is not supported by your browser");
+  }
+};
+  
+  */
+
+  // getUserMedia()를 지원하는지 확인하고 웹캠 스트림을 활성화합니다.
+  if (hasGetUserMedia()) {
+    // getUserMedia()의 매개변수를 설정합니다.
+
+    // "SPC-A1200MB Webcam (0c45:6340)"
+    // 웹캠 스트림을 활성화하고 예측 함수(predictWebcam)를 호출합니다.
+
+    navigator.mediaDevices
+      .getUserMedia({
+        video: {
+          deviceId: deviceId1,
+        },
+      })
+      .then((stream) => {
+        console.log("deviceId1 : " + deviceId1);
+        console.log(stream);
+
+        video1.srcObject = stream;
+        video1.addEventListener("loadeddata", () => {
+          console.log("Video 1 loaded");
+          // predictWebcam(canvasElement1, canvasCtx1, video1);
+        });
+        webcam1Running = true;
+      });
+
+    // "SC-FD110B PC Camera (1bcf:2284)"
+    // 웹캠 스트림을 활성화하고 예측 함수(predictWebcam)를 호출합니다.
+
+    navigator.mediaDevices
+      .getUserMedia({
+        video: {
+          deviceId: deviceId2,
+        },
+      })
+      .then((stream) => {
+        console.log("deviceId2 : " + deviceId2);
+        console.log(stream);
+        video2.srcObject = stream;
+        video2.addEventListener("loadeddata", () => {
+          console.log("Video 2 loaded");
+          // predictWebcam(canvasElement2, canvasCtx2, video2);
+        });
+        webcam2Running = true;
+      });
   } else {
     // getUserMedia()를 지원하지 않는 경우 경고 메시지를 출력합니다.
     console.warn("getUserMedia() is not supported by your browser");
@@ -128,7 +209,6 @@ let results_faceLandmarker = undefined;
 let results_gestureRecognizer = undefined;
 let results_poseLandmarker = undefined;
 let results_expression = undefined;
-const drawingUtils = new DrawingUtils(canvasCtx);
 
 let isEyeBlinkDetected = false;
 let isJawOpen = false;
@@ -142,10 +222,13 @@ let DetectGrimaceFace = false; // 눈을 찡그림
 let DetectJawOpen = false; // 눈을 찡그림
 
 // 웹캠 비디오 스트림에서 얼굴과 손을 감지하고 해당 랜드마크를 캔버스에 그리는 함수
-async function predictWebcam() {
+async function predictWebcam(canvasElement, canvasCtx, video) {
+  const drawingUtils = new DrawingUtils(canvasCtx);
+
   // 캔버스의 크기를 웹캠 비디오의 크기에 맞게 조정합니다.
   canvasElement.style.width = video.videoWidth;
   canvasElement.style.height = video.videoHeight;
+
   canvasElement.width = video.videoWidth;
   canvasElement.height = video.videoHeight;
 
@@ -177,18 +260,28 @@ async function predictWebcam() {
 
   results_faceLandmarker = faceLandmarker.detectForVideo(video, startTimeMs);
 
-  results_poseLandmarker = detectPoseLandmarks();
+  results_poseLandmarker = detectPoseLandmarks(
+    drawingUtils,
+    video,
+    canvasElement,
+    canvasCtx
+  );
 
   // 손의 랜드마크를 캔버스에 그리는 함수
-  drawGesturePredict(results_gestureRecognizer);
+  drawGesturePredict(
+    results_gestureRecognizer,
+    drawingUtils,
+    canvasElement,
+    canvasCtx
+  );
 
   // 얼굴의 랜드마크를 캔버스에 그리는 함수
-  drawFaceMarker(results_faceLandmarker);
+  drawFaceMarker(results_faceLandmarker, drawingUtils);
 
   // console.log(DetectNegativeExpression);
 
   // 감정 Detector
-  expressionDetection();
+  expressionDetection(video);
 
   // 눈 찡그림 인식
   isEyeBlinkDetectedFunc(results_faceLandmarker);
@@ -201,8 +294,11 @@ async function predictWebcam() {
   predictTroubleContext();
 
   // 웹캠이 실행 중일 경우, 브라우저가 준비될 때마다 이 함수를 다시 호출하여 지속적으로 예측합니다.
-  if (webcamRunning === true) {
-    window.requestAnimationFrame(predictWebcam);
+  if (webcam1Running === true && webcam2Running === true) {
+    window.requestAnimationFrame(() => {
+      predictWebcam(canvasElement1, canvasCtx1, video1);
+      predictWebcam(canvasElement2, canvasCtx2, video2);
+    });
   }
 }
 
@@ -357,7 +453,7 @@ function isMouthOpen(results_faceLandmarker) {
 }
 
 // 표정 Recognition 하는 함수
-async function expressionDetection() {
+async function expressionDetection(video) {
   // 표정 detect
   const detections = await faceapi
     .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
@@ -401,7 +497,12 @@ async function expressionDetection() {
 
 //////////////////////////////// Drawing ********************************
 //주어진 results_gestureRecognizer 객체를 기반으로 화면에 손의 특징점 및 제스처를 그리는 함수
-function drawGesturePredict(results_gestureRecognizer) {
+function drawGesturePredict(
+  results_gestureRecognizer,
+  drawingUtils,
+  canvasElement,
+  canvasCtx
+) {
   // 캔버스 컨텍스트를 저장하고 캔버스를 지웁니다.
   canvasCtx.save();
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -441,7 +542,7 @@ function drawGesturePredict(results_gestureRecognizer) {
 }
 
 // results_faceLandmarker 객체에서 얼굴 랜드마크를 추출하고 캔버스에 해당 랜드마크를 그리는 역할
-function drawFaceMarker(results_faceLandmarker) {
+function drawFaceMarker(results_faceLandmarker, drawingUtils) {
   // results_faceLandmarker 객체에서 얼굴 랜드마크를 가져옵니다.
   for (const landmarks of results_faceLandmarker.faceLandmarks) {
     // 얼굴 랜드마크를 연결하는 선을 그립니다.
@@ -500,7 +601,7 @@ function drawFaceMarker(results_faceLandmarker) {
 }
 
 // pose 그리는 함수
-function detectPoseLandmarks() {
+function detectPoseLandmarks(drawingUtils, video, canvasElement, canvasCtx) {
   let startTimeMs = performance.now();
   let results_poseLandmarker;
   poseLandmarker.detectForVideo(video, startTimeMs, (result) => {
