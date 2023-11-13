@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI kiosk</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css"
+    />
+    <link href="../css/kiosk.css" rel="stylesheet" />
+    <link href="../css/kiosk1.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <video
+        src="../video/advertise.mp4"
+        width="100%"
+        height="100%"
+        autoplay
+        loop="true"
+        style="z-index: 1; position: absolute"
+      ></video>
+      <button id="startBtn" href="../html/kiosk.html">시작버튼</button>
+    </div>
+    <div class="footer">
+      <div class="btnContainer">
+        <button class="languageBtn activeBtn">한국어</button>
+        <button class="languageBtn offBtn">English</button>
+        <button class="languageBtn offBtn">日本語</button>
+        <button class="languageBtn offBtn">中文</button>
+      </div>
+    </div>
+  </body>
+  <script>
+    document.getElementById("startBtn").addEventListener("click", function () {
+      window.location.href = "../html/kiosk_2_Menu_select.html";
+    });
+  </script>
+</html>
