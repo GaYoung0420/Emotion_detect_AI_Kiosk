@@ -2,5 +2,8 @@
   "type": "module",
   "dependencies": {
     "@mediapipe/tasks-vision": "^0.10.7"
+  },
+  "devDependencies": {
+    "prettier": "^3.1.0"
   }
 }

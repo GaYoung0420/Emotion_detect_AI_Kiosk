@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,6 +7,10 @@
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
     <link
       rel="stylesheet"
@@ -191,7 +195,9 @@
         style="
           width: 1080px;
           height: 233px;
-          background: url('../img/baner.png'), lightgray 50% / cover no-repeat;
+          background:
+            url('../img/baner.png'),
+            lightgray 50% / cover no-repeat;
         "
       ></div>
       <!-- Category -->
@@ -255,36 +261,36 @@
       <div class="MenuContainer">
         <div class="menuRowContainer">
           <button class="menuBtn">
-            <img class = "menuImg" src = "../img/menu/digital_americano.png"/>
-            <div id = "menuName">아메리카노</div>
-            <div id = "menuPrice">1,400원</div>
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
           </button>
           <button class="menuBtn">
-            <img class = "menuImg" src = "../img/menu/digital_americano.png"/>
-            <div id = "menuName">아메리카노</div>
-            <div id = "menuPrice">1,400원</div>
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
           </button>
           <button class="menuBtn">
-            <img class = "menuImg" src = "../img/menu/digital_americano.png"/>
-            <div id = "menuName">아메리카노</div>
-            <div id = "menuPrice">1,400원</div>
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
           </button>
         </div>
         <div class="menuRowContainer">
           <button class="menuBtn">
-            <img class = "menuImg" src = "../img/menu/digital_americano.png"/>
-            <div id = "menuName">아메리카노</div>
-            <div id = "menuPrice">1,400원</div>
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
           </button>
           <button class="menuBtn">
-            <img class = "menuImg" src = "../img/menu/digital_americano.png"/>
-            <div id = "menuName">아메리카노</div>
-            <div id = "menuPrice">1,400원</div>
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
           </button>
           <button class="menuBtn">
-            <img class = "menuImg" src = "../img/menu/digital_americano.png"/>
-            <div id = "menuName">아메리카노</div>
-            <div id = "menuPrice">1,400원</div>
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
           </button>
         </div>
       </div>
@@ -294,20 +300,122 @@
           <span class="material-icons"> arrow_back_ios </span>
           이전
         </button>
-        <div>
-          
+
+        <div class="pagingContainer">
+          <svg style="width: 56; height: 56">
+            <circle class="abledPaging" cx="28" cy="28" r="27" />
+             
+            <text
+              x="27"
+              y="40"
+              font-size="35"
+              text-anchor="middle"
+              fill="white"
+              style="font-weight: 1000"
+            >
+              1
+            </text>
+          </svg>
+          <svg style="width: 56; height: 56">
+            <circle class="disabledPaging" cx="28" cy="28" r="27" />
+            <text x="27" y="40" font-size="35" text-anchor="middle">2</text>
+          </svg>
+          <svg style="width: 56; height: 56">
+            <circle class="disabledPaging" cx="28" cy="28" r="27" />
+            <text x="27" y="40" font-size="35" text-anchor="middle">3</text>
+          </svg>
         </div>
         <button class="MenuBtn abledMenuBtn">
           다음
           <span class="material-icons"> arrow_forward_ios </span>
         </button>
+      </div>
+      <!-- Cart -->
+      <div class="cart_container">
+        <div class="cart_title_container">
+          <span class="cart_title">주문 내역</span>
+          <button class="cart_delete">
+            <span class="material-symbols-outlined" style="font-size: 33px">
+              delete
+            </span>
+            주문 전체 삭제
+          </button>
+        </div>
+        <hr style="width: 1002px; border: solid #d8dad9 1.3px" />
+        <div class="cart_select_container">
+          <button class="cart_LR_button disabled_menut_btn">
+            <div class="cart_div">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="21"
+                height="26"
+                viewBox="0 0 21 26"
+                fill="none"
+              >
+                <path d="M0 13L21 0.875645V25.1244L0 13Z" fill="white" />
+              </svg>
+            </div>
+            <text>이전</text>
+          </button>
+          <div class="menu_select_subcontainer">
+            <text style="font-size: 30px; color: #8d909f; font-weight: 700"
+              >주문내역이 없습니다. 메뉴를 선택해주세요</text
+            >
+          </div>
+          <button class="cart_LR_button disabled_menut_btn">
+            <div class="cart_div">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="21"
+                height="26"
+                viewBox="0 0 21 26"
+                fill="none"
+              >
+                <path d="M21 13L0 25.1244V0.875645L21 13Z" fill="white" />
+              </svg>
+            </div>
+            <text>다음</text>
+          </button>
+        </div>
+        <hr style="width: 1002px; border: solid #d8dad9 1.3px" />
+        <div class="cart_info_container">
+          <text class="cart_info_container_title">총 수량</text>
+          <div class="center_cantainer" style="width: 250px">
+            <text
+              id="cart_count"
+              class="cart_info_container_title"
+              style="font-weight: 800"
+              >0</text
+            >
+            <text id="cart_count" class="cart_info_container_text">개</text>
+          </div>
 
+          <text class="cart_info_container_title">총 수량</text>
+          <div class="center_cantainer" style="width: 250px">
+            <text
+              id="cart_count"
+              class="cart_info_container_title"
+              style="font-weight: 800"
+              >0</text
+            >
+            <text id="cart_count" class="cart_info_container_text">원</text>
+          </div>
+          <button class="order_button">주문하기</button>
+        </div>
+      </div>
+
+      <!-- footer -->
+      <div class="footer">
+        <button class="back_button center_cantainer">
+          <span class="material-symbols-outlined" style="font-size: 33px"> undo </span>
+          이전으로
+        </button>
       </div>
     </div>
   </body>
   <script>
-    document.getElementById("homeBtn").addEventListener("click", function () {
-      window.location.href = "../html/kiosk_1_Touch_screen.html";
+    document.getElementById('homeBtn').addEventListener('click', function () {
+      window.location.href = '../html/kiosk_1_Touch_screen.html';
     });
   </script>
 </html>
