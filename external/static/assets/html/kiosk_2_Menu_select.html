@@ -357,11 +357,45 @@
             </div>
             <text>이전</text>
           </button>
-          <div class="menu_select_subcontainer">
+          <!-- cart item list -->
+          <!-- 주문 내역이 없음 -->
+          <!-- <div class="menu_select_subcontainer">
             <text style="font-size: 30px; color: #8d909f; font-weight: 700"
-              >주문내역이 없습니다. 메뉴를 선택해주세요</text
-            >
+              >주문내역이 없습니다. 메뉴를 선택해주세요</text>
           </div>
+           -->
+          <div class="cart_list_container">
+            <div class="cart_list_background">
+              <div class="center_cantainer" style="width: 100%; gap: 190px;">
+                <!-- 리스트 번호 -->
+                <div class="cart_list_number center_cantainer">1</div>
+                <!-- 삭제 버튼 -->
+                <button utton class="cart_delete_icon center_cantainer">
+                  <img src="../svg/cart_delete.svg" />
+                  삭제
+                </button>
+              </div>
+              <div class="cart_info_sub_conatiner">
+                <img class="cart_menu_img" src="../img/menu/digital_caramel_latte.png" />
+                <div class="cart_container_info_sub_conatiner" >
+                  <div class="cart_menu_name">카라멜 카페라떼</div>
+                  <div class="cart_info_text">
+                    옵션
+                    <span> : 차가움, 보통, 에스프레소</span>
+                  </div>
+                </div>
+              </div>
+              <div class="center_cantainer" style="width: 100%; gap: 60px;">
+                <div class="center_cantainer" style="gap: 10px;">
+                  <img src="../svg/add_to_cart_icon.svg" />
+                  <text class="count_info_text">1</text>
+                  <img src="../svg/delete_to_cart_icon.svg" />
+                </div>
+                <div class="price_text">6,000 <span class="price_won">원</span></div>
+              </div>
+            </div>
+          </div>
+
           <button class="cart_LR_button disabled_menut_btn">
             <div class="cart_div">
               <svg
@@ -403,11 +437,13 @@
           <button class="order_button">주문하기</button>
         </div>
       </div>
-
+      <div class="add_option_select_conatiner"></div>
       <!-- footer -->
       <div class="footer">
         <button class="back_button center_cantainer">
-          <span class="material-symbols-outlined" style="font-size: 33px"> undo </span>
+          <span class="material-symbols-outlined" style="font-size: 33px">
+            undo
+          </span>
           이전으로
         </button>
       </div>

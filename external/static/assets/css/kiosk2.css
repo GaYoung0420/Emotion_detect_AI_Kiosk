@@ -390,6 +390,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 29px;
 }
 .cart_LR_button {
   width: 53px;
@@ -467,12 +468,6 @@
   line-height: normal;
 }
 
-.center_cantainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .order_button {
   width: 250px;
   height: 75px;
@@ -516,4 +511,122 @@
   width: auto;
   height: 175.26px;
   flex-shrink: 0;
+}
+
+.cart_list_container {
+  width: 900px;
+  height: 233px;
+}
+
+.cart_list_background {
+  width: 326px;
+  height: 233px;
+  flex-shrink: 0;
+  width: 326px;
+  height: 233px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  border: 0.5px solid #d9d9d9;
+  background: var(--white, #fff);
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+}
+
+.cart_list_number {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 15px 0px;
+  background: #333;
+  color: var(--white, #fff);
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-left: -6px;
+}
+
+.cart_delete_icon {
+  width: 85px;
+  height: 31px;
+  flex-shrink: 0;
+  border-radius: 132px;
+  border: 1px solid #6f6f6f;
+  background: #464646;
+  color: var(--white, #fff);
+  font-family: NanumSquare_ac;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  gap: 5px;
+}
+
+.cart_menu_img {
+  height: 106px;
+}
+
+.cart_info_sub_conatiner {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  margin: 10px;
+
+  /* align-items: center; */
+}
+
+.cart_menu_name {
+  color: var(--B-1, #333);
+  font-family: NanumSquare_ac;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.cart_container_info_sub_conatiner {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cart_info_text {
+  color: #626262;
+  font-family: NanumSquare_ac;
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.count_info_text {
+  color: #000;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.price_text {
+  color: #333;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.price_won {
+  color: #818288;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }

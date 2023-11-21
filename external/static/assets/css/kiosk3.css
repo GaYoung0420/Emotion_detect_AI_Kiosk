@@ -17,7 +17,7 @@
 }
 
 .menu_option_container {
-  height: 100%;
+  height: fit-content;
   width: 100%;
   border: solid 1px blue;
   display: flex;
@@ -90,7 +90,6 @@
 
 .option_container {
   display: flex;
-  justify-content: center;
   align-items: center;
   margin-top: 23px;
   width: 924px;
@@ -99,6 +98,7 @@
   background: #fff;
   padding-top: 22px;
   flex-direction: column;
+  gap: 25px;
 }
 
 .option_title {
@@ -126,7 +126,6 @@
   width: 299px;
   height: 57px;
   flex-shrink: 0;
-  border: solid 1px red;
 }
 
 .option_text_num {
@@ -154,10 +153,8 @@
   width: 509px;
   height: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border: solid 1px red;
 }
+
 .option_text_container {
   display: flex;
   justify-content: center;
@@ -166,11 +163,298 @@
   height: fit-content;
 }
 
-.delete_item_btn {
+#delete_item_btn {
   border-radius: 50px 10px 10px 50px;
   border: 3px solid #575757;
   background: #f8f8f8;
   width: 174px;
   height: 57px;
   flex-shrink: 0;
+  color: #575757;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+#add_item_btn {
+  border-radius: 10px 50px 50px 10px;
+  border: 3px solid #575757;
+  background: #f8f8f8;
+  width: 174px;
+  height: 57px;
+  flex-shrink: 0;
+  color: #575757;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.set_count {
+  color: #000;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.set_count_text {
+  color: #9e9e9e;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.option_select_button {
+  width: 157.065px;
+  height: 157.065px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  border: 3px solid #787878;
+  background: #f8f8f8;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.option_select_text {
+  color: #575757;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.option_icon_attribute {
+  width: fit-content;
+  height: 76px;
+}
+
+.add_option_text {
+  color: #333;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+#add_option_button {
+  display: inline-flex;
+  height: 55px;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #303030;
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.menu_select_info_container {
+  display: flex;
+  align-items: center;
+  width: 859px;
+  gap: 86px;
+}
+
+.menu_price_info_text {
+  color: #000;
+  width: 79px;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.menu_price {
+  color: #0759fb;
+  text-align: right;
+  font-family: NanumSquare_ac;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  width: 372px;
+}
+
+#add_to_cart_button {
+  display: flex;
+  width: 331px;
+  height: 81px;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--Main-Color, #334d81);
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.add_option_select_conatiner {
+  position: relative;
+  left: 0px;
+  top: -1466px;
+  z-index: 100;
+  width: 1080px;
+  height: 1466px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+.add_option_select_content {
+  width: 738px;
+  height: 1164px;
+  flex-shrink: 0;
+  background: #fff;
+  flex-direction: column;
+}
+
+.add_option_title {
+  width: 738px;
+  height: 85px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #c2c2c2;
+  background: var(--white, #fff);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.08);
+  color: var(--Main-Color, #334d81);
+  font-family: NanumSquare_ac;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.add_option_subcontainer {
+  width: 526.59px;
+  height: 1005px;
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.add_price {
+  color: #676767;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.prev_option_btn {
+  width: 172px;
+  height: 55px;
+  flex-shrink: 0;
+  border-radius: 100px;
+  background: #d9d9d9;
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border: none;
+  gap: 15px;
+}
+
+.option_able_paging {
+  fill: var(--Main-Color, #334d81);
+  color: var(--white, #fff);
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.option_disable_paging {
+  fill: var(--white, #FFF);
+  stroke-width: 3px;
+  stroke: #DFDFDF;
+  text-align: center;
+  color: var(--B-1, #333);
+text-align: center;
+font-family: NanumSquare_ac;
+font-size: 28px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+
+.able_option_btn {
+  display: flex;
+  width: 300px;
+  height: 74px;
+  border: none;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  border-radius: 12px;
+  background: var(--Main-Color, #334d81);
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.cancel_option_btn {
+  display: flex;
+  width: 180px;
+  height: 74px;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 13px;
+  border-radius: 12px;
+  background: #909090;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
