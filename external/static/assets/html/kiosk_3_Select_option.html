@@ -204,25 +204,47 @@
       <!-- task title -->
       <div class="task_title center_cantainer">옵션 선택</div>
       <!-- menu info -->
-
-      <div class="menu_info_sub_container ">
-        <div class="img_background center_cantainer">
-            <img class="menu_option_img" src="../img/menu/digital_caramel_latte.png">
-        </div>
-        <div class="menu_text_container">
+      <div class="center_cantainer" style="flex-direction: column">
+        <div class="menu_info_sub_container">
+          <div class="img_background center_cantainer">
+            <img
+              class="menu_option_img"
+              src="../img/menu/digital_caramel_latte.png"
+            />
+          </div>
+          <div class="menu_text_container">
             <div class="menu_title">카라멜 카페라떼</div>
-            <div class="menu_title_info">카라멜 시럽을 첨가하여 풍부하고 달콤한 커피</text>
+            <div class="menu_title_info">
+              카라멜 시럽을 첨가하여 풍부하고 달콤한 커피
+            </div>
             <div class="menu_price_text">3,000 원</div>
+          </div>
         </div>
+        <div class="option_container">
+          <div class="option_title">필수 옵션</div>
+          <div class="option_text_container">
+            <div class="option_text">
+              <text class="option_text_num">1</text>
+              <svg xmlns="http://www.w3.org/2000/svg" width="2" height="22" viewBox="0 0 2 22" fill="none">
+                <path d="M1 1L1 21" stroke="black" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <text class="option_text_title">수량</text>
+            </div>
+            <div class="option_container_select">
+              <button id="delete_item_btn"></button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
     </div>
-      <!-- footer -->
-      <!-- <div class="footer">
+    <!-- footer -->
+    <!-- <div class="footer">
         <button class="back_button center_cantainer">
           <span class="material-symbols-outlined" style="font-size: 33px"> undo </span>
           이전으로
         </button>
       </div> -->
-    </div>
   </body>
   <script>
     document.getElementById('homeBtn').addEventListener('click', function () {

@@ -27,7 +27,7 @@
 }
 
 .menu_info_sub_container {
-  border: solid 1px red;
+  margin-top: 22px;
   width: 924px;
   height: 254px;
   display: flex;
@@ -52,11 +52,10 @@
 }
 
 .menu_text_container {
-  border: solid 1px red;
   width: 564px;
   height: 254px;
   margin-left: 40px;
-  /* position: relative; */
+  position: relative;
 }
 
 .menu_title {
@@ -79,9 +78,8 @@
 }
 
 .menu_price_text {
-  /* position: absolute; */
-  /* bottom: 0px; */
-  border: solid 1px red;
+  position: absolute;
+  bottom: 0px;
   color: var(--Black, #000);
   font-family: NanumSquare_ac;
   font-size: 50px;
@@ -91,9 +89,88 @@
 }
 
 .option_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 23px;
   width: 924px;
-  height: 100px;
-  flex-shrink: 0;
+  height: 965px;
   border: 1px solid #e0e0e0;
   background: #fff;
+  padding-top: 22px;
+  flex-direction: column;
+}
+
+.option_title {
+  width: 839px;
+  height: 64px;
+  flex-shrink: 0;
+  border-top: 2px solid var(--Main-Color, #334d81);
+  border-bottom: 2px solid var(--Main-Color, #334d81);
+  color: var(--Main-Color, #334d81);
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.option_text {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  width: 299px;
+  height: 57px;
+  flex-shrink: 0;
+  border: solid 1px red;
+}
+
+.option_text_num {
+  color: #000;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-right: 8px;
+}
+
+.option_text_title {
+  color: #000;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 11px;
+}
+
+.option_container_select {
+  width: 509px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px red;
+}
+.option_text_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+}
+
+.delete_item_btn {
+  border-radius: 50px 10px 10px 50px;
+  border: 3px solid #575757;
+  background: #f8f8f8;
+  width: 174px;
+  height: 57px;
+  flex-shrink: 0;
 }
