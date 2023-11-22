@@ -14,9 +14,8 @@
 .order_row_container {
   width: 1080px;
   height: 71px;
-  flex-shrink: 0;
   background: #fff;
-  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
 .order_row_text {
@@ -45,7 +44,7 @@
 .order_product_info_container {
   width: 493px;
   height: 100%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .product_img {
@@ -58,8 +57,6 @@
   position: relative;
   margin-right: 10px;
 }
-
-
 
 .list_number {
   width: 46px;
@@ -131,7 +128,7 @@
 .count_info_container {
   height: 250px;
   width: 225px;
-  border: solid 1px red;
+  /* border: solid 1px red; */
 }
 
 .count_info_sub_container {
@@ -170,7 +167,7 @@
 .price_container {
   height: 250px;
   width: 192px;
-  border: solid 1px red;
+  /* border: solid 1px red; */
 }
 
 .price_text {
@@ -186,7 +183,7 @@
 .delete_container {
   height: 250px;
   width: 100px;
-  border: solid 1px red;
+  /* border: solid 1px red; */
 }
 
 .delete_button {
@@ -203,7 +200,7 @@
 .LR_button_container {
   width: 1015px;
   height: fit-content;
-  border: solid 1px red;
+  /* border: solid 1px red; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -231,32 +228,182 @@
   height: 384px;
   flex-shrink: 0;
   border: 0.5px solid #d8d8d8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .order_price_delete_sub_container {
   height: 384px;
-  border: solid 1px red;
-
+  /* border: solid 1px red; */
 }
 
-.table_container{
+.table_container {
   height: 384px;
   width: fit-content;
   gap: 20px;
-  border: solid 1px red;
+  /* border: solid 1px red; */
   display: flex;
   justify-content: center;
-  padding-left: 20px;
-  padding-right: 20px;
+  
   /* align-items: center; */
   flex-direction: column;
 }
 
 .table_option {
   width: 471px;
-  height: 160px;
+  height: 152px;
   flex-shrink: 0;
   border-radius: 15px;
   border: 1px solid #e2e2e2;
   background: #fff;
+}
+
+.table_option_text {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  color: #000;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  width: 451px;
+  height: 76px;
+  border-bottom: solid 1px #eaeaea;
+}
+
+.checkbox2 + label {
+  position: relative;
+  color: #5d5d5d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 58px;
+  border: 2px solid #5d5d5d;
+  width: 141px;
+  height: 51px;
+}
+
+.checkbox2:before + label {
+  position: relative;
+  color: #5d5d5d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 58px;
+  border: 2px solid #5d5d5d;
+  width: 141px;
+  height: 51px;
+}
+
+.checkbox input[type='radio'].checkbox2 {
+  display: none;
+}
+.checkbox input[type='radio'].checkbox2 + label:before {
+  /* 체크박스 배경 */
+  display: inline-block;
+  content: '';
+  width: 35px;
+  height: 35px;
+  border: 2px solid #334d81;
+  background-color: #ffffff;
+  border-radius: 50%;
+  margin: 0 15px 0px 0;
+}
+.checkbox input[type='radio'].checkbox2 + label:after {
+  /* 체크 마크 */
+  position: absolute;
+  left: 21px;
+  content: '✔'; /* 체크 마크 ASCii 문자 */
+  font-size: 30px;
+  line-height: 0.8;
+  color: #334d81;
+  transition: all 0.3s;
+}
+
+[type='radio'].checkbox2 + label:after {
+  /* 기본 상태 - 투명에 크기 0 */
+  opacity: 0;
+  transform: scale(0);
+}
+[type='radio']:checked.checkbox2 + label:after {
+  /* 체크 상태 - 불투명에 크기 1 */
+  opacity: 1;
+  transform: scale(1);
+}
+.checkbox input[type='radio'].checkbox2:checked + label {
+  /* label 배경 */
+  background-color: #334d81; /* Change background color to #334D81 when checked */
+  color: #fff; /* Change text color to white when checked, if needed */
+}
+
+.count_text {
+  color: #333;
+  width: 180px;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.user_text {
+  width: 200px;
+  color: #0759fb;
+  text-align: right;
+  font-family: NanumSquare_ac;
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.unit_text {
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.order_delete {
+  width: 145px;
+  height: 325px;
+  border-radius: 8px;
+  background: #3a3a3a;
+  color: var(--white, #fff);
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.payment_btn {
+  width: 321px;
+  height: 325px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--Main-Color, #334d81);
+  color: var(--white, #fff);
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  flex-direction: column;
+  gap: 20px;
 }

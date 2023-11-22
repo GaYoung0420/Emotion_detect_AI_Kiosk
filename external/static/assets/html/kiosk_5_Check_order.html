@@ -294,10 +294,59 @@
       <div class="order_price_delete_container">
         <div class="order_price_delete_sub_container">
           <div class="table_container">
-            <div class="table_option"></div>
-            <div class="table_option"></div>
+            <!-- 식사 장소 선택 -->
+            <div class="table_option">
+              <div class="table_option_text">식사 장소</div>
+              <div class="center_cantainer" style="gap: 30px; height: 76px">
+                <div class="checkbox">
+                  <input
+                    type="radio"
+                    name="palce"
+                    id="restaurant"
+                    value="restaurant"
+                    class="checkbox2"
+                    checked
+                  />
+                  <label for="restaurant">매장</label>
+                </div>
+                <div class="checkbox">
+                  <input
+                    type="radio"
+                    name="palce"
+                    id="takeout"
+                    value="takeout"
+                    class="checkbox2"
+                  />
+                  <label for="takeout">포장</label>
+                </div>
+              </div>
+            </div>
+            <!-- 수량 및 금액 -->
+            <div class="table_option" style="height: 150px">
+              <div
+                class="center_cantainer"
+                style="border-bottom: solid 1px #eaeaea; height: 75px"
+              >
+                <div class="count_text">총 수량</div>
+                <div class="user_text">2<span class="unit_text"> 개</span></div>
+              </div>
+              <div class="center_cantainer" style="height: 75px">
+                <div class="count_text">총 금액</div>
+                <div class="user_text">
+                  6,000<span class="unit_text"> 원</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <button class="order_delete">
+          <div style="margin-bottom: 10px;">주문</div>
+          <div>취소</div>
+        </button>
+        <button class="payment_btn center_cantainer">
+          <img src="../svg/card_icon.svg"/>
+          결제하기
+        </button>
       </div>
       <!-- footer -->
       <div class="footer">
