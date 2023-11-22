@@ -19,7 +19,7 @@
     />
 
     <link href="../css/kiosk.css" rel="stylesheet" />
-    <link href="../css/kiosk4.css" rel="stylesheet" />
+    <link href="../css/kiosk5.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -52,6 +52,30 @@
               cy="28"
               r="27"
               style="
+                fill: var(--Main-Color, #334d81);
+                stroke: #334d81;
+                stroke-width: 3px;
+              "
+            />
+             
+            <text
+              x="27"
+              y="40"
+              font-size="35"
+              text-anchor="middle"
+              fill="#ffffff"
+              style="font-weight: 1000"
+            >
+              1
+            </text>
+          </svg>
+          <hr class="check_bar" />
+          <svg style="width: 56; height: 56">
+            <circle
+              cx="28"
+              cy="28"
+              r="27"
+              style="
                 fill: var(--Main-Color, #ffffff);
                 stroke: #334d81;
                 stroke-width: 3px;
@@ -70,30 +94,6 @@
               font-size="35"
               text-anchor="middle"
               fill="white"
-              style="font-weight: 1000"
-            >
-              1
-            </text>
-          </svg>
-          <hr class="bar" />
-          <svg style="width: 56; height: 56">
-            <circle
-              cx="28"
-              cy="28"
-              r="27"
-              style="
-                fill: var(--Main-Color, #ffffff);
-                stroke: #ffffff;
-                stroke-width: 3px;
-              "
-            />
-             
-            <text
-              x="27"
-              y="40"
-              font-size="35"
-              text-anchor="middle"
-              fill="#535353;"
               style="font-weight: 1000"
             >
               2
@@ -173,10 +173,10 @@
           </svg>
         </div>
         <div class="steptextSubContainer">
-          <span class="nowText" style="position: relative; left: 53px"
+          <span class="nextText" style="position: relative; left: 33px"
             >메뉴 선택</span
           >
-          <span class="nextText" style="position: relative; left: 115px"
+          <span class="nowText" style="position: relative; left: 100px"
             >주문 확인</span
           >
           <span class="nextText" style="position: relative; left: 175px"
@@ -193,59 +193,113 @@
       <!-- baner -->
       <div class="baner"></div>
       <!-- task title -->
-      <div class="task_title center_cantainer">식사 장소 선택</div>
-      <div class="select_place_container">
-        <text class="task_sub_title">식사 장소를 선택해주세요.</text>
-        <div class="select_container center_cantainer">
-          <div class="center_cantainer" style="gap: 69px">
-            <button class="disable_select_btn center_cantainer">
-              <img
-                class="restaurant"
-                src="../svg/restaurant.svg"
-              />
-              매장
-            </button>
-            <button class="able_select_btn center_cantainer">
-              <img class="takeout" 
-             " src="../svg/take_out.svg" />
-              포장
-            </button>
+      <div class="task_title center_cantainer">주문 내역</div>
+      <!-- 주문 내역 -->
+      <div class="order_list_container">
+        <div class="order_row_container center_cantainer">
+          <text class="order_row_text" style="width: 528px">상품</text>
+          <div class="updown"></div>
+          <text class="order_row_text" style="width: 225px">수량</text>
+          <div class="updown"></div>
+          <text class="order_row_text" style="width: 192px">금액</text>
+          <div class="updown"></div>
+          <text class="order_row_text" style="width: 134px">삭제</text>
+        </div>
+        <div class="order_container">
+          <!-- 상품 -->
+          <div class="order_product_info_container center_cantainer">
+            <div class="product_img">
+              <div class="list_number center_cantainer">1</div>
+              <div class="img_menu_container center_cantainer">
+                <img
+                  class="img_menu"
+                  src="../img/menu/digital_caramel_latte.png"
+                />
+              </div>
+            </div>
+            <div
+              style="
+                height: 205px;
+                padding-top: 20px;
+                padding-left: 5px;
+                position: relative;
+              "
+            >
+              <div class="menu_title_text">카라멜 카페라떼</div>
+              <div class="option_text">옵션 : 차가움, 보통, 에스프레소</div>
+              <div style="position: absolute; bottom: 11px; right: 110px">
+                <button class="option_change_button">옵션 변경</button>
+              </div>
+            </div>
           </div>
-          <div class="center_cantainer" style="gap: 26px">
-            <button class="ok_button center_cantainer">
-              <span
-                class="material-icons"
-                style="font-size: 50px; font-weight: 700"
-              >
-                check
-              </span>
-              확인
-            </button>
-            <button class="no_button center_cantainer">
-              <span
-                class="material-icons"
-                style="font-size: 50px; font-weight: 700"
-              >
-                close
-              </span>
-              취소
-            </button>
-            <!-- <button class="able_option_btn abled_menut_btn">확인</button>
-
-            <button class="cancel_option_btn">
-              <span class="material-icons"> close </span>취소
-            </button> -->
+          <!-- 수량 -->
+          <div class="count_info_container center_cantainer">
+            <div class="count_info_sub_container center_cantainer">
+              <button class="count_control">-</button>
+              <text class="count_font">1</text>
+              <button class="count_control">+</button>
+            </div>
+          </div>
+          <!-- 금액 -->
+          <div class="price_container center_cantainer">
+            <text class="price_text"
+              >6,000 <span style="font-size: 35px">원</span></text
+            >
+          </div>
+          <!-- 삭제 -->
+          <div class="delete_container center_cantainer">
+            <button class="delete_button">X</button>
           </div>
         </div>
+        <div class="order_container"></div>
+
+        <div class="order_container"></div>
+        <!-- 이전, 좌우 컨테이너 -->
+        <div class="LR_button_container">
+          <button class="left_button center_cantainer">
+            <span class="material-icons"> arrow_back_ios </span>
+            <div style="width: 122.456px">이전</div>
+          </button>
+          <svg style="width: 57; height: 57">
+            <circle
+              cx="27"
+              cy="27"
+              r="23"
+              style="
+                fill: var(--Main-Color, #334d81);
+                stroke: #334d81;
+                stroke-width: 3px;
+              "
+            />
+             
+            <text
+              x="27"
+              y="38"
+              font-size="35"
+              text-anchor="middle"
+              fill="#ffffff"
+              style="font-weight: 700"
+            >
+              1
+            </text>
+          </svg>
+          <button class="left_button center_cantainer">
+            <div style="width: 122.456px">다음</div>
+            <span class="material-icons"> arrow_forward_ios </span>
+          </button>
+          <!-- <span class="material-icons"> arrow_forward_ios </span> -->
+        </div>
       </div>
+      <!-- 주문 금액 그리고 취소 및 결제하기 -->
+      <div class="order_price_delete_container"></div>
       <!-- footer -->
       <div class="footer">
-        <!-- <button class="back_button center_cantainer">
+        <button class="back_button center_cantainer">
           <span class="material-symbols-outlined" style="font-size: 33px">
             undo
           </span>
           이전으로
-        </button> -->
+        </button>
       </div>
     </div>
   </body>

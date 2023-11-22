@@ -1,0 +1,232 @@
+.order_list_container {
+  width: 1080px;
+  height: 900px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-shrink: 0;
+  border: 0.5px solid #d8d8d8;
+  background: var(--white, #fff);
+  box-shadow: 0px 0px 26px 0px rgba(0, 0, 0, 0.03);
+  flex-direction: column;
+}
+
+.order_row_container {
+  width: 1080px;
+  height: 71px;
+  flex-shrink: 0;
+  background: #fff;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
+}
+
+.order_row_text {
+  color: #252525;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+.updown {
+  border: 1px solid #bdbdbd;
+  width: 0.1px;
+  height: 45px;
+}
+.order_container {
+  height: 250px;
+  width: 1015px;
+  flex-direction: row;
+  border-bottom: 1px solid #efefef;
+  display: flex;
+  align-items: center;
+}
+
+.order_product_info_container {
+  width: 493px;
+  height: 100%;
+  border: 1px solid red;
+}
+
+.product_img {
+  width: 220px;
+  height: 205px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 1px solid rgba(51, 51, 51, 0.31);
+  background: #fff;
+  position: relative;
+  margin-right: 10px;
+}
+
+.order_price_delete_container {
+  width: 1080px;
+  height: 384px;
+  flex-shrink: 0;
+  border: 0.5px solid #d8d8d8;
+}
+
+.list_number {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 12px 0px;
+  background: #333;
+  color: var(--white, #fff);
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  z-index: 50;
+}
+
+.img_menu_container {
+  width: 220px;
+  height: 205px;
+  flex-shrink: 0;
+  z-index: 5;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.img_menu {
+  height: 130px;
+  width: auto;
+}
+
+.menu_title_text {
+  color: var(--B-1, #333);
+  font-family: NanumSquare_ac;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-bottom: 1px solid #e4e4e4;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.option_text {
+  color: #434343;
+  font-family: NanumSquare_ac;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.option_change_button {
+  width: 148px;
+  height: 43px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  border: 3px solid #334d81;
+  background: var(--Main-Color, #334d81);
+  color: var(--white, #fff);
+  font-family: NanumSquare_ac;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.count_info_container {
+  height: 250px;
+  width: 225px;
+  border: solid 1px red;
+}
+
+.count_info_sub_container {
+  width: 176px;
+  height: 125px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  border: 1px solid #e1e1e1;
+  background: #fff;
+}
+
+.count_control {
+  width: 49px;
+  height: 114px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  border: 1px solid #e1e1e1;
+  background: var(--Main-Color, #334d81);
+  font-size: 40px;
+  color: var(--white, #fff);
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+}
+
+.count_font {
+  color: #000;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 19px;
+  margin-right: 19px;
+}
+
+.price_container {
+  height: 250px;
+  width: 192px;
+  border: solid 1px red;
+}
+
+.price_text {
+  color: #0759fb;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.delete_container {
+  height: 250px;
+  width: 100px;
+  border: solid 1px red;
+}
+
+.delete_button {
+  border-radius: 6px;
+  background: #727272;
+  width: 69px;
+  height: 69px;
+  flex-shrink: 0;
+  border: none;
+  font-size: 45px;
+  color: #ffffff;
+}
+
+.LR_button_container {
+  width: 1015px;
+  height: fit-content;
+  border: solid 1px red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 250px;
+}
+
+.left_button {
+  width: 231.819px;
+  height: 68px;
+  flex-shrink: 0;
+  border-radius: 43.5px;
+  background: #d9d9d9;
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border: none;
+}
