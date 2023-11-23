@@ -91,6 +91,7 @@ body {
   font-style: normal;
   font-weight: 800;
   line-height: normal;
+  width: 159.25px;
 }
 
 .nextText {
@@ -275,4 +276,13 @@ body {
   line-height: normal;
   gap: 10px;
   margin-left: 10px;
+}
+
+.select__container {
+  display: flex;
+  width: 1080px;
+  height: 1284px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

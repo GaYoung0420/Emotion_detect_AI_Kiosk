@@ -1,0 +1,96 @@
+.payment_container {
+  /* border: solid 1px red; */
+  flex-direction: column;
+}
+
+.price_container {
+  width: 1080px;
+  height: 149px;
+  flex-shrink: 0;
+  background: #334d81;
+}
+
+.price_text {
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 55px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.price_result_text {
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.select_payment_container {
+  /* border: solid 1px blue; */
+  flex-direction: row;
+  padding: 70px 0 70px 0;
+  gap: 20px;
+}
+
+.card_button {
+  width: 319px;
+  height: 506px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: var(--Main-Color, #334d81);
+  border: none;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.payment_card_btn {
+  width: 320px;
+  /* height: 210.626px; */
+  margin-left: -7px;
+}
+.payment_choose_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 14px;
+  width: 225px;
+  height: 245px;
+  border-radius: 15px;
+  border: 2px solid #e1e1e1;
+  background: #fff;
+  color: var(--Black, #000);
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+}
+
+.payment_choose_button_container {
+  width: fit-content;
+  height: fit-content;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.svg_container {
+  height: 101px;
+  width: 200px;
+  /* border: solid 1px red; */
+  bottom: 0;
+  position: relative;
+}
