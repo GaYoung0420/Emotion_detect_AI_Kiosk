@@ -20,7 +20,7 @@
 
     <link href="../css/kiosk.css" rel="stylesheet" />
     <link href="../css/kiosk4.css" rel="stylesheet" />
-    <link href="../css/kiosk8.css" rel="stylesheet" />
+    <link href="../css/kiosk6.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -101,32 +101,6 @@
               cy="28"
               r="27"
               style="
-                fill: var(--Main-Color, #334d81);
-                stroke: #334d81;
-                stroke-width: 3px;
-              "
-            />
-             
-            <text
-              x="27"
-              y="40"
-              font-size="35"
-              text-anchor="middle"
-              fill="#ffffff"
-              style="font-weight: 1000"
-            >
-              3
-            </text>
-          </svg>
-
-          <hr class="check_bar" />
-         
-          <svg style="width: 56; height: 56">
-            <circle
-              cx="28"
-              cy="28"
-              r="27"
-              style="
                 fill: var(--Main-Color, #ffffff);
                 stroke: #334d81;
                 stroke-width: 3px;
@@ -145,6 +119,31 @@
               font-size="35"
               text-anchor="middle"
               fill="white"
+              style="font-weight: 1000"
+            >
+              3
+            </text>
+          </svg>
+
+          <hr class="bar" />
+          <svg style="width: 56; height: 56">
+            <circle
+              cx="28"
+              cy="28"
+              r="27"
+              style="
+                fill: var(--Main-Color, #ffffff);
+                stroke: #ffffff;
+                stroke-width: 3px;
+              "
+            />
+             
+            <text
+              x="27"
+              y="40"
+              font-size="35"
+              text-anchor="middle"
+              fill="#535353;"
               style="font-weight: 1000"
             >
               4
@@ -182,10 +181,10 @@
           <span class="nextText" style="position: relative; left: 85px"
             >주문 확인</span
           >
-          <span class="nextText" style="position: relative; left: 140px"
+          <span class="nowText" style="position: relative; left: 140px"
             >포인트 적립</span
           >
-          <span class="nowText" style="position: relative; left: 195px"
+          <span class="nextText" style="position: relative; left: 195px"
             >결제</span
           >
           <span class="nextText" style="position: relative; left: 250px"
@@ -196,37 +195,26 @@
       <!-- baner -->
       <div class="baner"></div>
       <!-- task title -->
-      <div class="task_title center_cantainer">결제 하기</div>
+      <div class="task_title center_cantainer">영수증 출력</div>
 
-      <!-- 8.1 카드 결제 가이드 -->
-      <div id="card_pay" class="select__container" >
-        <text class="task_sub_title" style="width: 620px; margin-top: -200px"
-          >우측 하단의 카드 삽입기에 카드를 끝까지 삽입해주세요.</text
-        >
-        <div class="img_container center_cantainer">
-          <div>
-            <img src="../svg/kiosk.svg" />
-            <div class="spinner-wrap">
-              <div class="spinner-item"></div>
-              <div class="spinner-item spinner-item--2"></div>
-              <div class="spinner-item spinner-item--3"></div>
-            </div>
+      <div class="select__container"  >
+        <text class="task_sub_title" style="margin-bottom: 30px;">영수증을 출력 하시겠습니까?</text>
+        <div class="select_container center_cantainer">
+          <div class="center_cantainer" style="gap: 69px">
+            <button class="point_select_btn center_cantainer" style="gap: 40px;">
+              <img src="../svg/print_yes.svg" style="height: 230px;" />
+              예
+            </button>
+            <button class="point_select_btn center_cantainer" style="gap: 40px;">
+              <img src="../svg/print_no.svg" style="height: 230px;" />
+              아니오
+            </button>
           </div>
-
-          <img class="card_insert" src="../gif/card_insert.gif" />
+          
         </div>
       </div>
 
-      <!-- 8.2 카드 결제 -->
-      <div id="card_pay_ing" class="select__container">
-        <text class="task_sub_title" style="width: 620px; margin-top: -200px"
-          >결제가 진행 중 입니다.</text
-        >
-        <div class="img_container center_cantainer">
-            <video class="pay_video" src="../video/pay.mp4" autoplay loop="true">
-            </video>
-        </div>
-      </div>
+      
 
       <!-- footer -->
       <div class="footer">
@@ -243,5 +231,39 @@
     document.getElementById('homeBtn').addEventListener('click', function () {
       window.location.href = '../html/kiosk_1_Touch_screen.html';
     });
+
+    var inputElement = document.getElementById('txtPhone');
+
+    inputElement.addEventListener('input', function () {
+      autoHyphen2();
+    });
+
+    function appendToInput(number) {
+      var inputValue = inputElement.value;
+
+      if (inputValue.length < 13) {
+        inputElement.value += number;
+        console.log(inputElement.value.length);
+        autoHyphen2();
+      }
+    }
+
+    function backspace() {
+      var inputValue = inputElement.value.replace(/\D/g, '');
+      inputElement.value = inputValue.slice(0, -1); // Remove the last character
+      autoHyphen2();
+    }
+
+    function clearInput() {
+      inputElement.value = ''; // Clear all content
+      autoHyphen2();
+    }
+
+    const autoHyphen2 = () => {
+      inputElement.value = inputElement.value
+        .replace(/[^0-9]/g, '')
+        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
+        .replace(/(\-{1,2})$/g, '');
+    };
   </script>
 </html>
