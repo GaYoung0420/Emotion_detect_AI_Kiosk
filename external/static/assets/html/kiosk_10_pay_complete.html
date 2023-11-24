@@ -20,6 +20,7 @@
 
     <link href="../css/kiosk.css" rel="stylesheet" />
     <link href="../css/kiosk4.css" rel="stylesheet" />
+    <link href="../css/kiosk8.css" rel="stylesheet" />
     <link href="../css/kiosk10.css" rel="stylesheet" />
   </head>
 
@@ -101,6 +102,54 @@
               cy="28"
               r="27"
               style="
+                fill: var(--Main-Color, #334d81);
+                stroke: #334d81;
+                stroke-width: 3px;
+              "
+            />
+             
+            <text
+              x="27"
+              y="40"
+              font-size="35"
+              text-anchor="middle"
+              fill="white"
+              style="font-weight: 1000"
+            >3
+            </text>
+          </svg>
+
+          <hr class="check_bar" />
+          <svg style="width: 56; height: 56">
+            <circle
+              cx="28"
+              cy="28"
+              r="27"
+              style="
+                fill: var(--Main-Color, #334d81);
+                stroke: #334d81;
+                stroke-width: 3px;
+              "
+            />
+             
+            <text
+              x="27"
+              y="40"
+              font-size="35"
+              text-anchor="middle"
+              fill="white"
+              style="font-weight: 1000"
+            >
+              4
+            </text>
+          </svg>
+          <hr class="check_bar" />
+          <svg style="width: 56; height: 56">
+            <circle
+              cx="28"
+              cy="28"
+              r="27"
+              style="
                 fill: var(--Main-Color, #ffffff);
                 stroke: #334d81;
                 stroke-width: 3px;
@@ -121,55 +170,6 @@
               fill="white"
               style="font-weight: 1000"
             >
-              3
-            </text>
-          </svg>
-
-          <hr class="bar" />
-          <svg style="width: 56; height: 56">
-            <circle
-              cx="28"
-              cy="28"
-              r="27"
-              style="
-                fill: var(--Main-Color, #ffffff);
-                stroke: #ffffff;
-                stroke-width: 3px;
-              "
-            />
-             
-            <text
-              x="27"
-              y="40"
-              font-size="35"
-              text-anchor="middle"
-              fill="#535353;"
-              style="font-weight: 1000"
-            >
-              4
-            </text>
-          </svg>
-          <hr class="bar" />
-          <svg style="width: 56; height: 56">
-            <circle
-              cx="28"
-              cy="28"
-              r="27"
-              style="
-                fill: var(--Main-Color, #ffffff);
-                stroke: #ffffff;
-                stroke-width: 3px;
-              "
-            />
-             
-            <text
-              x="27"
-              y="40"
-              font-size="35"
-              text-anchor="middle"
-              fill="#535353;"
-              style="font-weight: 1000"
-            >
               5
             </text>
           </svg>
@@ -181,13 +181,13 @@
           <span class="nextText" style="position: relative; left: 85px"
             >주문 확인</span
           >
-          <span class="nowText" style="position: relative; left: 140px"
+          <span class="nextText" style="position: relative; left: 140px"
             >포인트 적립</span
           >
           <span class="nextText" style="position: relative; left: 195px"
             >결제</span
           >
-          <span class="nextText" style="position: relative; left: 250px"
+          <span class="nowText" style="position: relative; left: 250px"
             >종료</span
           >
         </div>
@@ -219,13 +219,16 @@
         <text class="task_sub_title" style="margin-bottom: 30px"
           >카드와 영수증을 회수해주세요.</text
         >
-        <div class="select_container center_cantainer" style="height: 655px;">
-          <div class="center_cantainer" style="flex-direction: column;">
-            <text class="number_text">주문 번호</text>
-            <text class="number" style="color: #334d81;">374 <span style="color: black;">번</span></text>
-            <img src="../svg/receipts.svg" />
-
+        <div class="img_container center_cantainer">
+          <div>
+            <img src="../svg/kiosk_receipt.svg" />
+            <div class="spinner-wrap" style="left: -100px;">
+              <div class="spinner-item"></div>
+              <div class="spinner-item spinner-item--2"></div>
+              <div class="spinner-item spinner-item--3"></div>
+            </div>
           </div>
+
         </div>
       </div>
 
