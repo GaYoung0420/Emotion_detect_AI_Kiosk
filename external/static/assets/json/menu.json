@@ -18,83 +18,83 @@
     "price": "2,500",
     "catagory": "coffee",
     "explain": "부드럽고 고소한 맛이 특징인 커피",
-    "img": "../img/menu/digital_carameo_moca.jpg"
+    "img": "../img/menu/digital_carameo_moca.png"
   },
   {
     "text": "에스프레소",
     "price": "1,500",
     "catagory": "coffee",
     "explain": "더 진한 독창적인 풍미의 다크 초콜릿의 풍미를 느낄 수 있는 커피",
-    "img": "../img/menu/digital_espresso.jpg"
+    "img": "../img/menu/digital_espresso.png"
   },
   {
     "text": "에스프레소 콘파냐",
     "price": "2,000",
     "catagory": "coffee",
-    "explain": "상큼한 레몬이 에스프레소의 강렬한 맛을 부드럽게 완화시켜주는 독특한 커피",
-    "img": "../img/menu/digital_cafe_menu/digital_espresso_conpa.jpg"
+    "explain": "진한 에스프레소가 달콤하고 부드러운 크림과 만나 부담스럽지 않게 즐길 수 있는 커피",
+    "img": "../img/menu/digital_espresso_conpa.png"
   },
   {
     "text": "카라멜카페라떼",
     "price": "2,500",
     "catagory": "coffee",
     "explain": "진하고 쌉싸름한 원두커피에 카라멜을 섞어 달콤함과 원두커피를 동시에 맛볼 수 있는 커피",
-    "img": "../img/menu/digital_cafe_menu/digital_caramel_latte.jpg"
+    "img": "../img/menu/digital_caramel_latte.png"
   },
   {
     "text": "카푸치노",
     "price": "2,000",
     "catagory": "coffee",
     "explain": "진하고 쌉싸름한 원두커피에 우유와 우유거품을 풍성하게 올린 커피",
-    "img": "../img/menu/digital_cafe_menu/digital_capuch.jpg"
+    "img": "../img/menu/digital_capuch.png"
   },
   {
     "text": "아포카토",
     "price": "3,000",
     "catagory": "coffee",
     "explain": "콜드 브루 커피와 부드러운 바닐라 아이스크림의 조화를 이루는 커피",
-    "img": "../img/menu/igital_cafe_menu/digital_apo.jpg"
+    "img": "../img/menu/digital_apo.png"
   },
   {
     "text": "콜드브루",
     "price": "2,500",
     "catagory": "coffee",
     "explain": "부드럽고 고소한 맛이 특징인 커피",
-    "img": "../img/menu/img/digital_cafe_menu/cold.jpg"
+    "img": "../img/menu/cold.png"
   },
   {
     "text": "콜드브루라떼",
     "price": "2,800",
     "catagory": "coffee",
     "explain": "부드럽고 고소한 맛이 특징인 커피",
-    "img": "../img/menu/img/digital_cafe_menu/cold_latte.jpg"
+    "img": "../img/menu/cold_latte.png"
   },
   {
     "text": "말차라떼",
     "price": "3,200",
     "catagory": "coffee",
     "explain": "부드럽고 고소한 맛이 특징인 커피",
-    "img": "../img/menu/img/digital_cafe_menu/green_latte.jpg"
+    "img": "../img/menu/green_latte.png"
   },
   {
     "text": "연유라떼",
     "price": "3,000",
     "catagory": "coffee",
     "explain": "부드럽고 고소한 맛이 특징인 커피",
-    "img": "../img/menu/img/digital_cafe_menu/spani_latte.jpg"
+    "img": "../img/menu/spani_latte.png"
   },
   {
     "text": "비엔나커피",
     "price": "3,500",
     "catagory": "coffee",
     "explain": "부드럽고 고소한 맛이 특징인 커피",
-    "img": "../img/menu/img/digital_cafe_menu/Vienna.jpg"
+    "img": "../img/menu/Vienna.png"
   },
   {
     "text": "티라미수 라떼",
     "price": "3,000",
     "catagory": "coffee",
     "explain": "부드럽고 고소한 맛이 특징인 커피",
-    "img": "../img/menu/img/digital_cafe_menu/tiramisu.jpg"
+    "img": "../img/menu/tiramisu.png"
   }
 ]
