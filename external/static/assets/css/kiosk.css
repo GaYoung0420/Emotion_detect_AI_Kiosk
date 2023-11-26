@@ -35,11 +35,6 @@ body {
   background-color: #f0f0f0;
 }
 
-.container {
-  width: 1080px; /* 화면 가로 길이에 꽉 차도록 설정 */
-  height: 1920px; /* 화면 세로 길이에 꽉 차도록 설정 */
-  background-color: #fafafa;
-}
 
 .header {
   width: 100%;
