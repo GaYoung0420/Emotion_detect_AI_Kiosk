@@ -302,28 +302,17 @@
         </button>
 
         <div class="pagingContainer">
-          <svg style="width: 56; height: 56">
-            <circle class="abledPaging" cx="28" cy="28" r="27" />
-             
-            <text
-              x="27"
-              y="40"
-              font-size="35"
-              text-anchor="middle"
-              fill="white"
-              style="font-weight: 1000"
-            >
-              1
-            </text>
-          </svg>
-          <svg style="width: 56; height: 56">
-            <circle class="disabledPaging" cx="28" cy="28" r="27" />
-            <text x="27" y="40" font-size="35" text-anchor="middle">2</text>
-          </svg>
-          <svg style="width: 56; height: 56">
-            <circle class="disabledPaging" cx="28" cy="28" r="27" />
-            <text x="27" y="40" font-size="35" text-anchor="middle">3</text>
-          </svg>
+
+          <div class="paging">
+            <input type="radio" name="paging" id="paging_1" value="paging_1" checked />
+            <label for="paging_1">1</label>
+          </div>
+
+          <div class="paging">
+            <input type="radio" name="paging" id="paging_2" value="paging_2" />
+            <label for="paging_2">2</label>
+          </div>
+
         </div>
         <button class="MenuBtn abledMenuBtn">
           다음
@@ -362,8 +351,7 @@
           <!-- <div class="menu_select_subcontainer">
             <text style="font-size: 30px; color: #8d909f; font-weight: 700"
               >주문내역이 없습니다. 메뉴를 선택해주세요</text>
-          </div>
-           -->
+          </div> -->
           <div class="cart_list_container">
             <div class="cart_list_background">
               <div class="center_cantainer" style="width: 100%; gap: 190px">
@@ -410,7 +398,7 @@
                 viewBox="0 0 21 26"
                 fill="none"
               >
-                <path d="M21 13L0 25.1244V0.875645L21 13Z" fill="white" />
+              <path d="M21 13L0 25.1244V0.875645L21 13Z" fill="white" />
               </svg>
             </div>
             <text>다음</text>
@@ -461,6 +449,7 @@
     referrerpolicy="no-referrer"
   ></script>
   <script src="../json/menu.json" type="text/javascript"></script>
+  <script src="../js/kiosk/component/kiosk2_component.js"></script>
   <script src="../js/kiosk/kiosk2.js"></script>
   <script>
     document.getElementById('homeBtn').addEventListener('click', function () {
