@@ -260,34 +260,34 @@
       <!-- Menu -->
       <div class="MenuContainer">
         <div class="menuRowContainer">
-          <button class="menuBtn">
+          <button id="menu1" class="menuBtn">
             <img class="menuImg" src="../img/menu/digital_americano.png" />
             <div id="menuName">아메리카노</div>
             <div id="menuPrice">1,400원</div>
           </button>
-          <button class="menuBtn">
+          <button id="menu2" class="menuBtn">
             <img class="menuImg" src="../img/menu/digital_americano.png" />
             <div id="menuName">아메리카노</div>
             <div id="menuPrice">1,400원</div>
           </button>
-          <button class="menuBtn">
+          <button id="menu3" class="menuBtn">
             <img class="menuImg" src="../img/menu/digital_americano.png" />
             <div id="menuName">아메리카노</div>
             <div id="menuPrice">1,400원</div>
           </button>
         </div>
-        <div class="menuRowContainer">
+        <div id="menu4"class="menuRowContainer">
           <button class="menuBtn">
             <img class="menuImg" src="../img/menu/digital_americano.png" />
             <div id="menuName">아메리카노</div>
             <div id="menuPrice">1,400원</div>
           </button>
-          <button class="menuBtn">
+          <button id="menu5"class="menuBtn">
             <img class="menuImg" src="../img/menu/digital_americano.png" />
             <div id="menuName">아메리카노</div>
             <div id="menuPrice">1,400원</div>
           </button>
-          <button class="menuBtn">
+          <button id="menu6" class="menuBtn">
             <img class="menuImg" src="../img/menu/digital_americano.png" />
             <div id="menuName">아메리카노</div>
             <div id="menuPrice">1,400원</div>
@@ -366,7 +366,7 @@
            -->
           <div class="cart_list_container">
             <div class="cart_list_background">
-              <div class="center_cantainer" style="width: 100%; gap: 190px;">
+              <div class="center_cantainer" style="width: 100%; gap: 190px">
                 <!-- 리스트 번호 -->
                 <div class="cart_list_number center_cantainer">1</div>
                 <!-- 삭제 버튼 -->
@@ -376,8 +376,11 @@
                 </button>
               </div>
               <div class="cart_info_sub_conatiner">
-                <img class="cart_menu_img" src="../img/menu/digital_caramel_latte.png" />
-                <div class="cart_container_info_sub_conatiner" >
+                <img
+                  class="cart_menu_img"
+                  src="../img/menu/digital_caramel_latte.png"
+                />
+                <div class="cart_container_info_sub_conatiner">
                   <div class="cart_menu_name">카라멜 카페라떼</div>
                   <div class="cart_info_text">
                     옵션
@@ -385,13 +388,15 @@
                   </div>
                 </div>
               </div>
-              <div class="center_cantainer" style="width: 100%; gap: 60px;">
-                <div class="center_cantainer" style="gap: 10px;">
+              <div class="center_cantainer" style="width: 100%; gap: 60px">
+                <div class="center_cantainer" style="gap: 10px">
                   <img src="../svg/add_to_cart_icon.svg" />
                   <text class="count_info_text">1</text>
                   <img src="../svg/delete_to_cart_icon.svg" />
                 </div>
-                <div class="price_text">6,000 <span class="price_won">원</span></div>
+                <div class="price_text">
+                  6,000 <span class="price_won">원</span>
+                </div>
               </div>
             </div>
           </div>
@@ -449,6 +454,14 @@
       </div>
     </div>
   </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="../json/menu.json" type="text/javascript"></script>
+  <script src="../js/kiosk/kiosk2.js"></script>
   <script>
     document.getElementById('homeBtn').addEventListener('click', function () {
       window.location.href = '../html/kiosk_1_Touch_screen.html';
