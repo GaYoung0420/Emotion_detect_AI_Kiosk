@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+    <link href="../css/kiosk.css" rel="stylesheet" />
+    <link href="../css/kiosk2.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <button id="homeBtn" type="button">
+          <span class="material-icons"> home </span>
+          처음으로
+        </button>
+        <img src="../svg/logo.svg" alt="logo image" />
+
+        <input type="checkbox" id="toggle" hidden />
+        <label for="toggle" class="toggleSwitch">
+          <!-- <span class="toggleButton"></span> -->
+          <img
+            class="chatbotIcon"
+            src="../svg/chatbotIcon.svg"
+            alt="chatbotIcon"
+          />
+          <span class="chatbotActiveText"></span>
+        </label>
+      </div>
+      <!-- Step Bar -->
+      <div class="stepContainer">
+        <div class="stepSubContainer">
+          <svg style="width: 56; height: 56">
+            <circle
+              cx="28"
+              cy="28"
+              r="27"
+              style="
+                fill: var(--Main-Color, #ffffff);
+                stroke: #334d81;
+                stroke-width: 3px;
+              "
+            />
+             
+            <circle
+              cx="28"
+              cy="28"
+              r="23"
+              style="fill: var(--Main-Color, #334d81)"
+            />
+            <text
+              x="27"
+              y="40"
+              font-size="35"
+              text-anchor="middle"
+              fill="white"
+              style="font-weight: 1000"
+            >
+              1
+            </text>
+          </svg>
+          <hr class="bar" />
+          <svg style="width: 56; height: 56">
+            <circle
+              cx="28"
+              cy="28"
+              r="27"
+              style="
+                fill: var(--Main-Color, #ffffff);
+                stroke: #ffffff;
+                stroke-width: 3px;
+              "
+            />
+             
+            <text
+              x="27"
+              y="40"
+              font-size="35"
+              text-anchor="middle"
+              fill="#535353;"
+              style="font-weight: 1000"
+            >
+              2
+            </text>
+          </svg>
+          <hr class="bar" />
+          <svg style="width: 56; height: 56">
+            <circle
+              cx="28"
+              cy="28"
+              r="27"
+              style="
+                fill: var(--Main-Color, #ffffff);
+                stroke: #ffffff;
+                stroke-width: 3px;
+              "
+            />
+             
+            <text
+              x="27"
+              y="40"
+              font-size="35"
+              text-anchor="middle"
+              fill="#535353;"
+              style="font-weight: 1000"
+            >
+              3
+            </text>
+          </svg>
+          <hr class="bar" />
+          <svg style="width: 56; height: 56">
+            <circle
+              cx="28"
+              cy="28"
+              r="27"
+              style="
+                fill: var(--Main-Color, #ffffff);
+                stroke: #ffffff;
+                stroke-width: 3px;
+              "
+            />
+             
+            <text
+              x="27"
+              y="40"
+              font-size="35"
+              text-anchor="middle"
+              fill="#535353;"
+              style="font-weight: 1000"
+            >
+              4
+            </text>
+          </svg>
+          <hr class="bar" />
+          <svg style="width: 56; height: 56">
+            <circle
+              cx="28"
+              cy="28"
+              r="27"
+              style="
+                fill: var(--Main-Color, #ffffff);
+                stroke: #ffffff;
+                stroke-width: 3px;
+              "
+            />
+             
+            <text
+              x="27"
+              y="40"
+              font-size="35"
+              text-anchor="middle"
+              fill="#535353;"
+              style="font-weight: 1000"
+            >
+              5
+            </text>
+          </svg>
+        </div>
+        <div class="steptextSubContainer">
+          <span class="nowText" style="position: relative; left: 33px"
+            >메뉴 선택</span
+          >
+          <span class="nextText" style="position: relative; left: 85px"
+            >주문 확인</span
+          >
+          <span class="nextText" style="position: relative; left: 140px"
+            >포인트 적립</span
+          >
+          <span class="nextText" style="position: relative; left: 195px"
+            >결제</span
+          >
+          <span class="nextText" style="position: relative; left: 250px"
+            >종료</span
+          >
+        </div>
+      </div>
+      <!-- baner -->
+      <div
+        style="
+          width: 1080px;
+          height: 233px;
+          background:
+            url('../img/baner.png'),
+            lightgray 50% / cover no-repeat;
+        "
+      ></div>
+      <!-- Category -->
+      <div class="categoryContainer">
+        <div class="categoryRow" style="margin-bottom: 13px">
+          <div class="categry">
+            <input
+              type="radio"
+              name="category"
+              id="coffee"
+              value="coffee"
+              checked
+            />
+            <label for="coffee">커피</label>
+          </div>
+
+          <div class="categry">
+            <input type="radio" name="category" id="bread" value="bread" />
+            <label for="bread">빵</label>
+          </div>
+          <div class="categry">
+            <input type="radio" name="category" id="snack" value="snack" />
+            <label for="snack">구움과자</label>
+          </div>
+          <div class="categry">
+            <input type="radio" name="category" id="juice" value="juice" />
+            <label for="juice">생과일주스</label>
+          </div>
+        </div>
+        <div class="categoryRow">
+          <div class="categry">
+            <input type="radio" name="category" id="tea" value="tea" />
+            <label for="tea">차</label>
+          </div>
+
+          <div class="categry">
+            <input
+              type="radio"
+              name="category"
+              id="smoothie"
+              value="smoothie"
+            />
+            <label for="smoothie">스무디</label>
+          </div>
+          <div class="categry">
+            <input
+              type="radio"
+              name="category"
+              id="bingsu"
+              value="bingsu"
+            />
+            <label for="bingsu">빙수</label>
+          </div>
+          <div class="categry" style="opacity: 0">
+            <input type="radio" />
+            <label></label>
+          </div>
+        </div>
+      </div>
+      <!-- Menu -->
+      <!-- Slider main container -->
+      <div class="swiper-container gallery-top">
+        <div class="swiper-wrapper">
+        </div>
+
+        <div style="position: relative; bottom: -335px; ">
+          <button class="swiper-button-prev MenuBtn ">
+            <span class="material-icons"> arrow_back_ios </span>
+            이전
+          </button>
+          <button class="swiper-button-next MenuBtn ">
+            다음
+            <span class="material-icons"> arrow_forward_ios </span>
+          </button>
+          <!-- <div class="swiper-button-prev">다음</div>
+          <div class="swiper-button-next"></div> -->
+        </div>
+        <div class="swiper-pagination"></div>
+
+        <!-- <div class="swiper-pagination pagination_progress"></div> -->
+      </div>
+      <!-- <div class="MenuContainer">
+        <div class="menuRowContainer">
+          <button id="menu1" class="menuBtn">
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
+          </button>
+          <button id="menu2" class="menuBtn">
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
+          </button>
+          <button id="menu3" class="menuBtn">
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
+          </button>
+        </div>
+        <div class="menuRowContainer">
+          <button class="menuBtn">
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
+          </button>
+          <button id="menu5"class="menuBtn">
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
+          </button>
+          <button id="menu6" class="menuBtn">
+            <img class="menuImg" src="../img/menu/digital_americano.png" />
+            <div id="menuName">아메리카노</div>
+            <div id="menuPrice">1,400원</div>
+          </button>
+        </div>
+      </div> -->
+      <!-- Menu LR button -->
+      <!-- <div class="LRRowContainer">
+        <button class="MenuBtn disabledMenuBtn">
+          <span class="material-icons"> arrow_back_ios </span>
+          이전
+        </button>
+
+        <div class="pagingContainer">
+          <div class="paging">
+            <input
+              type="radio"
+              name="paging"
+              id="paging_1"
+              value="paging_1"
+              checked
+            />
+            <label for="paging_1">1</label>
+          </div>
+
+          <div class="paging">
+            <input type="radio" name="paging" id="paging_2" value="paging_2" />
+            <label for="paging_2">2</label>
+          </div>
+        </div>
+        <button class="MenuBtn abledMenuBtn">
+          다음
+          <span class="material-icons"> arrow_forward_ios </span>
+        </button>
+      </div> -->
+      <!-- Cart -->
+      <div class="cart_container">
+        <div class="cart_title_container">
+          <span class="cart_title">주문 내역</span>
+          <button class="cart_delete">
+            <span class="material-symbols-outlined" style="font-size: 33px">
+              delete
+            </span>
+            주문 전체 삭제
+          </button>
+        </div>
+        <hr style="width: 1002px; border: solid #d8dad9 1.3px" />
+        <div class="cart_select_container">
+          <button class="cart_LR_button disabled_menut_btn">
+            <div class="cart_div">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="21"
+                height="26"
+                viewBox="0 0 21 26"
+                fill="none"
+              >
+                <path d="M0 13L21 0.875645V25.1244L0 13Z" fill="white" />
+              </svg>
+            </div>
+            <text>이전</text>
+          </button>
+          <!-- cart item list -->
+          <!-- 주문 내역이 없음 -->
+          <!-- <div class="menu_select_subcontainer">
+            <text style="font-size: 30px; color: #8d909f; font-weight: 700"
+              >주문내역이 없습니다. 메뉴를 선택해주세요</text>
+          </div> -->
+          <div class="cart_list_container">
+            <div class="cart_list_background">
+              <div class="center_cantainer" style="width: 100%; gap: 190px">
+                <!-- 리스트 번호 -->
+                <div class="cart_list_number center_cantainer">1</div>
+                <!-- 삭제 버튼 -->
+                <button utton class="cart_delete_icon center_cantainer">
+                  <img src="../svg/cart_delete.svg" />
+                  삭제
+                </button>
+              </div>
+              <div class="cart_info_sub_conatiner">
+                <img
+                  class="cart_menu_img"
+                  src="../img/menu/digital_caramel_latte.png"
+                />
+                <div class="cart_container_info_sub_conatiner">
+                  <div class="cart_menu_name">카라멜 카페라떼</div>
+                  <div class="cart_info_text">
+                    옵션
+                    <span> : 차가움, 보통, 에스프레소</span>
+                  </div>
+                </div>
+              </div>
+              <div class="center_cantainer" style="width: 100%; gap: 60px">
+                <div class="center_cantainer" style="gap: 10px">
+                  <img src="../svg/add_to_cart_icon.svg" />
+                  <text class="count_info_text">1</text>
+                  <img src="../svg/delete_to_cart_icon.svg" />
+                </div>
+                <div class="price_text">
+                  6,000 <span class="price_won">원</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="cart_LR_button disabled_menut_btn">
+            <div class="cart_div">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="21"
+                height="26"
+                viewBox="0 0 21 26"
+                fill="none"
+              >
+                <path d="M21 13L0 25.1244V0.875645L21 13Z" fill="white" />
+              </svg>
+            </div>
+            <text>다음</text>
+          </button>
+        </div>
+        <hr style="width: 1002px; border: solid #d8dad9 1.3px" />
+        <div class="cart_info_container">
+          <text class="cart_info_container_title">총 수량</text>
+          <div class="center_cantainer" style="width: 250px">
+            <text
+              id="cart_count"
+              class="cart_info_container_title"
+              style="font-weight: 800"
+              >0</text
+            >
+            <text id="cart_count" class="cart_info_container_text">개</text>
+          </div>
+
+          <text class="cart_info_container_title">총 수량</text>
+          <div class="center_cantainer" style="width: 250px">
+            <text
+              id="cart_count"
+              class="cart_info_container_title"
+              style="font-weight: 800"
+              >0</text
+            >
+            <text id="cart_count" class="cart_info_container_text">원</text>
+          </div>
+          <button class="order_button">주문하기</button>
+        </div>
+      </div>
+      <div class="add_option_select_conatiner"></div>
+      <!-- footer -->
+      <div class="footer">
+        <button class="back_button center_cantainer">
+          <span class="material-symbols-outlined" style="font-size: 33px">
+            undo
+          </span>
+          이전으로
+        </button>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="../json/menu.json" type="text/javascript"></script>
+  <script src="../js/kiosk/component/kiosk2_component.js"></script>
+  <script src="../js/kiosk/kiosk2.js"></script>
+  <script>
+    document.getElementById('homeBtn').addEventListener('click', function () {
+      window.location.href = '../html/kiosk_1_Touch_screen.html';
+    });
+  </script>
+</html>

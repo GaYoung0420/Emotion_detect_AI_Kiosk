@@ -1,102 +1,233 @@
 MenuFile = {
   "coffee": [
-    [
       {
         "text": "아메리카노",
-        "price": "1,400",
+        "price": 1400,
         "explain": "독창적인 풍미의 다크 초콜릿의 풍미를 느낄 수 있는 커피",
         "img": "../img/menu/digital_americano.png"
       },
       {
         "text": "카페라떼",
-        "price": "2,000",
+        "price": 2000,
         "explain": "부드럽고 고소한 맛이 특징인 커피",
         "img": "../img/menu/digital_cafe_latte.png"
       },
       {
         "text": "카페모카",
-        "price": "2,500",
-        "catagory": "coffee",
-        "explain": "부드럽고 고소한 맛이 특징인 커피",
+        "price": 2500,
+        "explain": " 우유와 진한 초콜릿이 어우러진 시원한 모카 음료",
         "img": "../img/menu/digital_carameo_moca.png"
       },
       {
         "text": "에스프레소",
-        "price": "1,500",
-        "catagory": "coffee",
-        "explain": "더 진한 독창적인 풍미의 다크 초콜릿의 풍미를 느낄 수 있는 커피",
+        "price": 1500,
+        "explain": "바디감이 풍부하고 고소하면서 기분좋은 쓴맛인 커피",
         "img": "../img/menu/digital_espresso.png"
       },
       {
         "text": "에스프레소 콘파냐",
-        "price": "2,000",
-        "catagory": "coffee",
+        "price": 2000,
         "explain": "진한 에스프레소가 달콤하고 부드러운 크림과 만나 부담스럽지 않게 즐길 수 있는 커피",
         "img": "../img/menu/digital_espresso_conpa.png"
       },
       {
         "text": "카라멜카페라떼",
-        "price": "2,500",
-        "catagory": "coffee",
+        "price": 2500,
         "explain": "진하고 쌉싸름한 원두커피에 카라멜을 섞어 달콤함과 원두커피를 동시에 맛볼 수 있는 커피",
         "img": "../img/menu/digital_caramel_latte.png"
       },
       {
         "text": "카푸치노",
-        "price": "2,000",
-        "catagory": "coffee",
+        "price": 2000,
         "explain": "진하고 쌉싸름한 원두커피에 우유와 우유거품을 풍성하게 올린 커피",
         "img": "../img/menu/digital_capuch.png"
       },
       {
         "text": "아포카토",
-        "price": "3,000",
-        "catagory": "coffee",
-        "explain": "콜드 브루 커피와 부드러운 바닐라 아이스크림의 조화를 이루는 커피",
+        "price": 3000,
+        "explain": "아이스크림에 갓 내린 에스프레소를 부어 즐기는 디저트",
         "img": "../img/menu/digital_apo.png"
       },
       {
         "text": "콜드브루",
-        "price": "2,500",
-        "catagory": "coffee",
-        "explain": "부드럽고 고소한 맛이 특징인 커피",
+        "price": 2500,
+        "explain": "고품질 원두로 추출하여 만든 향긋한 풍미의 청량감 있는 커피",
         "img": "../img/menu/cold.png"
       },
       {
         "text": "콜드브루라떼",
-        "price": "2,800",
-        "catagory": "coffee",
-        "explain": "부드럽고 고소한 맛이 특징인 커피",
+        "price": 2800,
+        "explain": "밸런스가 좋은 콜드브루 원액에 부드럽고 우유 맛이 나는 고소한 라떼",
         "img": "../img/menu/cold_latte.png"
       },
       {
-        "text": "말차라떼",
-        "price": "3,200",
-        "catagory": "coffee",
-        "explain": "부드럽고 고소한 맛이 특징인 커피",
+        "text": "녹차라떼",
+        "price": 3200,
+        "explain": "차광 녹차가 들어 있는 녹차가루와 우유가 어우러진 시원한 녹차라떼",
         "img": "../img/menu/green_latte.png"
       },
       {
         "text": "연유라떼",
-        "price": "3,000",
-        "catagory": "coffee",
-        "explain": "부드럽고 고소한 맛이 특징인 커피",
+        "price": 3000,
+        "explain": "달콤한 연유에 부드럽고 고소한 우유가 더해져 달달한 커피",
         "img": "../img/menu/spani_latte.png"
       },
       {
         "text": "비엔나커피",
-        "price": "3,500",
-        "catagory": "coffee",
-        "explain": "부드럽고 고소한 맛이 특징인 커피",
+        "price": 3500,
+        "explain": "하얗고 부드러운 휘핑 크림이 올라간 부드럽고 달콤 쌉싸름한 커피",
         "img": "../img/menu/Vienna.png"
       },
       {
         "text": "티라미수 라떼",
-        "price": "3,000",
-        "catagory": "coffee",
-        "explain": "부드럽고 고소한 맛이 특징인 커피",
+        "price": 3000,
+        "explain": "입안 가득 느껴지는 부드러운 치즈와 카카오의 쌉싸름함을 느낄 수 있는 티라미수 라떼",
         "img": "../img/menu/tiramisu.png"
       }
-    ]
+  ],
+  "bread":[
+    {
+      "text": "초코머핀",
+      "price": 3500,
+      "img": "../img/menu/digital_choco.png"
+    },
+    {
+      "text": "치즈케이크",
+      "price": 3500,
+      "img": "../img/menu/digital_cheese.png"
+    },
+    {
+      "text": "티라미슈 케이크",
+      "price": 4500,
+      "img": "../img/menu/digital_tirami.png"
+    },
+    {
+      "text": "플레인 머핀",
+      "price": 3500,
+      "img": "../img/menu/digital_plain.png"
+    },
+    {
+      "text": "허니브레드",
+      "price": 4500,
+      "img": "../img/menu/digital_honey.png"
+    },
+    {
+      "text": "크렌베리 베이글",
+      "price": 1700,
+      "img": "../img/menu/bagle_cran.png"
+    },
+    {
+      "text": "플레인 베이글",
+      "price": 1500,
+      "img": "../img/menu/bagle.png"
+    },
+    {
+      "text": "크루아상",
+      "price": 2200,
+      "img": "../img/menu/croissant.png"
+    },
+    {
+      "text": "소금빵",
+      "price": 2300,
+      "img": "../img/menu/salt.png"
+    },
+    {
+      "text": "참치샌드위치",
+      "price": 4500,
+      "img": "../img/menu/tuna.png"
+    },
+    {
+      "text": "계란샌드위치",
+      "price": 4500,
+      "img": "../img/menu/egg_san.png"
+    },
+    {
+      "text": "햄치즈샌드위치",
+      "price": 4500,
+      "img": "../img/menu/cheese_san.png"
+    },
+    {
+      "text": "춘천 감자빵",
+      "price": 4500,
+      "img": "../img/menu/potato.png"
+    },
+  ],
+  "snack":[
+    {
+      "text": "마카롱 (크림맛)",
+      "price": 2500,
+      "img": "../img/menu/digital_maca.png"
+    },
+    {
+      "text": "휘낭시에",
+      "price": 1500,
+      "img": "../img/menu/digital_fianan.png"
+    },
+  ],
+  "juice":[
+    {
+      "text": "딸기 주스",
+      "price": 2500,
+      "img": "../img/menu/digital_straw.png"
+    },
+    {
+      "text": "딸기바나나 주스",
+      "price": 1500,
+      "img": "../img/menu/digital_straw.banana.png"
+    },
+    {
+      "text": "오렌지 주스",
+      "price": 2500,
+      "img": "../img/menu/digital_orange.png"
+    },
+  ],
+  "tea":[
+    {
+      "text": "히비스커스티",
+      "price": 2500,
+      "explain":"비타민이 많은 히비스커스와 달콤한 리치시럽이 조화를 이룬 상큼하고 달콤한 티",
+      "img": "../img/menu/hibiscus.png"
+    },
+    {
+      "text": "캐모마일티",
+      "price": 3000,
+      "explain":"부드럽고 은은한 카모마일의 향을 느낄 수 있는 티",
+      "img": "../img/menu/chamomile.png"
+    },
+    {
+      "text": "페퍼민트티",
+      "price": 3000,
+      "explain":"은은한 꽃향기를 머금어 부담없이 즐길 수 있는 허브티",
+      "img": "../img/menu/peppermint.png"
+    },
+  ],
+  "smoothie":[
+    {
+      "text": "딸기요거트스무디",
+      "price": 4000,
+      "img": "../img/menu/digital_straw_sm.jpg"
+    },
+    {
+      "text": "망고요거트스무디",
+      "price": 4000,
+      "img": "../img/menu/digital_man_sm.jpg"
+    },
+  ],
+  "bingsu":[
+    {
+      "text": "인절미빙수",
+      "price": 6000,
+      "img": "../img/menu/redbean_bingsu.png"
+    },
+    {
+      "text": "망고빙수",
+      "price": 7500,
+      "img": "../img/menu/mango_bingsu.png"
+    },
+    {
+      "text": "초코빙수",
+      "price": 7000,
+      "img": "../img/menu/choco_bingsu.png"
+    },
   ]
 }
