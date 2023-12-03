@@ -142,6 +142,10 @@
   background: #334d81;
 }
 
+.MenuBtn:active {
+  background: #ffffff;
+}
+
 .pagingContainer {
   display: flex;
   justify-content: center;

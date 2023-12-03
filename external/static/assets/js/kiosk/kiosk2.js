@@ -62,7 +62,7 @@ const change_menu = (category) => {
       );
     }
     $('#menuRowContainer' + menuRowContainer).append(
-      '<button class="menuBtn"><div class="menuImg"> <img  src=' +
+      '<button class="menuBtn" onClick="clickOption("menu")"><div class="menuImg"> <img  src=' +
         element.img +
         ' /></div><div id="menuName">' +
         element.text +
@@ -94,3 +94,7 @@ $('input:radio[name=category]').click(function () {
   swiper.update();
   swiper.slideTo(0);
 });
+
+function clickOption(menu) {
+  window.location.href = '../html/kiosk_3_Select_option.html';
+}
