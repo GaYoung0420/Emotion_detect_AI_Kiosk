@@ -62,7 +62,7 @@ const change_menu = (category) => {
       );
     }
     $('#menuRowContainer' + menuRowContainer).append(
-      '<button class="menuBtn" onClick="clickOption("menu")"><div class="menuImg"> <img  src=' +
+      '<button class="menuBtn"><div class="menuImg"> <img  src=' +
         element.img +
         ' /></div><div id="menuName">' +
         element.text +
