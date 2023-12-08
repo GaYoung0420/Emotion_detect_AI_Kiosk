@@ -32,6 +32,7 @@ var swiper = new Swiper('.swiper-container', {
   },
 });
 
+
 const change_menu = (category) => {
   let swiper_slide_container = 0;
   let menuRowContainer = 0;
@@ -44,6 +45,7 @@ const change_menu = (category) => {
     price :"1,500"
     text : "에스프레소"
     */
+    let idname = category + index;
     if (index % 6 == 0) {
       swiper_slide_container++;
       $('.swiper-wrapper').append(
@@ -62,7 +64,9 @@ const change_menu = (category) => {
       );
     }
     $('#menuRowContainer' + menuRowContainer).append(
-      '<button class="menuBtn"><div class="menuImg"> <img  src=' +
+      '<button id =' +
+        idname +
+        ' class="menuBtn"><div class="menuImg"> <img  src=' +
         element.img +
         ' /></div><div id="menuName">' +
         element.text +
@@ -70,6 +74,11 @@ const change_menu = (category) => {
         formatNumberWithCommas(element.price) +
         ' 원</div></button>',
     );
+
+    $('#' + idname).click(function () {
+      window.location.href = '../html/kiosk_3_Select_option.html';
+      localStorage.setItem('selectMenu', element);
+    });
   });
 };
 
@@ -95,6 +104,3 @@ $('input:radio[name=category]').click(function () {
   swiper.slideTo(0);
 });
 
-function clickOption(menu) {
-  window.location.href = '../html/kiosk_3_Select_option.html';
-}

@@ -309,6 +309,7 @@
 }
 
 .add_option_select_conatiner {
+  display: none;
   position: relative;
   left: 0px;
   top: -1466px;
