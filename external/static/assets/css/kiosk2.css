@@ -509,7 +509,7 @@
 }
 
 .swiper-container {
-  height: 702px;
+  height: 720px;
   width: 100%;
   margin-top: -20px;
 }
@@ -570,7 +570,7 @@
 /* pagination */
 .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets {
   position: relative;
-  bottom: -330px;
+  bottom: -340px;
 }
 
 .swiper-pagination-bullet {

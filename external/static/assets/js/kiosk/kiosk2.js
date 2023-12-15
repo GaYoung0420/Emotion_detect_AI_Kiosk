@@ -77,7 +77,7 @@ const change_menu = (category) => {
 
     $('#' + idname).click(function () {
       window.location.href = '../html/kiosk_3_Select_option.html';
-      localStorage.setItem('selectMenu', element);
+      localStorage.setItem('selectMenu', JSON.stringify(element));
     });
   });
 };

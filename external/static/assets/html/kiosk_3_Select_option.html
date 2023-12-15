@@ -17,6 +17,7 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css"
     />
+    
 
     <link href="../css/kiosk.css" rel="stylesheet" />
     <link href="../css/kiosk2.css" rel="stylesheet" />
@@ -217,7 +218,7 @@
             <div class="menu_title_info">
               카라멜 시럽을 첨가하여 풍부하고 달콤한 커피
             </div>
-            <div class="menu_price_text">3,000 원</div>
+            <div class="menu_price_text"><span class="menu_price_data"></span> 원</div>
           </div>
         </div>
         <div class="option_container">
@@ -247,7 +248,7 @@
               class="option_container_select center_cantainer"
               style="gap: 46px"
             >
-              <button id="delete_item_btn">
+              <button id="delete_item_btn" class="count_btn">
                 <span class="material-symbols-outlined" style="font-size: 33px">
                   do_not_disturb_on </span
                 >삭제
@@ -256,7 +257,7 @@
                 ><span class="set_count">1</span>
                 <span class="set_count_text">개</span>
               </span>
-              <button id="add_item_btn">
+              <button id="add_item_btn"  class="count_btn">
                 <span class="material-symbols-outlined" style="font-size: 33px">
                   add_circle </span
                 >추가
@@ -420,7 +421,7 @@
       </div>
       <!-- footer -->
       <div class="footer">
-        <button class="back_button center_cantainer">
+        <button id="back_button" class="back_button center_cantainer">
           <span class="material-symbols-outlined" style="font-size: 33px">
             undo
           </span>
@@ -708,10 +709,12 @@
       </div>
     </div>
   </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
   <script src ="../js/kiosk/kiosk3.js"></script>
-  <script>
-    document.getElementById('homeBtn').addEventListener('click', function () {
-      window.location.href = '../html/kiosk_1_Touch_screen.html';
-    });
-  </script>
+  <script src="../js/kiosk/kiosk_gnb.js"></script>
 </html>

@@ -1,5 +1,3 @@
-
-
 .menu_option_container {
   height: fit-content;
   width: 100%;
@@ -149,26 +147,13 @@
 
 #delete_item_btn {
   border-radius: 50px 10px 10px 50px;
-  border: 3px solid #575757;
-  background: #f8f8f8;
-  width: 174px;
-  height: 57px;
-  flex-shrink: 0;
-  color: #575757;
-  text-align: center;
-  font-family: NanumSquare_ac;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
 }
 
 #add_item_btn {
   border-radius: 10px 50px 50px 10px;
+}
+
+.count_btn {
   border: 3px solid #575757;
   background: #f8f8f8;
   width: 174px;
@@ -186,6 +171,12 @@
   align-items: center;
   gap: 5px;
 }
+.count_btn:active {
+  border: 3px solid var(--Main-Color, #334d81);
+  background: var(--Main-Color, #334d81);
+  color: #ffffff;
+}
+
 .set_count {
   color: #000;
   text-align: center;
@@ -390,19 +381,18 @@
 }
 
 .option_disable_paging {
-  fill: var(--white, #FFF);
+  fill: var(--white, #fff);
   stroke-width: 3px;
-  stroke: #DFDFDF;
+  stroke: #dfdfdf;
   text-align: center;
   color: var(--B-1, #333);
-text-align: center;
-font-family: NanumSquare_ac;
-font-size: 28px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
-
 
 .able_option_btn {
   display: flex;

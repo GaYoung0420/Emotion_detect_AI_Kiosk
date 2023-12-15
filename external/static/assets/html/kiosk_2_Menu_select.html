@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <styletag include-html="'../html/component/styletag.html"></styletag>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -17,7 +18,7 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css"
     />
-   <link
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css"
     />
@@ -249,12 +250,7 @@
             <label for="smoothie">스무디</label>
           </div>
           <div class="categry">
-            <input
-              type="radio"
-              name="category"
-              id="bingsu"
-              value="bingsu"
-            />
+            <input type="radio" name="category" id="bingsu" value="bingsu" />
             <label for="bingsu">빙수</label>
           </div>
           <div class="categry" style="opacity: 0">
@@ -266,16 +262,15 @@
       <!-- Menu -->
       <!-- Slider main container -->
       <div class="swiper-container gallery-top">
-        <div class="swiper-wrapper">
-        </div>
+        <div class="swiper-wrapper"></div>
         <div class="swiper-pagination"></div>
 
-        <div style="position: relative; bottom: -290px; ">
-          <button class="swiper-button-prev MenuBtn ">
+        <div style="position: relative; bottom: -300px">
+          <button class="swiper-button-prev MenuBtn">
             <span class="material-icons"> arrow_back_ios </span>
             이전
           </button>
-          <button class="swiper-button-next MenuBtn ">
+          <button class="swiper-button-next MenuBtn">
             다음
             <span class="material-icons"> arrow_forward_ios </span>
           </button>
@@ -464,7 +459,7 @@
       <div class="add_option_select_conatiner"></div>
       <!-- footer -->
       <div class="footer">
-        <button class="back_button center_cantainer">
+        <button id="back_button" class="back_button center_cantainer">
           <span class="material-symbols-outlined" style="font-size: 33px">
             undo
           </span>
@@ -482,9 +477,5 @@
   <script src="../json/menu.json" type="text/javascript"></script>
   <script src="../js/kiosk/component/kiosk2_component.js"></script>
   <script src="../js/kiosk/kiosk2.js"></script>
-  <script>
-    document.getElementById('homeBtn').addEventListener('click', function () {
-      window.location.href = '../html/kiosk_1_Touch_screen.html';
-    });
-  </script>
+  <script src="../js/kiosk/kiosk_gnb.js"></script>
 </html>
