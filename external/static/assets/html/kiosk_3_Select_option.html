@@ -17,7 +17,6 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css"
     />
-    
 
     <link href="../css/kiosk.css" rel="stylesheet" />
     <link href="../css/kiosk2.css" rel="stylesheet" />
@@ -218,7 +217,9 @@
             <div class="menu_title_info">
               카라멜 시럽을 첨가하여 풍부하고 달콤한 커피
             </div>
-            <div class="menu_price_text"><span class="menu_price_data"></span> 원</div>
+            <div class="menu_price_text">
+              <span class="menu_price_data"></span> 원
+            </div>
           </div>
         </div>
         <div class="option_container">
@@ -257,7 +258,7 @@
                 ><span class="set_count">1</span>
                 <span class="set_count_text">개</span>
               </span>
-              <button id="add_item_btn"  class="count_btn">
+              <button id="add_item_btn" class="count_btn">
                 <span class="material-symbols-outlined" style="font-size: 33px">
                   add_circle </span
                 >추가
@@ -288,49 +289,24 @@
               >
             </div>
             <div class="option_container_select" style="gap: 19px">
-             <div class="option_btn center_cantainer">
+              <div class="option_btn center_cantainer">
                 <input type="radio" name="temp" id="ice" value="ice" />
                 <label for="ice" class="option_select_button center_cantainer">
                   <div class="option_icon_attribute center_cantainer">
-                    <div class="option_icon_attribute ">
-                      <img
-                      class="option_svg_cold"
-                      src="../svg/cold_icon.svg"
-                    />
-                    </div>
-                    
+                    <img class="option_svg_cold" src="../svg/cold_icon.svg" />
                   </div>
-                  <div >차가움</div>
-                </label> 
+                  <div>차가움</div>
+                </label>
               </div>
               <div class="option_btn center_cantainer">
                 <input type="radio" name="temp" id="hot" value="hot" />
                 <label for="hot" class="option_select_button center_cantainer">
                   <div class="option_icon_attribute center_cantainer">
-                    <img
-                      class="option_icon_attribute"
-                      src="../svg/hot_icon.svg"
-                      
-                    />
+                    <img class="option_svg_hot" src="../svg/hot_icon.svg" />
                   </div>
-                  <div >따뜻함</div>
-                </label> 
+                  <div>따뜻함</div>
+                </label>
               </div>
-              <!-- <button class="option_select_button center_cantainer">
-                <div class="option_icon_attribute center_cantainer">
-                  <img
-                    class="option_icon_attribute"
-                    src="../svg/cold_icon.svg"
-                  />
-                </div>
-                <div class="option_select_text">차가움</div>
-              </button>
-              <button class="option_select_button center_cantainer">
-                <div class="option_icon_attribute center_cantainer">
-                  <img src="../svg/hot_icon.svg" />
-                </div>
-                <div class="option_select_text">따뜻함</div>
-              </button> -->
             </div>
           </div>
           <!-- 3. 크기 선택* -->
@@ -357,33 +333,54 @@
               >
             </div>
             <div class="option_container_select" style="gap: 19px">
-              <button class="option_select_button center_cantainer">
-                <div class="option_icon_attribute center_cantainer">
-                  <img
-                    style="height: 49px; width: auto"
-                    src="../svg/size.svg"
-                  />
-                </div>
-                <div class="option_select_text">작게</div>
-              </button>
-              <button class="option_select_button center_cantainer">
-                <div class="option_icon_attribute center_cantainer">
-                  <img
-                    style="height: 59px; width: auto"
-                    src="../svg/size.svg"
-                  />
-                </div>
-                <div class="option_select_text">보통</div>
-              </button>
-              <button class="option_select_button center_cantainer">
-                <div class="option_icon_attribute center_cantainer">
-                  <img
-                    style="height: 69px; width: auto"
-                    src="../svg/size.svg"
-                  />
-                </div>
-                <div class="option_select_text">크게</div>
-              </button>
+              <div class="option_btn center_cantainer">
+                <input type="radio" name="size" id="small" value="small" />
+                <label
+                  for="small"
+                  class="option_select_button center_cantainer"
+                >
+                  <div class="option_icon_attribute center_cantainer">
+                    <img
+                      class="option_svg_small"
+                      style="height: 49px; width: auto"
+                      src="../svg/size.svg"
+                    />
+                  </div>
+                  <div>작게</div>
+                </label>
+              </div>
+              <div class="option_btn center_cantainer">
+                <input type="radio" name="size" id="medium" value="medium" />
+                <label
+                  for="medium"
+                  class="option_select_button center_cantainer"
+                >
+                  <div class="option_icon_attribute center_cantainer">
+                    <img
+                      class="option_svg_medium"
+                      style="height: 59px; width: auto"
+                      src="../svg/size.svg"
+                    />
+                  </div>
+                  <div>보통</div>
+                </label>
+              </div>
+              <div class="option_btn center_cantainer">
+                <input type="radio" name="size" id="large" value="large" />
+                <label
+                  for="large"
+                  class="option_select_button center_cantainer"
+                >
+                  <div class="option_icon_attribute center_cantainer">
+                    <img
+                      class="option_svg_large"
+                      style="height: 69px; width: auto"
+                      src="../svg/size.svg"
+                    />
+                  </div>
+                  <div>크게</div>
+                </label>
+              </div>
             </div>
           </div>
           <!-- 3. 크기 선택* -->
@@ -410,7 +407,47 @@
               >
             </div>
             <div class="option_container_select" style="gap: 19px">
-              <button class="option_select_button center_cantainer">
+              <div class="option_btn center_cantainer">
+                <input
+                  type="radio"
+                  name="coffee"
+                  id="esspreso"
+                  value="esspreso"
+                />
+                <label
+                  for="esspreso"
+                  class="option_select_button center_cantainer"
+                >
+                  <div class="option_icon_attribute center_cantainer">
+                    <img
+                      src="../svg/coffee_icon.svg"
+                      class="option_svg_esspreso"
+                    />
+                  </div>
+                  <div>에스프레소</div>
+                </label>
+              </div>
+              <div class="option_btn center_cantainer">
+                <input
+                  type="radio"
+                  name="coffee"
+                  id="decaffeine"
+                  value="decaffeine"
+                />
+                <label
+                  for="decaffeine"
+                  class="option_select_button center_cantainer"
+                >
+                  <div class="option_icon_attribute center_cantainer">
+                    <img
+                      src="../svg/coffee_icon.svg"
+                      class="option_svg_decaffeine"
+                    />
+                  </div>
+                  <div>디카페인</div>
+                </label>
+              </div>
+              <!-- <button class="option_select_button center_cantainer">
                 <div class="option_icon_attribute center_cantainer">
                   <img src="../svg/coffee_icon.svg" />
                 </div>
@@ -421,7 +458,7 @@
                   <img src="../svg/coffee_icon.svg" />
                 </div>
                 <div class="option_select_text">디카페인</div>
-              </button>
+              </button> -->
             </div>
           </div>
           <div class="center_cantainer" style="gap: 10px">
@@ -531,7 +568,7 @@
             </div>
 
             <!-- 2. 얼음 추가 -->
-            <div >
+            <div>
               <div class="add_option_container">
                 <div class="option_text">
                   <text class="option_text_num">2</text>
@@ -601,7 +638,7 @@
                 </div>
               </div>
             </div>
-            <div >
+            <div>
               <!-- 3. 시럽 추가 -->
               <div class="add_option_container">
                 <div class="option_text">
@@ -670,10 +707,7 @@
               </div>
             </div>
             <!-- 좌우 버튼 -->
-            <div
-              class="center_cantainer"
-              style=" gap: 32px"
-            >
+            <div class="center_cantainer" style="gap: 32px">
               <button class="prev_option_btn center_cantainer">
                 <span class="material-icons"> arrow_back_ios </span>
                 이전
@@ -719,10 +753,7 @@
                 height: 1px;
               "
             />
-            <div
-              class="center_cantainer"
-              style=" gap: 45px"
-            >
+            <div class="center_cantainer" style="gap: 45px">
               <button class="able_option_btn abled_menut_btn">
                 <span class="material-icons"> check </span>
                 확인
@@ -743,6 +774,6 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   ></script>
-  <script src ="../js/kiosk/kiosk3.js"></script>
+  <script src="../js/kiosk/kiosk3.js"></script>
   <script src="../js/kiosk/kiosk_gnb.js"></script>
 </html>
