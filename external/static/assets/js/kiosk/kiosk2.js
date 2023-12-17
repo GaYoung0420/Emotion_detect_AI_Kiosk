@@ -1,6 +1,7 @@
 // let json = $('.MenuContainer').css('border', 'solid 1px red');
 $(window).on('load', function () {
   change_menu($('input[name=category]:checked').val());
+  swiper.update();
 });
 let menuData = JSON.parse(JSON.stringify(MenuFile));
 var menu = ['1', '2', '3'];
@@ -31,7 +32,6 @@ var swiper = new Swiper('.swiper-container', {
     nextEl: '.swiper-button-next',
   },
 });
-
 
 const change_menu = (category) => {
   let swiper_slide_container = 0;
@@ -101,6 +101,6 @@ $('input:radio[name=category]').click(function () {
   // }
   change_menu(value);
   swiper.update();
+
   swiper.slideTo(0);
 });
-
