@@ -410,7 +410,7 @@
               <div class="option_btn center_cantainer">
                 <input
                   type="radio"
-                  name="coffee"
+                  name="coffeebean"
                   id="esspreso"
                   value="esspreso"
                 />
@@ -430,7 +430,7 @@
               <div class="option_btn center_cantainer">
                 <input
                   type="radio"
-                  name="coffee"
+                  name="coffeebean"
                   id="decaffeine"
                   value="decaffeine"
                 />
@@ -474,7 +474,9 @@
           <div class="menu_select_info_container">
             <div class="center_cantainer">
               <text class="menu_price_info_text">금액</text>
-              <text class="menu_price">3,000 원</text>
+              <text class="menu_price"
+                ><span class="menu_price_info"></span> 원</text
+              >
             </div>
 
             <button id="add_to_cart_button">
@@ -493,33 +495,147 @@
           이전으로
         </button>
       </div>
-      <!-- 추가 옵션 -->
-      <div class="add_option_select_conatiner center_cantainer">
-        <div class="add_option_select_content center_cantainer">
-          <div class="add_option_title center_cantainer">추가 옵션 선택</div>
-          <div class="add_option_subcontainer">
-            <!-- 1. 커피 진하기 -->
+    </div>
+    <!-- 추가 옵션 -->
+    <div
+      id="add_option"
+      class="add_option_select_conatiner center_cantainer none_class"
+    >
+      <div class="add_option_select_content center_cantainer">
+        <div class="add_option_title center_cantainer">추가 옵션 선택</div>
+        <div class="add_option_subcontainer">
+          <!-- 1. 커피 진하기 -->
+          <div>
             <div>
-              <div>
-                <div class="option_text">
-                  <text class="option_text_num">1</text>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="2"
-                    height="22"
-                    viewBox="0 0 2 22"
-                    fill="none"
+              <div class="option_text">
+                <text class="option_text_num">1</text>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="2"
+                  height="22"
+                  viewBox="0 0 2 22"
+                  fill="none"
+                >
+                  <path
+                    d="M1 1L1 21"
+                    stroke="black"
+                    stroke-opacity="0.2"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <text class="option_text_title">커피 진하기</text>
+              </div>
+            </div>
+            <div
+              class="option_container_select center_cantainer"
+              style="gap: 19px"
+            >
+              <!-- 연하게 -->
+              <div
+                class="center_cantainer"
+                style="flex-direction: column; gap: 10px"
+              >
+                <div class="option_btn center_cantainer">
+                  <input
+                    type="radio"
+                    name="coffee_shot"
+                    id="one_shot"
+                    value="one_shot"
+                  />
+                  <label
+                    for="one_shot"
+                    class="option_select_button center_cantainer"
                   >
-                    <path
-                      d="M1 1L1 21"
-                      stroke="black"
-                      stroke-opacity="0.2"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                  <text class="option_text_title">커피 진하기</text>
+                    <div class="option_icon_attribute center_cantainer">
+                      <img
+                        src="../svg/one_shot.svg"
+                        class="option_svg_one_shot"
+                      />
+                    </div>
+                    <div>연하게</div>
+                  </label>
                 </div>
+                <text class="add_price">0원</text>
+              </div>
+              <!-- 보통 -->
+              <div
+                class="center_cantainer"
+                style="flex-direction: column; gap: 10px"
+              >
+                <div class="option_btn center_cantainer">
+                  <input
+                    type="radio"
+                    name="coffee_shot"
+                    id="two_shot"
+                    value="two_shot"
+                  />
+                  <label
+                    for="two_shot"
+                    class="option_select_button center_cantainer"
+                  >
+                    <div class="option_icon_attribute center_cantainer">
+                      <img
+                        src="../svg/two_shot.svg"
+                        class="option_svg_two_shot"
+                      />
+                    </div>
+                    <div>보통</div>
+                  </label>
+                </div>
+                <text class="add_price">0원</text>
+              </div>
+              <!-- 진하게 -->
+              <div
+                class="center_cantainer"
+                style="flex-direction: column; gap: 10px"
+              >
+                <div class="option_btn center_cantainer">
+                  <input
+                    type="radio"
+                    name="coffee_shot"
+                    id="three_shot"
+                    value="three_shot"
+                  />
+                  <label
+                    for="three_shot"
+                    class="option_select_button center_cantainer"
+                  >
+                    <div class="option_icon_attribute center_cantainer">
+                      <img
+                        src="../svg/three_shot.svg"
+                        class="option_svg_three_shot"
+                      />
+                    </div>
+                    <div>진하게</div>
+                  </label>
+                </div>
+                <text class="add_price">+300원</text>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. 얼음 추가 -->
+          <div>
+            <div class="add_option_container">
+              <div class="option_text">
+                <text class="option_text_num">2</text>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="2"
+                  height="22"
+                  viewBox="0 0 2 22"
+                  fill="none"
+                >
+                  <path
+                    d="M1 1L1 21"
+                    stroke="black"
+                    stroke-opacity="0.2"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <text class="option_text_title">얼음 추가</text>
               </div>
               <div
                 class="option_container_select center_cantainer"
@@ -530,12 +646,26 @@
                   class="center_cantainer"
                   style="flex-direction: column; gap: 10px"
                 >
-                  <button class="option_select_button center_cantainer">
-                    <div class="option_icon_attribute center_cantainer">
-                      <img src="../svg/one_shot.svg" />
-                    </div>
-                    <div class="option_select_text">연하게</div>
-                  </button>
+                  <div class="option_btn center_cantainer">
+                    <input
+                      type="radio"
+                      name="ice"
+                      id="one_ice"
+                      value="one_ice"
+                    />
+                    <label
+                      for="one_ice"
+                      class="option_select_button center_cantainer"
+                    >
+                      <div class="option_icon_attribute center_cantainer">
+                        <img
+                          src="../svg/one_ice.svg"
+                          class="option_svg_one_ice"
+                        />
+                      </div>
+                      <div>적게</div>
+                    </label>
+                  </div>
                   <text class="add_price">0원</text>
                 </div>
                 <!-- 보통 -->
@@ -543,12 +673,26 @@
                   class="center_cantainer"
                   style="flex-direction: column; gap: 10px"
                 >
-                  <button class="option_select_button center_cantainer">
-                    <div class="option_icon_attribute center_cantainer">
-                      <img src="../svg/two_shot.svg" />
-                    </div>
-                    <div class="option_select_text">보통</div>
-                  </button>
+                  <div class="option_btn center_cantainer">
+                    <input
+                      type="radio"
+                      name="ice"
+                      id="two_ice"
+                      value="two_ice"
+                    />
+                    <label
+                      for="two_ice"
+                      class="option_select_button center_cantainer"
+                    >
+                      <div class="option_icon_attribute center_cantainer">
+                        <img
+                          src="../svg/two_ice.svg"
+                          class="option_svg_two_ice"
+                        />
+                      </div>
+                      <div>기본</div>
+                    </label>
+                  </div>
                   <text class="add_price">0원</text>
                 </div>
                 <!-- 진하게 -->
@@ -556,213 +700,190 @@
                   class="center_cantainer"
                   style="flex-direction: column; gap: 10px"
                 >
-                  <button class="option_select_button center_cantainer">
-                    <div class="option_icon_attribute center_cantainer">
-                      <img src="../svg/three_shot.svg" />
-                    </div>
-                    <div class="option_select_text">진하게</div>
-                  </button>
+                  <div class="option_btn center_cantainer">
+                    <input
+                      type="radio"
+                      name="ice"
+                      id="three_ice"
+                      value="three_ice"
+                    />
+                    <label
+                      for="three_ice"
+                      class="option_select_button center_cantainer"
+                    >
+                      <div class="option_icon_attribute center_cantainer">
+                        <img
+                          src="../svg/three_ice.svg"
+                          class="option_svg_three_ice"
+                        />
+                      </div>
+                      <div>가득</div>
+                    </label>
+                  </div>
                   <text class="add_price">+300원</text>
                 </div>
               </div>
             </div>
-
-            <!-- 2. 얼음 추가 -->
-            <div>
-              <div class="add_option_container">
-                <div class="option_text">
-                  <text class="option_text_num">2</text>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="2"
-                    height="22"
-                    viewBox="0 0 2 22"
-                    fill="none"
-                  >
-                    <path
-                      d="M1 1L1 21"
-                      stroke="black"
-                      stroke-opacity="0.2"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                  <text class="option_text_title">얼음 추가</text>
-                </div>
-                <div
-                  class="option_container_select center_cantainer"
-                  style="gap: 19px"
+          </div>
+          <div>
+            <!-- 3. 시럽 추가 -->
+            <div class="add_option_container">
+              <div class="option_text">
+                <text class="option_text_num">3</text>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="2"
+                  height="22"
+                  viewBox="0 0 2 22"
+                  fill="none"
                 >
-                  <!-- 연하게 -->
-                  <div
-                    class="center_cantainer"
-                    style="flex-direction: column; gap: 10px"
-                  >
-                    <button class="option_select_button center_cantainer">
-                      <div class="option_icon_attribute center_cantainer">
-                        <img height="60px" src="../svg/one_ice.svg" />
-                      </div>
-                      <div class="option_select_text">적게</div>
-                    </button>
-                    <text class="add_price">0원</text>
-                  </div>
-                  <!-- 보통 -->
-                  <div
-                    class="center_cantainer"
-                    style="flex-direction: column; gap: 10px"
-                  >
-                    <button class="option_select_button center_cantainer">
-                      <div class="option_icon_attribute center_cantainer">
-                        <img height="60px" src="../svg/two_ice.svg" />
-                      </div>
-                      <div class="option_select_text">기본</div>
-                    </button>
-                    <text class="add_price">0원</text>
-                  </div>
-                  <!-- 진하게 -->
-                  <div
-                    class="center_cantainer"
-                    style="flex-direction: column; gap: 10px"
-                  >
-                    <button class="option_select_button center_cantainer">
+                  <path
+                    d="M1 1L1 21"
+                    stroke="black"
+                    stroke-opacity="0.2"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <text class="option_text_title">시럽 추가</text>
+              </div>
+              <div
+                class="option_container_select center_cantainer"
+                style="gap: 19px"
+              >
+                <!-- 바닐라 -->
+                <div
+                  class="center_cantainer"
+                  style="flex-direction: column; gap: 10px"
+                >
+                  <div class="option_btn center_cantainer">
+                    <input
+                      type="radio"
+                      name="syrup"
+                      id="vanilla"
+                      value="vanilla"
+                    
+                    />
+                    <label
+                      for="vanilla"
+                      class="option_select_button center_cantainer"
+                    >
                       <div class="option_icon_attribute center_cantainer">
                         <img
-                          class="option_icon_attribute"
-                          src="../svg/three_ice.svg"
+                          height="80px"
+                          src="../svg/syrup.svg"
+                          class="option_svg_vanilla"
                         />
                       </div>
-                      <div class="option_select_text">가득</div>
-                    </button>
-                    <text class="add_price">+300원</text>
+                      <div>바닐라</div>
+                    </label>
                   </div>
+                  <text class="add_price">+500원</text>
                 </div>
-              </div>
-            </div>
-            <div>
-              <!-- 3. 시럽 추가 -->
-              <div class="add_option_container">
-                <div class="option_text">
-                  <text class="option_text_num">3</text>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="2"
-                    height="22"
-                    viewBox="0 0 2 22"
-                    fill="none"
-                  >
-                    <path
-                      d="M1 1L1 21"
-                      stroke="black"
-                      stroke-opacity="0.2"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                  <text class="option_text_title">시럽 추가</text>
-                </div>
+                <!-- 헤이즐넛 -->
                 <div
-                  class="option_container_select center_cantainer"
-                  style="gap: 19px"
+                  class="center_cantainer"
+                  style="flex-direction: column; gap: 10px"
                 >
-                  <!-- 연하게 -->
-                  <div
-                    class="center_cantainer"
-                    style="flex-direction: column; gap: 10px"
-                  >
-                    <button class="option_select_button center_cantainer">
+                  <div class="option_btn center_cantainer">
+                    <input
+                      type="radio"
+                      name="syrup"
+                      id="hazelnut"
+                      value="hazelnut"
+                    />
+                    <label
+                      for="hazelnut"
+                      class="option_select_button center_cantainer"
+                    >
                       <div class="option_icon_attribute center_cantainer">
-                        <img height="70px" src="../svg/syrup.svg" />
+                        <img
+                          height="80px"
+                          src="../svg/syrup.svg"
+                          class="option_svg_hazelnut"
+                        />
                       </div>
-                      <div class="option_select_text">바닐라</div>
-                    </button>
-                    <text class="add_price">+500원</text>
+                      <div>헤이즐넛</div>
+                    </label>
                   </div>
-                  <!-- 보통 -->
-                  <div
-                    class="center_cantainer"
-                    style="flex-direction: column; gap: 10px"
-                  >
-                    <button class="option_select_button center_cantainer">
+                  <text class="add_price">+500원</text>
+                </div>
+                <!-- 카라멜 -->
+                <div
+                  class="center_cantainer"
+                  style="flex-direction: column; gap: 10px"
+                >
+                  <div class="option_btn center_cantainer">
+                    <input
+                      type="radio"
+                      name="syrup"
+                      id="caramel"
+                      value="caramel"
+                    />
+                    <label
+                      for="caramel"
+                      class="option_select_button center_cantainer"
+                    >
                       <div class="option_icon_attribute center_cantainer">
-                        <img height="70px" src="../svg/syrup.svg" />
+                        <img
+                          height="80px"
+                          src="../svg/syrup.svg"
+                          class="option_svg_caramel"
+                        />
                       </div>
-                      <div class="option_select_text">헤이즐넛</div>
-                    </button>
-                    <text class="add_price">+500원</text>
+                      <div>카라멜</div>
+                    </label>
                   </div>
-                  <!-- 진하게 -->
-                  <div
-                    class="center_cantainer"
-                    style="flex-direction: column; gap: 10px"
-                  >
-                    <button class="option_select_button center_cantainer">
-                      <div class="option_icon_attribute center_cantainer">
-                        <img height="70px" src="../svg/syrup.svg" />
-                      </div>
-                      <div class="option_select_text">카라멜</div>
-                    </button>
-                    <text class="add_price">+500원</text>
-                  </div>
+                  <text class="add_price">+500원</text>
                 </div>
               </div>
             </div>
-            <!-- 좌우 버튼 -->
-            <div class="center_cantainer" style="gap: 32px">
-              <button class="prev_option_btn center_cantainer">
-                <span class="material-icons"> arrow_back_ios </span>
-                이전
-              </button>
-              <div>
-                <svg style="width: 56; height: 56">
-                  <circle class="option_able_paging" cx="28" cy="28" r="27" />
-                   
-                  <text
-                    x="27"
-                    y="40"
-                    font-size="35"
-                    text-anchor="middle"
-                    fill="white"
-                    style="font-weight: 1000"
-                  >
-                    1
-                  </text>
-                </svg>
-                <svg style="width: 56; height: 56">
-                  <circle
-                    class="option_disable_paging"
-                    cx="28"
-                    cy="28"
-                    r="27"
-                  />
-                  <text x="27" y="40" font-size="35" text-anchor="middle">
-                    2
-                  </text>
-                </svg>
-              </div>
-
-              <button class="prev_option_btn center_cantainer">
-                다음
-                <span class="material-icons"> arrow_forward_ios </span>
-              </button>
+          </div>
+          <!-- 좌우 버튼 -->
+          <div class="center_cantainer" style="gap: 32px">
+            <button class="prev_option_btn center_cantainer">
+              <span class="material-icons"> arrow_back_ios </span>
+              이전
+            </button>
+            <div>
+              <svg style="width: 56; height: 56">
+                <circle class="option_able_paging" cx="28" cy="28" r="27" />
+                 
+                <text
+                  x="27"
+                  y="40"
+                  font-size="35"
+                  text-anchor="middle"
+                  fill="white"
+                  style="font-weight: 1000"
+                >
+                  1
+                </text>
+              </svg>
             </div>
-            <hr
-              style="
-                border: solid #efefef 1px;
-                background: #efefef;
-                width: 526.59px;
-                height: 1px;
-              "
-            />
-            <div class="center_cantainer" style="gap: 45px">
-              <button class="able_option_btn abled_menut_btn">
-                <span class="material-icons"> check </span>
-                확인
-              </button>
 
-              <button class="cancel_option_btn">
-                <span class="material-icons"> close </span>취소
-              </button>
-            </div>
+            <button class="prev_option_btn center_cantainer">
+              다음
+              <span class="material-icons"> arrow_forward_ios </span>
+            </button>
+          </div>
+          <hr
+            style="
+              border: solid #efefef 1px;
+              background: #efefef;
+              width: 526.59px;
+              height: 1px;
+            "
+          />
+          <div class="center_cantainer" style="gap: 45px">
+            <button class="able_option_btn abled_menut_btn">
+              <span class="material-icons"> check </span>
+              확인
+            </button>
+
+            <button class="cancel_option_btn">
+              <span class="material-icons"> close </span>취소
+            </button>
           </div>
         </div>
       </div>

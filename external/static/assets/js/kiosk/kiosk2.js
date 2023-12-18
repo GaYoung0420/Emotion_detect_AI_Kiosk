@@ -2,6 +2,10 @@
 $(window).on('load', function () {
   change_menu($('input[name=category]:checked').val());
   swiper.update();
+  if (localStorage.getItem('Cart')) {
+    var cartData = JSON.parse(localStorage.getItem('Cart'));
+    console.log(cartData);
+  }
 });
 let menuData = JSON.parse(JSON.stringify(MenuFile));
 var menu = ['1', '2', '3'];
