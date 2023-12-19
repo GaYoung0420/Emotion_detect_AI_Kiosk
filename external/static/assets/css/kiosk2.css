@@ -341,7 +341,14 @@
 
 .cart_list_container {
   width: 900px;
-  height: 233px;
+  height: 236px;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  /* justify-content: center; */
+  align-items: center;
+  overflow: auto;
+  overflow-y:hidden;
 }
 
 .cart_list_background {

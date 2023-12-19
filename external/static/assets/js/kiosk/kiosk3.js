@@ -4,6 +4,7 @@ var menu = {
   name: '',
   price: 0,
   count: 0,
+  img: '',
   options: {
     temp: '',
     size: '',
@@ -93,6 +94,7 @@ if (localStorage.getItem('selectMenu')) {
   var lastData = JSON.parse(localStorage.getItem('selectMenu'));
   console.log(lastData);
   menu.name = lastData.text;
+  menu.img = lastData.img;
   menu.price = lastData.price;
   menu.count = 1;
   set_price();
