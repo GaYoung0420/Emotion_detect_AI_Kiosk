@@ -204,7 +204,7 @@
       <!-- task title -->
       <div class="task_title center_cantainer">옵션 선택</div>
       <!-- menu info -->
-      <div class="center_cantainer" style="flex-direction: column">
+      <div class="center_cantainer task_content_container" style="flex-direction: column;">
         <div class="menu_info_sub_container">
           <div class="img_background center_cantainer">
             <img
@@ -496,6 +496,31 @@
         </button>
       </div>
     </div>
+    <!-- alert -->
+    <div id="alert" class="add_option_select_conatiner center_cantainer none_class">
+      <div class="alert_contents">
+        <div class="add_option_title_alert center_cantainer">
+          <div
+            class="center_cantainer"
+            style="width: 100%;"
+          >
+            <span class="material-symbols-outlined warning_icon">
+              warning
+            </span>
+          </div>
+          "필수 옵션"을 선택해주세요.
+          
+        </div>
+        <div class="alert_text" style="margin-bottom: 70px;">
+          온도, 크기, 사이즈를 선택해야 메뉴를 담을 수 있습니다.
+        </div>
+        <button id="alert_check" class="able_option_btn">
+          <span class="material-icons"> check </span>
+          확인
+        </button>
+      </div>
+    </div>
+
     <!-- 추가 옵션 -->
     <div
       id="add_option"
@@ -762,7 +787,6 @@
                       name="syrup"
                       id="vanilla"
                       value="vanilla"
-                    
                     />
                     <label
                       for="vanilla"

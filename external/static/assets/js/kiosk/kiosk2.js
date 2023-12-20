@@ -1,18 +1,17 @@
 // let json = $('.MenuContainer').css('border', 'solid 1px red');
-$(window).on('load', function () {
-  change_menu($('input[name=category]:checked').val());
-  swiper.update();
-  if (localStorage.getItem('Cart')) {
-    var cartData = JSON.parse(localStorage.getItem('Cart'));
-    console.log(cartData);
-    change_cart();
-  }
-});
+
 let menuData = JSON.parse(JSON.stringify(MenuFile));
 var menu = ['1', '2', '3'];
 let select_category = 'coffee';
 let total_price = 0;
 let total_count = 0;
+
+$(window).on('load', function () {
+  change_menu($('input[name=category]:checked').val());
+  swiper.update();
+  change_cart();
+});
+
 // 스와이프
 var swiper = new Swiper('.swiper-container', {
   spaceBetween: 10, //슬라이드 간격
@@ -32,7 +31,6 @@ var swiper = new Swiper('.swiper-container', {
     nextEl: '.swiper-button-next',
   },
 });
-
 // 메뉴 바뀜
 const change_menu = (category) => {
   let swiper_slide_container = 0;
@@ -82,6 +80,14 @@ const change_menu = (category) => {
     });
   });
 };
+
+$('.cart_delete').click(function () {
+  if (localStorage.getItem('Cart')) {
+    var cartData = [];
+    localStorage.setItem('Cart', JSON.stringify(cartData));
+    change_cart();
+  }
+});
 
 /*
 {
@@ -190,58 +196,82 @@ const change_cart = () => {
     return option_text;
   };
 
-  console.log(set_options);
+  $('.cart_list_container').empty();
+  var cartData = JSON.parse(localStorage.getItem('Cart'));
+  console.log(cartData);
 
-  if (localStorage.getItem('Cart')) {
-    var cartData = JSON.parse(localStorage.getItem('Cart'));
-
+  if (cartData === null || cartData.length === 0) {
+    console.log('BB');
+    $('.cart_list_container').append(
+      '<div class="menu_select_subcontainer"> <text style="font-size: 30px; color: #8d909f; font-weight: 700">주문내역이 없습니다. 메뉴를 선택해주세요</text></div>',
+    );
+  } else if (cartData) {
+    console.log('AAA');
     cartData.forEach((element, index) => {
-      total_price += element.price;
+      total_price += element.price * element.count;
       total_count += element.count;
+      $('#cart_count').text(total_count);
+      $('#cart_price').text(total_price.toLocaleString('ko-KR'));
       let options = set_options(element.options, element.add_options);
       $('.cart_list_container').append(
         '<div class="cart_list_background"> <div class="center_cantainer" style="width: 100%; gap: 190px"> <div class="cart_list_number center_cantainer">' +
           (index + 1) +
-          '</div> <button id=delete' +
+          '</div> <button id="delete' +
           index +
-          ' class="cart_delete_icon center_cantainer"> <img src="../svg/cart_delete.svg" />삭제</button></div><div class="cart_info_sub_conatiner"><img class="cart_menu_img" src="' +
+          '" class="cart_delete_icon center_cantainer"> <img src="../svg/cart_delete.svg" />삭제</button></div><div class="cart_info_sub_conatiner"><img class="cart_menu_img" src="' +
           element.img +
-          '"/> <div class="cart_container_info_sub_conatiner"> <div class="cart_menus_name">' +
+          '"/> <div class="cart_container_info_sub_conatiner"> <div class="cart_menu_name">' +
           element.name +
           '</div> <div class="cart_info_text"> 옵션 <span> : ' +
           options +
           '</span> </div> </div> </div> <div class="center_cantainer" style="width: 100%; gap: 60px"> <div class="center_cantainer" style="gap: 10px"> <img id ="minus' +
           index +
-          '" src="../svg/delete_to_cart_icon.svg" /> <text class="count_info_text">' +
+          '" src="../svg/delete_to_cart_icon.svg" /> <text class="count_info_text"><span id = "count' +
+          index +
+          '">' +
           element.count +
-          '<span>개</span></text> <img id = "add' +
+          '</span>개</text> <img id = "add' +
           index +
           '" src="../svg/add_to_cart_icon.svg" /> </div> <div class="price_text">' +
-          element.price.toLocaleString('ko-KR') +
+          (element.price * element.count).toLocaleString('ko-KR') +
           ' <span class="price_won">원</span></div></div></div>',
       );
 
-      $('#cart_count').text(total_count);
-      $('#cart_price').text(total_price.toLocaleString('ko-KR'));
-
       $('#add' + index).click(function () {
-        element.count += 1;
-        $('.count_info_text').text(element.count);
-        console.log(element);
+        change_count_price('add', element, index, cartData);
       });
 
       $('#minus' + index).click(function () {
-        element.count -= 1;
-        console.log(element);
+        change_count_price('minus', element, index, cartData);
       });
 
       $('#delete' + index).click(function () {
         cartData.splice(index, 1);
         localStorage.setItem('Cart', JSON.stringify(cartData));
-        console.log(JSON.parse(localStorage.getItem('Cart')));
+        change_cart();
       });
     });
-  } else {
+  }
+};
+
+var change_count_price = (func, element, index, cartData) => {
+  if (func == 'add') {
+    total_price -= element.count * element.price;
+    element.count += 1;
+    total_count += 1;
+    total_price += element.count * element.price;
+  } else if (func == 'minus') {
+    element.count -= 1;
+    total_price -= element.price;
+    total_count -= 1;
+  }
+  $('#count' + index).text(element.count);
+  $('#cart_count').text(total_count);
+  $('#cart_price').text(total_price.toLocaleString('ko-KR'));
+  if (element.count == 0) {
+    cartData.splice(index, 1);
+    localStorage.setItem('Cart', JSON.stringify(cartData));
+    change_cart();
   }
 };
 

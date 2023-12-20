@@ -37,10 +37,10 @@ var set_price = () => {
   let option_coffee_shot = menu.add_options.coffee_shot.price;
   let option_ice = menu.add_options.ice.price;
   let option_syrup = menu.add_options.syrup.price;
-  let count_price = lastData.price * menu.count;
+  let count_price = lastData.price;
   menu.price = count_price + option_coffee_shot + option_ice + option_syrup;
 
-  $('.menu_price_info').text(menu.price.toLocaleString('ko-KR'));
+  $('.menu_price_info').text((menu.price * menu.count).toLocaleString('ko-KR'));
 };
 
 // 수량 설정
@@ -92,6 +92,7 @@ var set_options = (info, value) => {
 // 선택한 메뉴 옵션 화면에 뿌리기
 if (localStorage.getItem('selectMenu')) {
   var lastData = JSON.parse(localStorage.getItem('selectMenu'));
+
   console.log(lastData);
   menu.name = lastData.text;
   menu.img = lastData.img;
@@ -169,17 +170,30 @@ $('.cancel_option_btn').click(function () {
 
 // 장바구니에 담기 버튼
 $('#add_to_cart_button').click(function () {
-  window.location.href = '../html/kiosk_2_Menu_select.html';
-  let cart_item = JSON.parse(localStorage.getItem('Cart'));
-  if (cart_item == undefined) {
-    localStorage.setItem('Cart', JSON.stringify([menu]));
+  if (
+    $('input:radio[name=temp]').is(':checked') &&
+    $('input:radio[name=size]').is(':checked') &&
+    $('input:radio[name=coffeebean]').is(':checked')
+  ) {
+    let cart_item = JSON.parse(localStorage.getItem('Cart'));
+
+    if (cart_item == undefined) {
+      localStorage.setItem('Cart', JSON.stringify([menu]));
+    } else {
+      cart_item.push(menu);
+      console.log(cart_item);
+      localStorage.setItem('Cart', JSON.stringify(cart_item));
+    }
+
+    window.location.href = '../html/kiosk_2_Menu_select.html';
   } else {
-    cart_item.push(menu);
-    console.log(cart_item);
-    localStorage.setItem('Cart', JSON.stringify(cart_item));
+    $('#alert').removeClass('none_class');
   }
 });
 
+$('#alert_check').click(function () {
+  $('#alert').addClass('none_class');
+});
 // 수량 조절 버튼 클릭시
 $('#add_item_btn').click(function () {
   set_count(true);
