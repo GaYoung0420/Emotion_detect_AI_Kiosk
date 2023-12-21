@@ -75,8 +75,41 @@ const change_menu = (category) => {
     );
 
     $('#' + idname).click(function () {
-      window.location.href = '../html/kiosk_3_Select_option.html';
-      localStorage.setItem('selectMenu', JSON.stringify(element));
+      if (category == 'coffee' || category == 'tea') {
+        window.location.href = '../html/kiosk_3_Select_option.html';
+        localStorage.setItem('selectMenu', JSON.stringify(element));
+      } else {
+        let cart_item = JSON.parse(localStorage.getItem('Cart'));
+        var menu = {
+          name: element.text,
+          price: element.price,
+          count: 1,
+          img: element.img,
+          options: {
+            temp: '',
+            size: '',
+            coffeebean: '',
+          },
+        };
+
+        if (cart_item == undefined) {
+          localStorage.setItem('Cart', JSON.stringify([menu]));
+          change_cart();
+        } else {
+          cart_item.forEach((element) => {
+            if (element.text == menu.name) {
+              menu.count += element.count;
+              return false;
+            }
+          });
+          if (element.count == 1) {
+            cart_item.push(menu);
+            console.log(cart_item);
+            localStorage.setItem('Cart', JSON.stringify(cart_item));
+          }
+          change_cart();
+        }
+      }
     });
   });
 };
@@ -121,46 +154,49 @@ const change_cart = () => {
   let set_options = (options, add_options) => {
     let option_array = new Array();
 
-    switch (options.temp) {
-      case 'hot':
-        option_array.push('따뜻함');
-        break;
-      case 'ice':
-        option_array.push('차가움');
-        break;
-    }
-    switch (options.size) {
-      case 'small':
-        option_array.push('작게');
-        break;
-      case 'medium':
-        option_array.push('보통');
-        break;
-      case 'large':
-        option_array.push('크게');
-        break;
-    }
-    switch (options.coffeebean) {
-      case 'esspreso':
-        option_array.push('에스프레소');
-        break;
-      case 'decaffeine':
-        option_array.push('디카페인');
-        break;
-    }
-    if (add_options.coffee_shot.options !== undefined) {
-      switch (add_options.coffee_shot.options) {
-        case 'one_shot':
-          option_array.push('커피 연하게');
+    if (options.temp != undefined) {
+      switch (options.temp) {
+        case 'hot':
+          option_array.push('따뜻함');
           break;
-        case 'two_shot':
-          option_array.push('보통 진하게');
-          break;
-        case 'three_shot':
-          option_array.push('진하게');
+        case 'ice':
+          option_array.push('차가움');
           break;
       }
+      switch (options.size) {
+        case 'small':
+          option_array.push('작게');
+          break;
+        case 'medium':
+          option_array.push('보통');
+          break;
+        case 'large':
+          option_array.push('크게');
+          break;
+      }
+      switch (options.coffeebean) {
+        case 'esspreso':
+          option_array.push('에스프레소');
+          break;
+        case 'decaffeine':
+          option_array.push('디카페인');
+          break;
+      }
+      if (add_options.coffee_shot.options !== undefined) {
+        switch (add_options.coffee_shot.options) {
+          case 'one_shot':
+            option_array.push('커피 연하게');
+            break;
+          case 'two_shot':
+            option_array.push('보통 진하게');
+            break;
+          case 'three_shot':
+            option_array.push('진하게');
+            break;
+        }
+      }
     }
+
     if (add_options.ice.options !== undefined) {
       switch (add_options.ice.options) {
         case 'one_ice':

@@ -30,11 +30,13 @@ body {
   justify-content: center;
   align-items: center;
   font-family: NanumSquare_ac;
-  /* overflow: hidden; */
+  overflow: hidden;
   height: 100vh; /* 화면 세로 길이에 꽉 차도록 설정 */
   background-color: #f0f0f0;
 }
-
+.scroll::-webkit-scrollbar {
+  display: none;
+}
 
 .header {
   width: 100%;
