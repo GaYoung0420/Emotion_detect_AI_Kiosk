@@ -5,6 +5,7 @@ var menu = {
   price: 0,
   count: 0,
   img: '',
+  option_text: '',
   options: {
     temp: '',
     size: '',
@@ -30,6 +31,76 @@ var add_options = {
   coffee_shot: 'two_shot',
   ice: 'two_ice',
   syrup: '',
+};
+
+var set_options = (options, add_options) => {
+  let option_array = new Array();
+  if (options.temp != ' ') {
+    switch (options.temp) {
+      case 'hot':
+        option_array.push('옵션 : ');
+        option_array.push('따뜻함');
+        break;
+      case 'ice':
+        option_array.push('옵션 : ');
+        option_array.push('차가움');
+        break;
+    }
+    switch (options.size) {
+      case 'small':
+        option_array.push('작게');
+        break;
+      case 'medium':
+        option_array.push('보통');
+        break;
+      case 'large':
+        option_array.push('크게');
+        break;
+    }
+    switch (options.coffeebean) {
+      case 'esspreso':
+        option_array.push('에스프레소');
+        break;
+      case 'decaffeine':
+        option_array.push('디카페인');
+        break;
+    }
+    if (add_options !== undefined) {
+      switch (add_options.coffee_shot.options) {
+        case 'one_shot':
+          option_array.push('커피 연하게');
+          break;
+        case 'two_shot':
+          option_array.push('보통 진하게');
+          break;
+        case 'three_shot':
+          option_array.push('진하게');
+          break;
+      }
+      switch (add_options.ice.options) {
+        case 'one_ice':
+          option_array.push('얼음 적게');
+          break;
+        case 'two_ice':
+          option_array.push('얼음 보통');
+          break;
+        case 'three_ice':
+          option_array.push('얼음 많게');
+          break;
+      }
+      switch (add_options.syrup.options) {
+        case 'vanilla':
+          option_array.push('바닐라시럽');
+          break;
+        case 'hazelnut':
+          option_array.push('헤이즐넛시럽');
+          break;
+        case 'caramel':
+          option_array.push('카라멜시럽');
+          break;
+      }
+    }
+  }
 };
 
 // 금액 설정
@@ -98,6 +169,7 @@ if (localStorage.getItem('selectMenu')) {
   menu.img = lastData.img;
   menu.price = lastData.price;
   menu.count = 1;
+  menu.idname = lastData.idname;
   set_price();
   $('.menu_title').text(lastData.text);
   $('.menu_title_info').text(lastData.explain);
@@ -168,8 +240,26 @@ $('.cancel_option_btn').click(function () {
   $('#add_option').addClass('none_class');
 });
 
+const similiar_check = (cartData, menu) => {
+  let compare_name = false;
+
+  cartData.forEach((element) => {
+    if (element.name === menu.name) {
+      element.count += 1;
+      compare_name = true;
+      return false;
+    }
+  });
+
+  if (!compare_name) {
+    cartData.push(menu);
+  }
+  localStorage.setItem('Cart', JSON.stringify(cartData));
+};
+
 // 장바구니에 담기 버튼
 $('#add_to_cart_button').click(function () {
+
   if (
     $('input:radio[name=temp]').is(':checked') &&
     $('input:radio[name=size]').is(':checked') &&

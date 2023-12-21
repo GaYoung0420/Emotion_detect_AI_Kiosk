@@ -31,6 +31,24 @@ var swiper = new Swiper('.swiper-container', {
     nextEl: '.swiper-button-next',
   },
 });
+
+const similiar_check = (cartData, menu) => {
+  let compare_name = false;
+
+  cartData.forEach((element) => {
+    if (element.name === menu.name) {
+      element.count += 1;
+      compare_name = true;
+      return false;
+    }
+  });
+
+  if (!compare_name) {
+    cartData.push(menu);
+  }
+  localStorage.setItem('Cart', JSON.stringify(cartData));
+};
+
 // 메뉴 바뀜
 const change_menu = (category) => {
   let swiper_slide_container = 0;
@@ -52,7 +70,6 @@ const change_menu = (category) => {
           swiper_slide_container +
           "' class='swiper-slide-container center_cantainer'></div></div++>",
       );
-      // swiper_slide++;
     }
     if (index % 3 == 0) {
       menuRowContainer++;
@@ -77,12 +94,16 @@ const change_menu = (category) => {
     $('#' + idname).click(function () {
       if (category == 'coffee' || category == 'tea') {
         window.location.href = '../html/kiosk_3_Select_option.html';
+        element.idname = idname;
+        console.log(element.idname);
         localStorage.setItem('selectMenu', JSON.stringify(element));
       } else {
         let cart_item = JSON.parse(localStorage.getItem('Cart'));
         var menu = {
+          id: idname,
           name: element.text,
           price: element.price,
+          option_text: '',
           count: 1,
           img: element.img,
           options: {
@@ -96,17 +117,7 @@ const change_menu = (category) => {
           localStorage.setItem('Cart', JSON.stringify([menu]));
           change_cart();
         } else {
-          cart_item.forEach((element) => {
-            if (element.text == menu.name) {
-              menu.count += element.count;
-              return false;
-            }
-          });
-          if (element.count == 1) {
-            cart_item.push(menu);
-            console.log(cart_item);
-            localStorage.setItem('Cart', JSON.stringify(cart_item));
-          }
+          similiar_check(cart_item, menu);
           change_cart();
         }
       }
@@ -153,13 +164,14 @@ $('.cart_delete').click(function () {
 const change_cart = () => {
   let set_options = (options, add_options) => {
     let option_array = new Array();
-
-    if (options.temp != undefined) {
+    if (options.temp != ' ') {
       switch (options.temp) {
         case 'hot':
+          option_array.push('옵션 : ');
           option_array.push('따뜻함');
           break;
         case 'ice':
+          option_array.push('옵션 : ');
           option_array.push('차가움');
           break;
       }
@@ -182,7 +194,7 @@ const change_cart = () => {
           option_array.push('디카페인');
           break;
       }
-      if (add_options.coffee_shot.options !== undefined) {
+      if (add_options !== undefined) {
         switch (add_options.coffee_shot.options) {
           case 'one_shot':
             option_array.push('커피 연하게');
@@ -194,40 +206,44 @@ const change_cart = () => {
             option_array.push('진하게');
             break;
         }
+        switch (add_options.ice.options) {
+          case 'one_ice':
+            option_array.push('얼음 적게');
+            break;
+          case 'two_ice':
+            option_array.push('얼음 보통');
+            break;
+          case 'three_ice':
+            option_array.push('얼음 많게');
+            break;
+        }
+        switch (add_options.syrup.options) {
+          case 'vanilla':
+            option_array.push('바닐라시럽');
+            break;
+          case 'hazelnut':
+            option_array.push('헤이즐넛시럽');
+            break;
+          case 'caramel':
+            option_array.push('카라멜시럽');
+            break;
+        }
       }
     }
 
-    if (add_options.ice.options !== undefined) {
-      switch (add_options.ice.options) {
-        case 'one_ice':
-          option_array.push('얼음 적게');
-          break;
-        case 'two_ice':
-          option_array.push('얼음 보통');
-          break;
-        case 'three_ice':
-          option_array.push('얼음 많게');
-          break;
-      }
-    }
-    if (add_options.syrup.options !== undefined) {
-      switch (add_options.syrup.options) {
-        case 'vanilla':
-          option_array.push('바닐라시럽');
-          break;
-        case 'hazelnut':
-          option_array.push('헤이즐넛시럽');
-          break;
-        case 'caramel':
-          option_array.push('카라멜시럽');
-          break;
-      }
-    }
     let option_text = '';
-    option_array.forEach((element, index) => {
-      if (index == 0) option_text = element;
-      else option_text = option_text.concat(',' + element);
-    });
+
+    if (options != undefined || add_options !== undefined) {
+      option_array.forEach((element, index) => {
+        if (index == 0) {
+          option_text = element;
+        } else if (index == 1) {
+          option_text = option_text.concat(element);
+        } else {
+          option_text = option_text.concat(',' + element);
+        }
+      });
+    }
 
     return option_text;
   };
@@ -235,20 +251,40 @@ const change_cart = () => {
   $('.cart_list_container').empty();
   var cartData = JSON.parse(localStorage.getItem('Cart'));
   console.log(cartData);
-
+  total_count = 0;
+  total_price = 0;
   if (cartData === null || cartData.length === 0) {
-    console.log('BB');
+    $('#cart_count').text(total_count);
+    $('#cart_price').text(total_price.toLocaleString('ko-KR'));
     $('.cart_list_container').append(
       '<div class="menu_select_subcontainer"> <text style="font-size: 30px; color: #8d909f; font-weight: 700">주문내역이 없습니다. 메뉴를 선택해주세요</text></div>',
     );
   } else if (cartData) {
-    console.log('AAA');
     cartData.forEach((element, index) => {
+      // if (
+      //   $('#' + element.idname).children('#count_btn_container').length == 0
+      // ) {
+      //   $('#' + element.idname).append(
+      //     '<div id ="count_btn_container" class="center_cantainer" style="gap: 1px; width:200px"> <img id ="minus' +
+      //       index +
+      //       '" style="height:50px;width:50px;" src="../svg/delete_to_cart_icon.svg"> <span class="count_info_text" style="width:200px;font-size: 30px;"><span id = "count' +
+      //       index +
+      //       '">' +
+      //       element.count +
+      //       '</span>개</span> <img id = "add' +
+      //       index +
+      //       '" style="height:50px;width:50px;" src="../svg/add_to_cart_icon.svg"> </div>',
+      //   );
+      // }
+
       total_price += element.price * element.count;
       total_count += element.count;
       $('#cart_count').text(total_count);
       $('#cart_price').text(total_price.toLocaleString('ko-KR'));
       let options = set_options(element.options, element.add_options);
+
+      element.option_text = options;
+
       $('.cart_list_container').append(
         '<div class="cart_list_background"> <div class="center_cantainer" style="width: 100%; gap: 190px"> <div class="cart_list_number center_cantainer">' +
           (index + 1) +
@@ -258,9 +294,9 @@ const change_cart = () => {
           element.img +
           '"/> <div class="cart_container_info_sub_conatiner"> <div class="cart_menu_name">' +
           element.name +
-          '</div> <div class="cart_info_text"> 옵션 <span> : ' +
+          '</div> <div class="cart_info_text"> <span>' +
           options +
-          '</span> </div> </div> </div> <div class="center_cantainer" style="width: 100%; gap: 60px"> <div class="center_cantainer" style="gap: 10px"> <img id ="minus' +
+          '</span> </div> </div> </div> <div class="center_cantainer" style="width: 100%;"> <div class="center_cantainer" style="gap: 10px; width:150px;"> <img id ="minus' +
           index +
           '" src="../svg/delete_to_cart_icon.svg" /> <text class="count_info_text"><span id = "count' +
           index +
@@ -273,12 +309,21 @@ const change_cart = () => {
           ' <span class="price_won">원</span></div></div></div>',
       );
 
+      localStorage.setItem('Cart', JSON.stringify(cartData));
+
       $('#add' + index).click(function () {
-        change_count_price('add', element, index, cartData);
+        element.count += 1;
+        localStorage.setItem('Cart', JSON.stringify(cartData));
+        change_cart();
+        // change_count_price('add', element, index, cartData);
       });
 
       $('#minus' + index).click(function () {
-        change_count_price('minus', element, index, cartData);
+        element.count -= 1;
+        localStorage.setItem('Cart', JSON.stringify(cartData));
+        change_cart();
+
+        // change_count_price('minus', element, index, cartData);
       });
 
       $('#delete' + index).click(function () {
@@ -301,14 +346,17 @@ var change_count_price = (func, element, index, cartData) => {
     total_price -= element.price;
     total_count -= 1;
   }
-  $('#count' + index).text(element.count);
-  $('#cart_count').text(total_count);
-  $('#cart_price').text(total_price.toLocaleString('ko-KR'));
+
   if (element.count == 0) {
     cartData.splice(index, 1);
     localStorage.setItem('Cart', JSON.stringify(cartData));
     change_cart();
+  } else {
+    localStorage.setItem('Cart', JSON.stringify(cartData));
   }
+  $('#count' + index).text(element.count);
+  $('#cart_count').text(total_count);
+  $('#cart_price').text(total_price.toLocaleString('ko-KR'));
 };
 
 // Function to format number with commas
