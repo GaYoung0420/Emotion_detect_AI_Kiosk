@@ -33,7 +33,7 @@ var add_options = {
   syrup: '',
 };
 
-var set_options = (options, add_options) => {
+var set_options_texts = (options, add_options) => {
   let option_array = new Array();
   if (options.temp != ' ') {
     switch (options.temp) {
@@ -101,6 +101,22 @@ var set_options = (options, add_options) => {
       }
     }
   }
+
+  let option_text = '';
+
+  if (options != undefined || add_options !== undefined) {
+    option_array.forEach((element, index) => {
+      if (index == 0) {
+        option_text = element;
+      } else if (index == 1) {
+        option_text = option_text.concat(element);
+      } else {
+        option_text = option_text.concat(',' + element);
+      }
+    });
+  }
+
+  return option_text;
 };
 
 // 금액 설정
@@ -259,19 +275,35 @@ const similiar_check = (cartData, menu) => {
 
 // 장바구니에 담기 버튼
 $('#add_to_cart_button').click(function () {
-
   if (
     $('input:radio[name=temp]').is(':checked') &&
     $('input:radio[name=size]').is(':checked') &&
     $('input:radio[name=coffeebean]').is(':checked')
   ) {
     let cart_item = JSON.parse(localStorage.getItem('Cart'));
-
+    menu.option_text = set_options_texts(menu.options, menu.add_options);
+    console.log(menu.option_text);
     if (cart_item == undefined) {
       localStorage.setItem('Cart', JSON.stringify([menu]));
     } else {
-      cart_item.push(menu);
-      console.log(cart_item);
+      var compare_name = false;
+
+      cart_item.forEach((element, index) => {
+        console.log(
+          element.name == menu.name && element.option_text == menu.option_text,
+        );
+        if (
+          element.name == menu.name &&
+          element.option_text == menu.option_text
+        ) {
+          console.log('AA');
+          element.count += menu.count;
+          compare_name = true;
+        }
+      });
+      if (!compare_name) {
+        cart_item.push(menu);
+      }
       localStorage.setItem('Cart', JSON.stringify(cart_item));
     }
 
