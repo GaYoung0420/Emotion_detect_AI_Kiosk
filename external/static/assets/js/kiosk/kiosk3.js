@@ -175,24 +175,33 @@ var set_options = (info, value) => {
   }
   console.log(menu);
 };
+var lastData = JSON.parse(localStorage.getItem('selectMenu'));
 
-// 선택한 메뉴 옵션 화면에 뿌리기
-if (localStorage.getItem('selectMenu')) {
-  var lastData = JSON.parse(localStorage.getItem('selectMenu'));
+$(window).on('load', function () {
+  // 선택한 메뉴 옵션 화면에 뿌리기
 
-  console.log(lastData);
-  menu.name = lastData.text;
-  menu.img = lastData.img;
-  menu.price = lastData.price;
-  menu.count = 1;
-  menu.idname = lastData.idname;
-  set_price();
-  $('.menu_title').text(lastData.text);
-  $('.menu_title_info').text(lastData.explain);
-  $('.menu_price_data').text(lastData.price.toLocaleString('ko-KR'));
-  $('.menu_option_img').attr('src', lastData.img);
-  $('.set_count').text(menu.count);
-}
+  if (localStorage.getItem('selectMenu')) {
+    if (
+      lastData.text === '히비스커스티' ||
+      lastData.text === '캐모마일티' ||
+      lastData.text === '페퍼민트티'
+    ) {
+      $('#coffeebean_container').addClass('invisible');
+    }
+    console.log(lastData);
+    menu.name = lastData.text;
+    menu.img = lastData.img;
+    menu.price = lastData.price;
+    menu.count = 1;
+    menu.idname = lastData.idname;
+    set_price();
+    $('.menu_title').text(lastData.text);
+    $('.menu_title_info').text(lastData.explain);
+    $('.menu_price_data').text(lastData.price.toLocaleString('ko-KR'));
+    $('.menu_option_img').attr('src', lastData.img);
+    $('.set_count').text(menu.count);
+  }
+});
 
 // ******************** 이벤트 핸들러 ********************
 
@@ -277,34 +286,41 @@ const similiar_check = (cartData, menu) => {
 $('#add_to_cart_button').click(function () {
   if (
     $('input:radio[name=temp]').is(':checked') &&
-    $('input:radio[name=size]').is(':checked') &&
-    $('input:radio[name=coffeebean]').is(':checked')
+    $('input:radio[name=size]').is(':checked')
   ) {
-    let cart_item = JSON.parse(localStorage.getItem('Cart'));
-    menu.option_text = set_options_texts(menu.options, menu.add_options);
-    console.log(menu.option_text);
-    if (cart_item == undefined) {
-      localStorage.setItem('Cart', JSON.stringify([menu]));
-    } else {
-      var compare_name = false;
+    if (
+      $('input:radio[name=coffeebean]').is(':checked') ||
+      lastData.text === '히비스커스티' ||
+      lastData.text === '캐모마일티' ||
+      lastData.text === '페퍼민트티'
+    ) {
+      let cart_item = JSON.parse(localStorage.getItem('Cart'));
+      menu.option_text = set_options_texts(menu.options, menu.add_options);
+      console.log(menu.option_text);
+      if (cart_item == undefined) {
+        localStorage.setItem('Cart', JSON.stringify([menu]));
+      } else {
+        var compare_name = false;
 
-      cart_item.forEach((element, index) => {
-        console.log(
-          element.name == menu.name && element.option_text == menu.option_text,
-        );
-        if (
-          element.name == menu.name &&
-          element.option_text == menu.option_text
-        ) {
-          console.log('AA');
-          element.count += menu.count;
-          compare_name = true;
+        cart_item.forEach((element, index) => {
+          console.log(
+            element.name == menu.name &&
+              element.option_text == menu.option_text,
+          );
+          if (
+            element.name == menu.name &&
+            element.option_text == menu.option_text
+          ) {
+            console.log('AA');
+            element.count += menu.count;
+            compare_name = true;
+          }
+        });
+        if (!compare_name) {
+          cart_item.push(menu);
         }
-      });
-      if (!compare_name) {
-        cart_item.push(menu);
+        localStorage.setItem('Cart', JSON.stringify(cart_item));
       }
-      localStorage.setItem('Cart', JSON.stringify(cart_item));
     }
 
     window.location.href = '../html/kiosk_2_Menu_select.html';

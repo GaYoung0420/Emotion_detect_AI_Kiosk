@@ -5,7 +5,8 @@ var menu = ['1', '2', '3'];
 let select_category = 'coffee';
 let total_price = 0;
 let total_count = 0;
-
+let right_btn_count = 0;
+let left_btn_count = 0;
 $(window).on('load', function () {
   change_menu($('input[name=category]:checked').val());
   swiper.update();
@@ -162,128 +163,28 @@ $('.cart_delete').click(function () {
 
 // cart 변경
 const change_cart = () => {
-  let set_options = (options, add_options) => {
-    let option_array = new Array();
-    if (options.temp != ' ') {
-      switch (options.temp) {
-        case 'hot':
-          option_array.push('옵션 : ');
-          option_array.push('따뜻함');
-          break;
-        case 'ice':
-          option_array.push('옵션 : ');
-          option_array.push('차가움');
-          break;
-      }
-      switch (options.size) {
-        case 'small':
-          option_array.push('작게');
-          break;
-        case 'medium':
-          option_array.push('보통');
-          break;
-        case 'large':
-          option_array.push('크게');
-          break;
-      }
-      switch (options.coffeebean) {
-        case 'esspreso':
-          option_array.push('에스프레소');
-          break;
-        case 'decaffeine':
-          option_array.push('디카페인');
-          break;
-      }
-      if (add_options !== undefined) {
-        switch (add_options.coffee_shot.options) {
-          case 'one_shot':
-            option_array.push('커피 연하게');
-            break;
-          case 'two_shot':
-            option_array.push('보통 진하게');
-            break;
-          case 'three_shot':
-            option_array.push('진하게');
-            break;
-        }
-        switch (add_options.ice.options) {
-          case 'one_ice':
-            option_array.push('얼음 적게');
-            break;
-          case 'two_ice':
-            option_array.push('얼음 보통');
-            break;
-          case 'three_ice':
-            option_array.push('얼음 많게');
-            break;
-        }
-        switch (add_options.syrup.options) {
-          case 'vanilla':
-            option_array.push('바닐라시럽');
-            break;
-          case 'hazelnut':
-            option_array.push('헤이즐넛시럽');
-            break;
-          case 'caramel':
-            option_array.push('카라멜시럽');
-            break;
-        }
-      }
-    }
-
-    let option_text = '';
-
-    if (options != undefined || add_options !== undefined) {
-      option_array.forEach((element, index) => {
-        if (index == 0) {
-          option_text = element;
-        } else if (index == 1) {
-          option_text = option_text.concat(element);
-        } else {
-          option_text = option_text.concat(',' + element);
-        }
-      });
-    }
-
-    return option_text;
-  };
-
   $('.cart_list_container').empty();
   var cartData = JSON.parse(localStorage.getItem('Cart'));
   console.log(cartData);
   total_count = 0;
   total_price = 0;
+
   if (cartData === null || cartData.length === 0) {
+    right_btn_count = 0;
+    left_btn_count = 0;
     $('#cart_count').text(total_count);
     $('#cart_price').text(total_price.toLocaleString('ko-KR'));
     $('.cart_list_container').append(
       '<div class="menu_select_subcontainer"> <text style="font-size: 30px; color: #8d909f; font-weight: 700">주문내역이 없습니다. 메뉴를 선택해주세요</text></div>',
     );
   } else if (cartData) {
+    right_btn_count = 0;
+    left_btn_count = 0;
     cartData.forEach((element, index) => {
-      // if (
-      //   $('#' + element.idname).children('#count_btn_container').length == 0
-      // ) {
-      //   $('#' + element.idname).append(
-      //     '<div id ="count_btn_container" class="center_cantainer" style="gap: 1px; width:200px"> <img id ="minus' +
-      //       index +
-      //       '" style="height:50px;width:50px;" src="../svg/delete_to_cart_icon.svg"> <span class="count_info_text" style="width:200px;font-size: 30px;"><span id = "count' +
-      //       index +
-      //       '">' +
-      //       element.count +
-      //       '</span>개</span> <img id = "add' +
-      //       index +
-      //       '" style="height:50px;width:50px;" src="../svg/add_to_cart_icon.svg"> </div>',
-      //   );
-      // }
-
       total_price += element.price * element.count;
       total_count += element.count;
       $('#cart_count').text(total_count);
       $('#cart_price').text(total_price.toLocaleString('ko-KR'));
-      let options = set_options(element.options, element.add_options);
-
-      element.option_text = options;
 
       $('.cart_list_container').append(
         '<div class="cart_list_background"> <div class="center_cantainer" style="width: 100%; gap: 190px"> <div class="cart_list_number center_cantainer">' +
@@ -295,7 +196,7 @@ const change_cart = () => {
           '"/> <div class="cart_container_info_sub_conatiner"> <div class="cart_menu_name">' +
           element.name +
           '</div> <div class="cart_info_text"> <span>' +
-          options +
+          element.option_text +
           '</span> </div> </div> </div> <div class="center_cantainer" style="width: 100%;"> <div class="center_cantainer" style="gap: 10px; width:150px;"> <img id ="minus' +
           index +
           '" src="../svg/delete_to_cart_icon.svg" /> <text class="count_info_text"><span id = "count' +
@@ -311,19 +212,18 @@ const change_cart = () => {
 
       localStorage.setItem('Cart', JSON.stringify(cartData));
 
+      // console.log($('.cart_list_container').scrollLeft());
+      // console.log(
+      //   $('.cart_list_container').prop('scrollWidth') / cartData.length,
+      // );
       $('#add' + index).click(function () {
-        element.count += 1;
-        localStorage.setItem('Cart', JSON.stringify(cartData));
+        change_count_price('add', element, index, cartData);
         change_cart();
-        // change_count_price('add', element, index, cartData);
       });
 
       $('#minus' + index).click(function () {
-        element.count -= 1;
-        localStorage.setItem('Cart', JSON.stringify(cartData));
+        change_count_price('minus', element, index, cartData);
         change_cart();
-
-        // change_count_price('minus', element, index, cartData);
       });
 
       $('#delete' + index).click(function () {
@@ -332,10 +232,65 @@ const change_cart = () => {
         change_cart();
       });
     });
+    right_btn_count = cartData.length - 2;
+    if (cartData.length == 3) {
+      $('.cart_list_container').animate({ scrollLeft: 205 }, 500);
+      $('#cart_left_btn').addClass('abled_menut_btn');
+    } else {
+      $('.cart_list_container').animate(
+        { scrollLeft: 380 * right_btn_count + 205 },
+        500,
+        'linear',
+      );
+      $('#cart_left_btn').addClass('abled_menut_btn');
+    }
+  }
+};
+
+$('#cart_right_btn').click(() => {
+  $('.cart_list_container').animate(
+    { scrollLeft: $('.cart_list_container').scrollLeft() + 347 },
+    300,
+  );
+  change_btn();
+});
+
+$('#cart_left_btn').click(() => {
+  if ($('#cart_left_btn').hasClass('abled_menut_btn') === true)
+    $('.cart_list_container').animate(
+      { scrollLeft: $('.cart_list_container').scrollLeft() - 347 },
+      300,
+    );
+  change_btn();
+});
+
+var change_btn = () => {
+  var cartData = JSON.parse(localStorage.getItem('Cart'));
+
+  console.log(
+    $('.cart_list_container').prop('scrollWidth') -
+      $('.cart_list_container').scrollLeft(),
+  );
+  if (
+    $('.cart_list_container').prop('scrollWidth') -
+      $('.cart_list_container').scrollLeft() >
+      901 &&
+    cartData.length >= 3
+  ) {
+    $('#cart_right_btn').addClass('abled_menut_btn');
+  } else {
+    $('#cart_right_btn').removeClass('abled_menut_btn');
+  }
+
+  if ($('.cart_list_container').scrollLeft() > 0) {
+    $('#cart_left_btn').addClass('abled_menut_btn');
+  } else {
+    $('#cart_left_btn').removeClass('abled_menut_btn');
   }
 };
 
 var change_count_price = (func, element, index, cartData) => {
+  console.log(func, element, index, cartData);
   if (func == 'add') {
     total_price -= element.count * element.price;
     element.count += 1;

@@ -18,6 +18,9 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.invisible{
+  visibility: hidden;
+}
 
 .img_background {
   width: 273.473px;
