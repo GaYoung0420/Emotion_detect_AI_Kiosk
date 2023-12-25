@@ -33,7 +33,7 @@
   height: 45px;
 }
 .order_container {
-  height: 300px;
+  height: 240px;
   width: 1015px;
   flex-direction: row;
   border-bottom: 1px solid #efefef;
@@ -43,7 +43,7 @@
 
 .order_product_info_container {
   width: 493px;
-  height: 300px%;
+  height: 250px%;
   /* border: 1px solid red; */
 }
 
@@ -82,7 +82,6 @@
   position: absolute;
   bottom: 0px;
   right: 0px;
-  
 }
 
 .img_menu {
@@ -249,7 +248,7 @@
   /* border: solid 1px red; */
   display: flex;
   justify-content: center;
-  
+
   /* align-items: center; */
   flex-direction: column;
 }
@@ -412,9 +411,8 @@
 
 .swiper-wrapper {
   width: 1080px;
-  height: 300px;
+  height: 720px;
   border: solid 1px red;
-
 }
 
 .swiper-slide img {
@@ -430,7 +428,7 @@
 }
 
 .swiper-container {
-  height: 720px;
+  height: 830px;
   width: 1080px;
   border: solid 1px red;
 }
@@ -464,7 +462,6 @@
   padding-top: 10px;
 }
 
-
 .gallery-thumbs {
   overflow: hidden;
   width: 250px;
@@ -491,7 +488,7 @@
 /* pagination */
 .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets {
   position: relative;
-  bottom: -350px;
+  bottom: -30px;
 }
 
 .swiper-pagination-bullet {
@@ -554,10 +551,10 @@
   display: none;
 }
 
-.swiper-button-prev{
+.swiper-button-prev {
   margin-left: 30px;
 }
-.swiper-button-next{
+.swiper-button-next {
   margin-right: 30px;
 }
 
