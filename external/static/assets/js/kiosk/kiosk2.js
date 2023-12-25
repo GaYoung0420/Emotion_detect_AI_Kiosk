@@ -264,6 +264,11 @@ $('#cart_left_btn').click(() => {
   change_btn();
 });
 
+$('.order_button').click(() => {
+  var cartData = JSON.parse(localStorage.getItem('Cart'));
+  if (cartData) window.location.href = '../html/kiosk_4_Select_place.html';
+});
+
 var change_btn = () => {
   var cartData = JSON.parse(localStorage.getItem('Cart'));
 
