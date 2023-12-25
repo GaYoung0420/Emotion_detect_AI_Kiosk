@@ -17,6 +17,12 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js"></script>
 
     <link href="../css/kiosk.css" rel="stylesheet" />
     <link href="../css/kiosk5.css" rel="stylesheet" />
@@ -205,89 +211,121 @@
           <div class="updown"></div>
           <text class="order_row_text" style="width: 134px">삭제</text>
         </div>
-        <div class="order_container">
-          <!-- 상품 -->
-          <div class="order_product_info_container center_cantainer">
-            <div class="product_img">
-              <div class="list_number center_cantainer">1</div>
-              <div class="img_menu_container center_cantainer">
-                <img
-                  class="img_menu"
-                  src="../img/menu/digital_caramel_latte.png"
-                />
+        <div>
+          <div class="swiper-container gallery-top">
+            <div class="swiper-wrapper center_cantainer">
+              <div class="swiper-slide ">
+                <div class=" order_container">
+                  <div class="order_product_info_container center_cantainer">
+                    <div class="product_img">
+                      <div class="list_number center_cantainer">1</div>
+                      <div class="img_menu_container center_cantainer">
+                        <img
+                          class="img_menu"
+                          src="../img/menu/digital_caramel_latte.png"
+                          style="height:130px;"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        height: 205px;
+                        padding-top: 20px;
+                        padding-left: 5px;
+                        position: relative;
+                      "
+                    >
+                      <div class="menu_title_text">카라멜 카페라떼</div>
+                      <div class="option_text">
+                        옵션 : 차가움, 보통, 에스프레소
+                      </div>
+                      <div style="position: absolute; bottom: 11px; right: 110px">
+                        <button class="option_change_button">옵션 변경</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="count_info_container center_cantainer">
+                    <div class="count_info_sub_container center_cantainer">
+                      <button class="count_control">-</button>
+                      <text class="count_font">1</text>
+                      <button class="count_control">+</button>
+                    </div>
+                  </div>
+                  <div class="price_container center_cantainer">
+                    <text class="price_text"
+                      >6,000 <span style="font-size: 35px">원</span></text
+                    >
+                  </div>
+                  <div class="delete_container center_cantainer">
+                    <button class="delete_button">X</button>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="swiper-slide ">
+                <div class=" order_container">
+                  <div class="order_product_info_container center_cantainer">
+                    <div class="product_img">
+                      <div class="list_number center_cantainer">1</div>
+                      <div class="img_menu_container center_cantainer">
+                        <img
+                          class="img_menu"
+                          src="../img/menu/digital_caramel_latte.png"
+                          style="height:130px;"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        height: 205px;
+                        padding-top: 20px;
+                        padding-left: 5px;
+                        position: relative;
+                      "
+                    >
+                      <div class="menu_title_text">카라멜 카페라떼</div>
+                      <div class="option_text">
+                        옵션 : 차가움, 보통, 에스프레소
+                      </div>
+                      <div style="position: absolute; bottom: 11px; right: 110px">
+                        <button class="option_change_button">옵션 변경</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="count_info_container center_cantainer">
+                    <div class="count_info_sub_container center_cantainer">
+                      <button class="count_control">-</button>
+                      <text class="count_font">1</text>
+                      <button class="count_control">+</button>
+                    </div>
+                  </div>
+                  <div class="price_container center_cantainer">
+                    <text class="price_text"
+                      >6,000 <span style="font-size: 35px">원</span></text
+                    >
+                  </div>
+                  <div class="delete_container center_cantainer">
+                    <button class="delete_button">X</button>
+                  </div>
+                </div>
+                
               </div>
             </div>
-            <div
-              style="
-                height: 205px;
-                padding-top: 20px;
-                padding-left: 5px;
-                position: relative;
-              "
-            >
-              <div class="menu_title_text">카라멜 카페라떼</div>
-              <div class="option_text">옵션 : 차가움, 보통, 에스프레소</div>
-              <div style="position: absolute; bottom: 11px; right: 110px">
-                <button class="option_change_button">옵션 변경</button>
-              </div>
-            </div>
-          </div>
-          <!-- 수량 -->
-          <div class="count_info_container center_cantainer">
-            <div class="count_info_sub_container center_cantainer">
-              <button class="count_control">-</button>
-              <text class="count_font">1</text>
-              <button class="count_control">+</button>
-            </div>
-          </div>
-          <!-- 금액 -->
-          <div class="price_container center_cantainer">
-            <text class="price_text"
-              >6,000 <span style="font-size: 35px">원</span></text
-            >
-          </div>
-          <!-- 삭제 -->
-          <div class="delete_container center_cantainer">
-            <button class="delete_button">X</button>
-          </div>
-        </div>
-        <div class="order_container"></div>
+            <div class="swiper-pagination"></div>
 
-        <div class="order_container"></div>
-        <!-- 이전, 좌우 컨테이너 -->
-        <div class="LR_button_container">
-          <button class="left_button center_cantainer">
-            <span class="material-icons"> arrow_back_ios </span>
-            <div style="width: 122.456px">이전</div>
-          </button>
-          <svg style="width: 57; height: 57">
-            <circle
-              cx="27"
-              cy="27"
-              r="23"
-              style="
-                fill: var(--Main-Color, #334d81);
-                stroke: #334d81;
-                stroke-width: 3px;
-              "
-            />
-             
-            <text
-              x="27"
-              y="38"
-              font-size="35"
-              text-anchor="middle"
-              fill="#ffffff"
-              style="font-weight: 700"
-            >
-              1
-            </text>
-          </svg>
-          <button class="left_button center_cantainer">
-            <div style="width: 122.456px">다음</div>
-            <span class="material-icons"> arrow_forward_ios </span>
-          </button>
-          <!-- <span class="material-icons"> arrow_forward_ios </span> -->
+            <div style="position: relative; bottom: -260px; height:105px;">
+              <button class="swiper-button-prev MenuBtn">
+                <span class="material-icons"> arrow_back_ios </span>
+                이전
+              </button>
+              <button class="swiper-button-next MenuBtn">
+                다음
+                <span class="material-icons"> arrow_forward_ios </span>
+              </button>
+              <!-- <div class="swiper-button-prev">다음</div>
+              <div class="swiper-button-next"></div> -->
+            </div>
+          </div>
         </div>
       </div>
       <!-- 주문 금액 그리고 취소 및 결제하기 -->
@@ -301,7 +339,7 @@
                 <div class="checkbox">
                   <input
                     type="radio"
-                    name="palce"
+                    name="place"
                     id="restaurant"
                     value="restaurant"
                     class="checkbox2"
@@ -312,7 +350,7 @@
                 <div class="checkbox">
                   <input
                     type="radio"
-                    name="palce"
+                    name="place"
                     id="takeout"
                     value="takeout"
                     class="checkbox2"
@@ -340,17 +378,17 @@
           </div>
         </div>
         <button class="order_delete">
-          <div style="margin-bottom: 10px;">주문</div>
+          <div style="margin-bottom: 10px">주문</div>
           <div>취소</div>
         </button>
         <button class="payment_btn center_cantainer">
-          <img src="../svg/card_icon.svg"/>
+          <img src="../svg/card_icon.svg" />
           결제하기
         </button>
       </div>
       <!-- footer -->
       <div class="footer">
-        <button class="back_button center_cantainer">
+        <button id="back_button" class="back_button center_cantainer">
           <span class="material-symbols-outlined" style="font-size: 33px">
             undo
           </span>
@@ -359,9 +397,12 @@
       </div>
     </div>
   </body>
-  <script>
-    document.getElementById('homeBtn').addEventListener('click', function () {
-      window.location.href = '../html/kiosk_1_Touch_screen.html';
-    });
-  </script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="../js/kiosk/kiosk_gnb.js"></script>
+  <script src="../js/kiosk/kiosk5.js"></script>
 </html>

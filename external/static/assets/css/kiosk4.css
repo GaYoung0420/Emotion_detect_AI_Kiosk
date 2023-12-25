@@ -36,6 +36,70 @@
   gap: 131px;
 }
 
+/* .option_btn input[type='radio'] {
+  display: none;
+}
+
+.option_btn label {
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.option_btn input[type='radio']:checked + label {
+  background: var(--white, #334d81);
+  border: 3px solid #334d81;
+  color: #fff;
+  fill: #fff;
+}
+
+.option_btn input[type='radio'] + label {
+  border: 3px solid #787878;
+  background: #f8f8f8;
+  color: #575757;
+} */
+
+.option_btn input[type='radio'] {
+  display: none;
+}
+.option_btn input[type='radio'] + label {
+  border: 6px solid #787878;
+  background: #f8f8f8;
+  color: #575757;
+}
+.option_btn input[type='radio']:checked + label {
+  background: var(--white, #334d81);
+  border: 6px solid #334d81;
+  color: #fff;
+  fill: #fff;
+}
+
+
+.option_select_button {
+  width: 369px;
+  height: 492px;
+  flex-shrink: 0;
+  border-radius: 44px;
+  flex-direction: column;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  gap: 68px;
+}
+
+
+
+.disable_svg {
+  filter: invert(32%) sepia(0%) saturate(0%) hue-rotate(355deg) brightness(100%)
+    contrast(87%);
+}
+
 .disable_select_btn {
   width: 369px;
   height: 492px;
@@ -72,6 +136,7 @@
   line-height: normal;
   gap: 68px;
 }
+
 
 .restaurant {
     filter: invert(47%) sepia(9%) saturate(13%) hue-rotate(352deg) brightness(97%) contrast(85%);
