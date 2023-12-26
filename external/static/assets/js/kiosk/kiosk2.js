@@ -266,9 +266,16 @@ $('#cart_left_btn').click(() => {
 
 $('.order_button').click(() => {
   var cartData = JSON.parse(localStorage.getItem('Cart'));
-  if (cartData) window.location.href = '../html/kiosk_4_Select_place.html';
+  if (cartData.length > 0) {
+    window.location.href = '../html/kiosk_4_Select_place.html';
+  } else {
+    $('#alert').removeClass('none_class');
+  }
 });
 
+$('#alert_check').click(() => {
+  $('#alert').addClass('none_class');
+});
 var change_btn = () => {
   var cartData = JSON.parse(localStorage.getItem('Cart'));
 

@@ -100,6 +100,7 @@
   border-bottom: 1px solid #e4e4e4;
   margin-bottom: 10px;
   padding-bottom: 10px;
+  width: 257px;
 }
 
 .option_text {
@@ -109,6 +110,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  width: 257px;
 }
 
 .option_change_button {
@@ -412,7 +414,6 @@
 .swiper-wrapper {
   width: 1080px;
   height: 720px;
-  border: solid 1px red;
 }
 
 .swiper-slide img {
@@ -430,7 +431,6 @@
 .swiper-container {
   height: 830px;
   width: 1080px;
-  border: solid 1px red;
 }
 
 .wrap_thumb_layout .swiper-container {
@@ -616,4 +616,97 @@
   width: 100%;
   gap: 160px;
   margin: 20px auto;
+}
+
+
+.add_option_select_conatiner {
+  position: absolute;
+  left: 0px;
+  top: 458px;
+  z-index: 150;
+  width: 1080px;
+  height: 1800px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+.none_class{
+  display: none;
+}
+
+.alert_contents {
+  width: 900px;
+  height: 400px;
+  margin-top: -500px;
+  flex-shrink: 0;
+  background: #fff;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  padding: 40px;
+}
+.add_option_title_alert{
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  color: var(--Main-Color, #334d81);
+  font-family: NanumSquare_ac;
+  font-size: 60px;
+  font-weight: 800;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.warning_icon{
+  font-size: 100px;
+  font-weight: 800;
+}
+
+.alert_text{
+  color: var(--Main-Color, #474747);
+  font-family: NanumSquare_ac;
+  font-size: 33px;
+  font-style: normal;
+  font-weight: 800;
+  margin-top: 20px;
+}
+
+.able_option_btn {
+  display: flex;
+  width: 300px;
+  height: 74px;
+  border: none;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  border-radius: 12px;
+  background: var(--Main-Color, #334d81);
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+
+.cancel_option_btn {
+  display: flex;
+  width: 180px;
+  height: 74px;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 13px;
+  border-radius: 12px;
+  background: #909090;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }

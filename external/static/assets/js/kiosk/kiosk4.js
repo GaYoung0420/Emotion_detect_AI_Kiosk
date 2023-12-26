@@ -32,7 +32,7 @@ var change_svg_ = (select_value, first, second) => {
 $(window).on('load', function () {
   if (place_value) {
     change_svg_(place_value.place, 'restaurant', 'takeout');
-    $("input:radio[name='place']:radio[value=" + place_value.place + ']').prop(
+    $("input:radio[name='place'][value='" + place_value.place + "']").prop(
       'checked',
       true,
     );

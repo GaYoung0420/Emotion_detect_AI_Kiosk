@@ -612,29 +612,6 @@
   border: solid 3px #334d81;
 }
 
-/* .swiper-button-next {
-  background: #334d81;
-  width: 231.819px;
-  height: 68px;
-  border-radius: 43.5px;
-  border: none;
-  color: #fff;
-  text-align: center;
-  font-family: NanumSquare_ac;
-  font-size: 35px;
-  font-style: normal;
-  font-weight: 700;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.08);
-  
-}
-
-.swiper-button-prev {
-  background: #334d81;
-} */
-
 .swiper-button-next::after,
 .swiper-button-prev::after {
   display: none;
@@ -647,30 +624,53 @@
   margin-right: 30px;
 }
 
-  /*
-      애니메이션이 반복될 때 진행 방향을 지정
+.add_option_select_conatiner {
+  position: absolute;
+  left: 0px;
+  top: 476px;
+  z-index: 150;
+  width: 1080px;
+  height: 1800px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+.none_class{
+  display: none;
+}
 
-      normal: from -> to (기본값)
-      reverse: to -> from
-      alternate: 홀(normal) 짝(reverse)
-      alternate-reverse: 홀(reverse) 짝(normal)
-  */
-  
+.alert_contents {
+  width: 900px;
+  height: 400px;
+  margin-top: -500px;
+  flex-shrink: 0;
+  background: #fff;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  padding: 40px;
+}
+.add_option_title_alert{
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  color: var(--Main-Color, #334d81);
+  font-family: NanumSquare_ac;
+  font-size: 60px;
+  font-weight: 800;
+  flex-direction: column;
+  gap: 20px;
+}
 
-  /*
-      애니메이션이 실행 상태가 아닐 때 (대기 or 종료) 요소의 스타일 지정
+.warning_icon{
+  font-size: 100px;
+  font-weight: 800;
+}
 
-      none:       대기 -> 시작 프레임(from)에 설정한 스타일을 적용하지 않고 대기한다.
-                  종료 -> 애니메이션 실행 전 상태로 애니메이션 요소의 프로퍼티값을 되돌리고 종료한다.
-
-      forwards:   대기 -> 시작 프레임(from)에 설정한 스타일을 적용하지 않고 대기한다.
-                  종료 -> 종료 프레임(to)에 설정한 스타일을 적용하고 종료한다.
-
-      backwrads:  대기 -> 시작 프레임(from)에 설정한 스타일을 적용하고 대기한다.
-                  종료 -> 애니메이션 실행 전 상태로 애니메이션 요소의 프로퍼티값을 되돌리고 종료한다.
-
-      both :      대기 -> 시작 프레임(from)에 설정한 스타일을 적용하고 대기한다.
-                  종료 -> 종료 프레임(to)에 설정한 스타일을 적용하고 종료한다.
-  */
-
-  /* running(기본값) || paused */
+.alert_text{
+  color: var(--Main-Color, #474747);
+  font-family: NanumSquare_ac;
+  font-size: 33px;
+  font-style: normal;
+  font-weight: 800;
+  margin-top: 20px;
+}

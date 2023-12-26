@@ -212,7 +212,7 @@
           <text class="order_row_text" style="width: 134px">삭제</text>
         </div>
         <div>
-          <div class="swiper-container gallery-top">
+          <div class="swiper-container">
             <div class="swiper-wrapper"></div>
             <div class="swiper-pagination"></div>
 
@@ -269,12 +269,16 @@
                 style="border-bottom: solid 1px #eaeaea; height: 75px"
               >
                 <div class="count_text">총 수량</div>
-                <div class="user_text">2<span class="unit_text"> 개</span></div>
+                <div class="user_text">
+                  <span id="cart_count"></span
+                  ><span class="unit_text"> 개</span>
+                </div>
               </div>
               <div class="center_cantainer" style="height: 75px">
                 <div class="count_text">총 금액</div>
                 <div class="user_text">
-                  6,000<span class="unit_text"> 원</span>
+                  <span id="cart_price"></span
+                  ><span class="unit_text"> 원</span>
                 </div>
               </div>
             </div>
@@ -297,6 +301,34 @@
           </span>
           이전으로
         </button>
+      </div>
+    </div>
+    <div id="alert" class="add_option_select_conatiner center_cantainer none_class">
+      <div class="alert_contents">
+        <div class="add_option_title_alert center_cantainer">
+          <div
+            class="center_cantainer"
+            style="width: 100%;"
+          >
+            <span class="material-symbols-outlined warning_icon">
+              warning
+            </span>
+          </div>
+          주문 취소를 하시겠습니까?
+        </div>
+        <div class="alert_text" style="margin-bottom: 70px;">
+          주문 취소 시, 메뉴 선택 페이지로 다시 넘어가게 됩니다.
+        </div>
+        <div class="center_cantainer" style="gap: 45px">
+          <button class="able_option_btn abled_menut_btn">
+            <span class="material-icons"> check </span>
+            확인
+          </button>
+
+          <button class="cancel_option_btn">
+            <span class="material-icons"> close </span>취소
+          </button>
+        </div>
       </div>
     </div>
   </body>

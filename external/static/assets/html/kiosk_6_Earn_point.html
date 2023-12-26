@@ -198,44 +198,24 @@
       <div class="task_title center_cantainer">포인트 적립</div>
 
       <!-- 6.1 포인트 적립 유무 -->
-      <div class="select_point_container" style="display: none">
+      <div class="select_point_container">
         <text class="task_sub_title">포인트 적립을 하시겠습니까?</text>
         <div class="select_container center_cantainer">
           <div class="center_cantainer" style="gap: 69px">
-            <button class="point_select_btn center_cantainer">
+            <button id="earn_point_btn" class="point_select_btn center_cantainer">
               <img src="../svg/earn_point_yes_icon.svg" />
               예
             </button>
-            <button class="point_select_btn center_cantainer">
+            <button id="no_earn_point_btn" class="point_select_btn center_cantainer">
               <img src="../svg/earn_point_no_icon.svg" />
               아니오
             </button>
           </div>
-          <!-- <div class="center_cantainer" style="gap: 26px">
-            <button class="ok_button center_cantainer">
-              <span
-                class="material-icons"
-                style="font-size: 50px; font-weight: 700"
-              >
-                check
-              </span>
-              확인
-            </button>
-            <button class="no_button center_cantainer">
-              <span
-                class="material-icons"
-                style="font-size: 50px; font-weight: 700"
-              >
-                close
-              </span>
-              취소
-            </button>
-          </div> -->
         </div>
       </div>
 
       <!-- 6.2 포인트 적립 -->
-      <div class="input_phone_number_container">
+      <div class="input_phone_number_container none_class">
         <text class="task_sub_title">휴대폰 번호를 입력해주세요.</text>
         <div class="select_container center_cantainer">
           <div class="center_cantainer" style="flex-direction: column">
@@ -330,7 +310,7 @@
 
       <!-- footer -->
       <div class="footer">
-        <button class="back_button center_cantainer">
+        <button id="back_button" class="back_button center_cantainer">
           <span class="material-symbols-outlined" style="font-size: 33px">
             undo
           </span>
@@ -338,44 +318,37 @@
         </button>
       </div>
     </div>
+    <div id="alert" class="add_option_select_conatiner center_cantainer none_class">
+      <div class="alert_contents">
+        <div class="add_option_title_alert center_cantainer">
+          <div
+            class="center_cantainer"
+            style="width: 100%;"
+          >
+            <span class="material-symbols-outlined warning_icon">
+              warning
+            </span>
+          </div>
+          전화번호 11자리를 입력해주세요.
+        </div>
+        <div class="alert_text" style="margin-bottom: 70px;">
+          전화번호를 입력하신 후 확인 버튼을 눌러주세요.
+        </div>
+        <div class="center_cantainer" style="gap: 45px">
+          <button id = "alert_check" class="able_option_btn abled_menut_btn">
+            <span class="material-icons"> check </span>
+            확인
+          </button>
+
+        </div>
+      </div>
   </body>
-  <script>
-    document.getElementById('homeBtn').addEventListener('click', function () {
-      window.location.href = '../html/kiosk_1_Touch_screen.html';
-    });
-
-    var inputElement = document.getElementById('txtPhone');
-
-    inputElement.addEventListener('input', function () {
-      autoHyphen2();
-    });
-
-    function appendToInput(number) {
-      var inputValue = inputElement.value;
-
-      if (inputValue.length < 13) {
-        inputElement.value += number;
-        console.log(inputElement.value.length);
-        autoHyphen2();
-      }
-    }
-
-    function backspace() {
-      var inputValue = inputElement.value.replace(/\D/g, '');
-      inputElement.value = inputValue.slice(0, -1); // Remove the last character
-      autoHyphen2();
-    }
-
-    function clearInput() {
-      inputElement.value = ''; // Clear all content
-      autoHyphen2();
-    }
-
-    const autoHyphen2 = () => {
-      inputElement.value = inputElement.value
-        .replace(/[^0-9]/g, '')
-        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
-        .replace(/(\-{1,2})$/g, '');
-    };
-  </script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="../js/kiosk/kiosk_gnb.js"></script>
+  <script src="../js/kiosk/kiosk6.js"></script>
 </html>

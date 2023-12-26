@@ -16,6 +16,11 @@
   gap: 71px;
 }
 
+.point_select_btn:active {
+  background: var(--white, #334d81);
+  color: #fff;
+}
+
 .select_point_container {
   display: flex;
   width: 1080px;
@@ -36,7 +41,6 @@
   align-items: center;
   gap: 47px;
   flex-shrink: 0;
-  border: solid 1px red;
 }
 
 #txtPhone {
@@ -94,4 +98,99 @@
   /* border: 8px solid #334d81; */
   color: var(--Black, #fff);
   background: #334d81;
+}
+
+.add_option_select_conatiner {
+  position: absolute;
+  left: 0px;
+  top: 458px;
+  z-index: 150;
+  width: 1080px;
+  height: 1800px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+.none_class {
+  display: none;
+}
+
+.none_class {
+  display: none;
+}
+
+.alert_contents {
+  width: 900px;
+  height: 400px;
+  margin-top: -500px;
+  flex-shrink: 0;
+  background: #fff;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  padding: 40px;
+}
+.add_option_title_alert {
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  color: var(--Main-Color, #334d81);
+  font-family: NanumSquare_ac;
+  font-size: 60px;
+  font-weight: 800;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.warning_icon {
+  font-size: 100px;
+  font-weight: 800;
+}
+
+.alert_text {
+  color: var(--Main-Color, #474747);
+  font-family: NanumSquare_ac;
+  font-size: 33px;
+  font-style: normal;
+  font-weight: 800;
+  margin-top: 20px;
+}
+
+.able_option_btn {
+  display: flex;
+  width: 300px;
+  height: 74px;
+  border: none;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  border-radius: 12px;
+  background: var(--Main-Color, #334d81);
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.cancel_option_btn {
+  display: flex;
+  width: 180px;
+  height: 74px;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 13px;
+  border-radius: 12px;
+  background: #909090;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
