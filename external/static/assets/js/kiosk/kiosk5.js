@@ -1,6 +1,6 @@
 var cart_item = JSON.parse(localStorage.getItem('Cart'));
 var place_value = JSON.parse(localStorage.getItem('Option'));
-var menu = [];
+var menu = ['1', '2', '3'];
 let total_price = 0;
 let total_count = 0;
 $(window).on('load', function () {
@@ -11,14 +11,16 @@ $(window).on('load', function () {
     );
   }
 
-  if (cart_item) {
-    for (var i = 1; i <= Math.ceil(cart_item.length / 3); i++) {
+  if (Math.ceil(cart_item.length / 3) > 3) {
+    for (var i = 4; i <= Math.ceil(cart_item.length / 3); i++) {
+      console.log(i);
       menu.push(i);
     }
-    console.log(menu);
-    set_orderlist(cart_item);
-    swiper.update();
   }
+
+  console.log(menu);
+  set_orderlist(cart_item);
+  swiper.update();
 });
 
 var change_count_price = (func, element, index, cartData) => {

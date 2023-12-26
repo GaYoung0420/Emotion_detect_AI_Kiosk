@@ -43,21 +43,15 @@
   flex-shrink: 0;
   border-radius: 15px;
   background: var(--Main-Color, #334d81);
-  border: none;
+  border: solid 1px #334D81;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
   color: #fff;
-  text-align: center;
-  font-family: NanumSquare_ac;
-  font-size: 50px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
 }
 
 .payment_card_btn {
   width: 320px;
+  margin-top: 30px;
   /* height: 210.626px; */
-  margin-left: -7px;
 }
 .payment_choose_button {
   display: flex;
@@ -71,12 +65,6 @@
   border: 2px solid #e1e1e1;
   background: #fff;
   color: var(--Black, #000);
-  text-align: center;
-  font-family: NanumSquare_ac;
-  font-size: 35px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
 }
 
@@ -93,4 +81,53 @@
   /* border: solid 1px red; */
   bottom: 0;
   position: relative;
+}
+
+.option_btn input[type='radio'] {
+  display: none;
+}
+
+.option_btn label {
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.option_btn input[type='radio']:checked + label {
+  background: var(--white, #334d81);
+  border: 1px solid #334d81;
+  color: #fff;
+  fill: #fff;
+}
+
+.option_btn input[type='radio'] + label {
+  border: 1px solid #e1e1e1;
+  background: #fff;
+  color: var(--Black, #000);
+}
+
+.option_text {
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.option_text1 {
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.svg_filter {
+  filter: invert(29%) sepia(7%) saturate(4483%) hue-rotate(182deg)
+    brightness(90%) contrast(88%);
 }

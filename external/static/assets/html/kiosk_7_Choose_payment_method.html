@@ -199,7 +199,9 @@
 
       <!-- 6.1 포인트 적립 유무 -->
       <div class="select__container">
-        <text class="task_sub_title">결제 수단을 선택해주세요.</text>
+        <text class="task_sub_title" style="margin-top: -100px"
+          >결제 수단을 선택해주세요.</text
+        >
         <div class="payment_container center_cantainer">
           <div class="price_container center_cantainer">
             <text class="price_text">총 결제 금액</text>
@@ -219,52 +221,116 @@
                 stroke="white"
               />
             </svg>
-            <text class="price_result_text"><span id = "result_price"></span>원</text>
+            <text class="price_result_text"
+              ><span id="result_price"></span>원</text
+            >
           </div>
           <div class="select_payment_container center_cantainer">
-            <button class="card_button">
+            <div class="option_btn center_cantainer">
+              <input type="radio" name="payment" id="card" value="card" />
+              <label for="card" class="card_button">
+                <div class="svg_container">
+                  <img
+                    src="../svg/payment_card_btn.svg"
+                    class="payment_card_btn"
+                  />
+                </div>
+                <div class="option_text1" style="margin-top: 260px">
+                  신용 카드
+                </div>
+              </label>
+            </div>
+            <!-- <button class="card_button">
               <img src="../svg/payment_card_btn.svg" class="payment_card_btn" />
               신용 카드
-            </button>
+            </button> -->
             <div class="payment_choose_button_container center_cantainer">
-              <button class="payment_choose_button">
-                <div class="svg_container">
-                  <img src="../svg/mobile_cupon.svg" />
-                </div>
-                모바일 쿠폰
-              </button>
-              <button class="payment_choose_button">
-                <div class="svg_container">
-                  <img
-                    src="../svg/gift_card.svg"
-                    style="position: absolute; bottom: 0px; right: 50px"
-                  />
-                </div>
-                기프트 카드
-              </button>
+              <div class="option_btn center_cantainer">
+                <input
+                  type="radio"
+                  name="payment"
+                  id="mobile_cupon"
+                  value="mobile_cupon"
+                />
+                <label
+                  for="mobile_cupon"
+                  class="payment_choose_button center_cantainer"
+                >
+                  <div class="svg_container">
+                    <img class="svg_filter" src="../svg/mobile_cupon.svg" />
+                  </div>
+                  <div class="option_text">모바일 쿠폰</div>
+                </label>
+              </div>
+              <div class="option_btn center_cantainer">
+                <input
+                  type="radio"
+                  name="payment"
+                  id="gift_card"
+                  value="gift_card"
+                />
+                <label
+                  for="gift_card"
+                  class="payment_choose_button center_cantainer"
+                >
+                  <div class="svg_container">
+                    <img
+                      class="svg_filter"
+                      src="../svg/gift_card.svg"
+                      style="position: absolute; bottom: 0px; right: 50px"
+                    />
+                  </div>
+                  <div class="option_text">기프트 카드</div>
+                </label>
+              </div>
             </div>
             <div class="payment_choose_button_container center_cantainer">
-              <button class="payment_choose_button">
-                <div class="svg_container" >
-                  <div style="position: absolute; bottom: 0px; right: 16px; width: 170px;;" >
-                    <img src="../svg/naver_pay.svg" />
-                    <img src="../svg/kakao_pay.svg" />
+              <div class="option_btn center_cantainer">
+                <input
+                  type="radio"
+                  name="payment"
+                  id="mobile_pay"
+                  value="mobile_pay"
+                />
+                <label
+                  for="mobile_pay"
+                  class="payment_choose_button center_cantainer"
+                >
+                  <div class="svg_container">
+                    <div
+                      style="
+                        position: absolute;
+                        bottom: 0px;
+                        right: 16px;
+                        width: 170px;
+                      "
+                    >
+                      <img src="../svg/naver_pay.svg" class="svg_filter" />
+                      <img src="../svg/kakao_pay.svg" class="svg_filter" />
+                    </div>
                   </div>
-                </div>
-                간편 결제
-              </button>
-              <button class="payment_choose_button">
-                <div class="svg_container">
-                  <img
-                    src="../svg/cash.svg"
-                    style="position: absolute; bottom: 0px; right: 50px"
-                  />
-                </div>
-                현금 결제
-              </button>
+                  <div class="option_text">간편 결제</div>
+                </label>
+              </div>
+              <div class="option_btn center_cantainer">
+                <input type="radio" name="payment" id="cash" value="cash" />
+                <label
+                  for="cash"
+                  class="payment_choose_button center_cantainer"
+                >
+                  <div class="svg_container">
+                    <img
+                      class="svg_filter"
+                      src="../svg/cash.svg"
+                      style="position: absolute; bottom: 0px; right: 50px"
+                    />
+                  </div>
+                  <div class="option_text">현금 결제</div>
+                </label>
+              </div>
             </div>
           </div>
-          <div class="center_cantainer" style="gap: 40px;">
+          <div class="center_cantainer" style="gap: 40px">
             <button class="ok_button center_cantainer">
               <span
                 class="material-icons"
