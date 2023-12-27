@@ -9,7 +9,7 @@ $(window).on('load', function () {
   }
   $('#result_price').text(result_price.toLocaleString('ko-KR'));
 });
-
+// 334D81
 var change_svg_filter = (change, class_name) => {
   if (change) {
     $(class_name).css(
@@ -27,30 +27,35 @@ var change_svg_filter = (change, class_name) => {
 var change_svg_ = (select_value, first, second, third, fourth) => {
   switch (select_value) {
     case first:
+      $('.payment_card_btn').prop('src','../svg/payment_card_btn_base.svg');
       change_svg_filter(true, '.option_svg_' + first);
       change_svg_filter(false, '.option_svg_' + second);
       change_svg_filter(false, '.option_svg_' + third);
       change_svg_filter(false, '.option_svg_' + fourth);
       break;
     case second:
+      $('.payment_card_btn').prop('src','../svg/payment_card_btn_base.svg');
       change_svg_filter(false, '.option_svg_' + first);
       change_svg_filter(true, '.option_svg_' + second);
       change_svg_filter(false, '.option_svg_' + third);
       change_svg_filter(false, '.option_svg_' + fourth);
       break;
     case third:
+      $('.payment_card_btn').prop('src','../svg/payment_card_btn_base.svg');
       change_svg_filter(false, '.option_svg_' + first);
       change_svg_filter(false, '.option_svg_' + second);
       change_svg_filter(true, '.option_svg_' + third);
       change_svg_filter(false, '.option_svg_' + fourth);
       break;
     case fourth:
+      $('.payment_card_btn').prop('src','../svg/payment_card_btn_base.svg');
       change_svg_filter(false, '.option_svg_' + first);
       change_svg_filter(false, '.option_svg_' + second);
       change_svg_filter(false, '.option_svg_' + third);
       change_svg_filter(true, '.option_svg_' + fourth);
       break;
     default:
+      $('.payment_card_btn').prop('src','../svg/payment_card_btn.svg');
       change_svg_filter(false, '.option_svg_' + first);
       change_svg_filter(false, '.option_svg_' + second);
       change_svg_filter(false, '.option_svg_' + third);

@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <styletag include-html="'../html/component/styletag.html"></styletag>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -24,6 +31,8 @@
     />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r117/examples/js/loaders/FBXLoader.js"></script>
+    <script type="module" src="../js/three.module.min.js"></script>
 
     <link href="../css/kiosk.css" rel="stylesheet" />
     <link href="../css/kiosk2.css" rel="stylesheet" />
@@ -39,7 +48,7 @@
         </button>
         <img src="../svg/logo.svg" alt="logo image" />
 
-        <input type="checkbox" id="toggle" hidden />
+        <input type="checkbox" id="toggle" name="chatbot" hidden />
         <label for="toggle" class="toggleSwitch">
           <!-- <span class="toggleButton"></span> -->
           <img
@@ -198,15 +207,26 @@
         </div>
       </div>
       <!-- baner -->
-      <div
-        style="
-          width: 1080px;
-          height: 233px;
-          background:
-            url('../img/baner.png'),
-            lightgray 50% / cover no-repeat;
-        "
-      ></div>
+
+      <div style="width: 1080px; height: 233px">
+        <div style="position: relative">
+          <div id="assistant_container">
+            <div class="assistant_subcontainer">
+              <div class="balloon_03">
+              </div>
+              <canvas id="canvas"></canvas>
+            </div>
+          </div>
+          <div
+            id="baner"
+            style="
+              background:
+                url('../img/baner.png'),
+                lightgray 50% / cover no-repeat;
+            "
+          ></div>
+        </div>
+      </div>
       <!-- Category -->
       <div class="categoryContainer">
         <div class="categoryRow" style="margin-bottom: 13px">
@@ -262,11 +282,10 @@
       <!-- Menu -->
       <!-- Slider main container -->
       <div class="swiper-container gallery-top">
-        <div class="swiper-wrapper">
-        </div>
+        <div class="swiper-wrapper"></div>
         <div class="swiper-pagination"></div>
 
-        <div style="position: relative; bottom: -260px; height:105px;">
+        <div style="position: relative; bottom: -260px; height: 105px">
           <button class="swiper-button-prev MenuBtn">
             <span class="material-icons"> arrow_back_ios </span>
             이전
@@ -293,7 +312,7 @@
         </div>
         <hr style="width: 1002px; border: solid #d8dad9 1.3px" />
         <div class="cart_select_container">
-          <button id = 'cart_left_btn' class="cart_LR_button disabled_menut_btn">
+          <button id="cart_left_btn" class="cart_LR_button disabled_menut_btn">
             <div class="cart_div">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -307,50 +326,9 @@
             </div>
             <text>이전</text>
           </button>
-          <!-- cart item list -->
-          <!-- 주문 내역이 없음 -->
-          <!--  -->
-          <div class="cart_list_container">
-            <!-- <div class="menu_select_subcontainer">
-              <text style="font-size: 30px; color: #8d909f; font-weight: 700"
-                >주문내역이 없습니다. 메뉴를 선택해주세요</text>
-            </div> -->
-            <!-- <div class="cart_list_background">
-              <div class="center_cantainer" style="width: 100%; gap: 190px">
-                <div class="cart_list_number center_cantainer">1</div>
-                <button class="cart_delete_icon center_cantainer">
-                  <img src="../svg/cart_delete.svg" />
-                  삭제
-                </button>
-              </div>
-              <div class="cart_info_sub_conatiner">
-                <img
-                  class="cart_menu_img"
-                  src="../img/menu/digital_caramel_latte.png"
-                />
-                <div class="cart_container_info_sub_conatiner">
-                  <div class="cart_menu_name">카라멜 카페라떼</div>
-                  <div class="cart_info_text">
-                    옵션
-                    <span> : 차가움, 보통, 에스프레소</span>
-                  </div>
-                </div>
-              </div>
-              <div class="center_cantainer" style="width: 100%; gap: 60px">
-                <div class="center_cantainer" style="gap: 10px">
-                  <img src="../svg/add_to_cart_icon.svg" />
-                  <text class="count_info_text">1</text>
-                  <img src="../svg/delete_to_cart_icon.svg" />
-                </div>
-                <div class="price_text">
-                  6,000 <span class="price_won">원</span>
-                </div>
-              </div>
-            </div> -->
-            
-          </div>
+          <div class="cart_list_container"></div>
 
-          <button id = 'cart_right_btn' class="cart_LR_button disabled_menut_btn">
+          <button id="cart_right_btn" class="cart_LR_button disabled_menut_btn">
             <div class="cart_div">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -401,20 +379,20 @@
         </button>
       </div>
     </div>
-    <div id="alert" class="add_option_select_conatiner center_cantainer none_class">
+    <div
+      id="alert"
+      class="add_option_select_conatiner center_cantainer none_class"
+    >
       <div class="alert_contents">
         <div class="add_option_title_alert center_cantainer">
-          <div
-            class="center_cantainer"
-            style="width: 100%;"
-          >
+          <div class="center_cantainer" style="width: 100%">
             <span class="material-symbols-outlined warning_icon">
               shopping_cart
             </span>
           </div>
           원하시는 메뉴를 선택해주세요.
         </div>
-        <div class="alert_text" style="margin-bottom: 70px;">
+        <div class="alert_text" style="margin-bottom: 70px">
           현재 주문 내역이 없습니다. 메뉴를 담은 후 주문하기 버튼을 누르세요.
         </div>
         <button id="alert_check" class="able_option_btn">
@@ -424,14 +402,10 @@
       </div>
     </div>
   </body>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  ></script>
+
   <script src="../json/menu.json" type="text/javascript"></script>
   <script src="../js/kiosk/component/kiosk2_component.js"></script>
   <script src="../js/kiosk/kiosk2.js"></script>
+  <script type="module" src="../js/assistant/assistant.js"></script>
   <script src="../js/kiosk/kiosk_gnb.js"></script>
 </html>

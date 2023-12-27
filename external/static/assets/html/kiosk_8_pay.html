@@ -120,7 +120,7 @@
           </svg>
 
           <hr class="check_bar" />
-         
+
           <svg style="width: 56; height: 56">
             <circle
               cx="28"
@@ -199,8 +199,10 @@
       <div class="task_title center_cantainer">결제 하기</div>
 
       <!-- 8.1 카드 결제 가이드 -->
-      <div id="card_pay" class="select__container" >
-        <text class="task_sub_title" style="width: 620px; margin-top: -200px"
+      <div id="card_pay" class="select__container">
+        <text
+          class="task_sub_title"
+          style="width: 620px; margin-top: -200px; line-height: 140%"
           >우측 하단의 카드 삽입기에 카드를 끝까지 삽입해주세요.</text
         >
         <div class="img_container center_cantainer">
@@ -218,30 +220,40 @@
       </div>
 
       <!-- 8.2 카드 결제 -->
-      <div id="card_pay_ing" class="select__container">
-        <text class="task_sub_title" style="width: 620px; margin-top: -200px"
-          >결제가 진행 중 입니다.</text
-        >
-        <div class="img_container center_cantainer">
-            <video class="pay_video" src="../video/pay.mp4" autoplay loop="true">
-            </video>
+      <div id="card_pay_ing" class="none_class">
+        <div  class="select__container ">
+          <text class="task_sub_title" style="width: 620px; margin-top: -180px"
+            >결제가 진행 중 입니다.</text
+          >
+          <div class="img_container center_cantainer">
+            <video
+              class="pay_video"
+              src="../video/pay.mp4"
+              autoplay
+              loop="true"
+            ></video>
+          </div>
         </div>
       </div>
+      
 
       <!-- footer -->
       <div class="footer">
-        <!-- <button class="back_button center_cantainer">
+        <button id="back_button" class="back_button center_cantainer">
           <span class="material-symbols-outlined" style="font-size: 33px">
             undo
           </span>
           이전으로
-        </button> -->
+        </button>
       </div>
     </div>
   </body>
-  <script>
-    document.getElementById('homeBtn').addEventListener('click', function () {
-      window.location.href = '../html/kiosk_1_Touch_screen.html';
-    });
-  </script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="../js/kiosk/kiosk_gnb.js"></script>
+  <script src="../js/kiosk/kiosk8.js"></script>
 </html>

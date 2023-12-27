@@ -28,7 +28,7 @@
     <div class="container">
       <!-- Header -->
       <div class="header">
-        <button id="homeBtn" type="button">
+        <button id="homeBtn" type="button" style="visibility: hidden">
           <span class="material-icons"> home </span>
           처음으로
         </button>
@@ -115,7 +115,8 @@
               text-anchor="middle"
               fill="white"
               style="font-weight: 1000"
-            >3
+            >
+              3
             </text>
           </svg>
 
@@ -197,90 +198,86 @@
       <!-- task title -->
       <div class="task_title center_cantainer">결제 완료</div>
 
-      <div class="select__container" style="display: none;" >
-        <text class="task_sub_title" style="margin-bottom: -80px"
-          >결제가 완료 되었습니다.</text
-        >
-        <text class="task_sub_title" style="margin-bottom: 30px"
-          >영수증의 주문 번호를 확인해주세요.</text
-        >
-        <div class="select_container center_cantainer" style="height: 655px;">
-          <div class="center_cantainer" style="flex-direction: column;">
-            <text class="number_text">주문 번호</text>
-            <text class="number" style="color: #334d81;">374 <span style="color: black;">번</span></text>
-            <img src="../svg/receipts.svg" />
+      <div id="complete_container">
+        <div class="select__container">
+          <text class="task_sub_title" style="margin-top: -150px"
+            ><div style="margin-bottom: 10px;">결제가 완료 되었습니다.</div>
+            <div style="margin-bottom: 100px;">영수증의 주문 번호를 확인해주세요.</div></text
+          >
 
-          </div>
-        </div>
-      </div>
-
-      <div class="select__container" >
-   
-        <text class="task_sub_title" style="margin-bottom: 30px"
-          >카드와 영수증을 회수해주세요.</text
-        >
-        <div class="img_container center_cantainer">
-          <div>
-            <img src="../svg/kiosk_receipt.svg" />
-            <div class="spinner-wrap" style="left: -100px;">
-              <div class="spinner-item"></div>
-              <div class="spinner-item spinner-item--2"></div>
-              <div class="spinner-item spinner-item--3"></div>
+          <div class="select_container center_cantainer" style="height: 655px">
+            <div class="center_cantainer" style="flex-direction: column">
+              <text class="number_text">주문 번호</text>
+              <text class="number" style="color: #334d81"
+                >374 <span style="color: black">번</span></text
+              >
+              <div class="img_container center_cantainer">
+                <video
+                  class="receipt_ing"
+                  src="../video/receipt_ing.mp4"
+                  style="border: none"
+                  autoplay
+                  loop="true"
+                ></video>
+              </div>
             </div>
           </div>
-
         </div>
       </div>
 
+      <div id="card_container" class="none_class">
+        <div class="select__container">
+          <text class="task_sub_title" style="margin-top: -100px"
+            >카드와 영수증을 회수해주세요.</text
+          >
+          <div class="img_container center_cantainer">
+            <div style="margin-top: -50px">
+              <img src="../svg/kiosk_receipt.svg" />
+              <div class="spinner-wrap" style="left: -100px">
+                <div class="spinner-item"></div>
+                <div class="spinner-item spinner-item--2"></div>
+                <div class="spinner-item spinner-item--3"></div>
+              </div>
+              <img
+                src="../svg/number.svg"
+                style="
+                  position: relative;
+                  top: -600px;
+                  left: -85px;
+                  z-index: 400;
+                  width: 400px;
+                "
+              />
+            </div>
+          </div>
+          <button id="homeBtn" class="goto_homeBtn" type="button" style="margin-top: -250px">
+            <span class="material-icons"> home </span>
+            처음으로
+          </button>
+        </div>
+      </div>
 
       <!-- footer -->
       <div class="footer">
-        <!-- <button class="back_button center_cantainer">
+        <button
+          id="back_button"
+          class="back_button center_cantainer"
+          style="visibility: hidden"
+        >
           <span class="material-symbols-outlined" style="font-size: 33px">
             undo
           </span>
           이전으로
-        </button> -->
+        </button>
       </div>
     </div>
   </body>
-  <script>
-    document.getElementById('homeBtn').addEventListener('click', function () {
-      window.location.href = '../html/kiosk_1_Touch_screen.html';
-    });
-
-    var inputElement = document.getElementById('txtPhone');
-
-    inputElement.addEventListener('input', function () {
-      autoHyphen2();
-    });
-
-    function appendToInput(number) {
-      var inputValue = inputElement.value;
-
-      if (inputValue.length < 13) {
-        inputElement.value += number;
-        console.log(inputElement.value.length);
-        autoHyphen2();
-      }
-    }
-
-    function backspace() {
-      var inputValue = inputElement.value.replace(/\D/g, '');
-      inputElement.value = inputValue.slice(0, -1); // Remove the last character
-      autoHyphen2();
-    }
-
-    function clearInput() {
-      inputElement.value = ''; // Clear all content
-      autoHyphen2();
-    }
-
-    const autoHyphen2 = () => {
-      inputElement.value = inputElement.value
-        .replace(/[^0-9]/g, '')
-        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
-        .replace(/(\-{1,2})$/g, '');
-    };
-  </script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="../js/kiosk/kiosk_gnb.js"></script>
+  <script src="../js/kiosk/kiosk10.js"></script>
 </html>

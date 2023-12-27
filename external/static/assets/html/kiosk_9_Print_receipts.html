@@ -114,7 +114,8 @@
               text-anchor="middle"
               fill="white"
               style="font-weight: 1000"
-            >3
+            >
+              3
             </text>
           </svg>
 
@@ -196,28 +197,27 @@
       <!-- task title -->
       <div class="task_title center_cantainer">영수증 출력</div>
 
-      <div class="select__container"  >
-        <text class="task_sub_title" style="margin-bottom: 30px;">영수증을 출력 하시겠습니까?</text>
+      <div class="select__container">
+        <text class="task_sub_title" style="margin-bottom: 30px"
+          >영수증을 출력 하시겠습니까?</text
+        >
         <div class="select_container center_cantainer">
           <div class="center_cantainer" style="gap: 69px">
-            <button class="point_select_btn center_cantainer" style="gap: 40px;">
-              <img src="../svg/print_yes.svg" style="height: 230px;" />
+            <button id = "recepit_yes" class="point_select_btn center_cantainer" style="gap: 40px">
+              <img src="../svg/print_yes.svg" style="height: 230px" />
               예
             </button>
-            <button class="point_select_btn center_cantainer" style="gap: 40px;">
-              <img src="../svg/print_no.svg" style="height: 230px;" />
+            <button id = "recepit_no" class="point_select_btn center_cantainer" style="gap: 40px">
+              <img src="../svg/print_no.svg" style="height: 230px" />
               아니오
             </button>
           </div>
-          
         </div>
       </div>
 
-      
-
       <!-- footer -->
       <div class="footer">
-        <button class="back_button center_cantainer">
+        <button id="back_button" class="back_button center_cantainer">
           <span class="material-symbols-outlined" style="font-size: 33px">
             undo
           </span>
@@ -226,43 +226,12 @@
       </div>
     </div>
   </body>
-  <script>
-    document.getElementById('homeBtn').addEventListener('click', function () {
-      window.location.href = '../html/kiosk_1_Touch_screen.html';
-    });
-
-    var inputElement = document.getElementById('txtPhone');
-
-    inputElement.addEventListener('input', function () {
-      autoHyphen2();
-    });
-
-    function appendToInput(number) {
-      var inputValue = inputElement.value;
-
-      if (inputValue.length < 13) {
-        inputElement.value += number;
-        console.log(inputElement.value.length);
-        autoHyphen2();
-      }
-    }
-
-    function backspace() {
-      var inputValue = inputElement.value.replace(/\D/g, '');
-      inputElement.value = inputValue.slice(0, -1); // Remove the last character
-      autoHyphen2();
-    }
-
-    function clearInput() {
-      inputElement.value = ''; // Clear all content
-      autoHyphen2();
-    }
-
-    const autoHyphen2 = () => {
-      inputElement.value = inputElement.value
-        .replace(/[^0-9]/g, '')
-        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
-        .replace(/(\-{1,2})$/g, '');
-    };
-  </script>
-</html>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="../js/kiosk/kiosk_gnb.js"></script>
+  <script src="../js/kiosk/kiosk9.js"></script> 
+  </html>

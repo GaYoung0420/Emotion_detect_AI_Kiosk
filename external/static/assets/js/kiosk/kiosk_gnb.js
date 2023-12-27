@@ -1,4 +1,4 @@
-document.getElementById('homeBtn').addEventListener('click', function () {
+$('#homeBtn').click(() => {
   window.location.href = '../html/kiosk_1_Touch_screen.html';
 });
 
