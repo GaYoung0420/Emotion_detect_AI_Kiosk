@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>my first three.js app</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
+      import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js';
+      import { FBXLoader } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/loaders/FBXLoader.js';
+
+      //scene
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000,
+      );
+      scene.add(new THREE.AxesHelper(5));
+      //   scene.background = new THREE.Color('#fafafa');
+      const light = new THREE.PointLight(0xffffff, 50);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+      const fbxLoader = new FBXLoader();
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({ color: 0x00ff80 });
+      const cube = new THREE.Mesh(geometry, material);
+      const ambientLight = new THREE.AmbientLight();
+      scene.add(ambientLight);
+      //   scene.add(cube);
+
+      camera.position.z = 5;
+      light.position.set(0.8, 1.4, 1.0);
+      scene.add(light);
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.minDistance = 1;
+      controls.maxDistance = 500;
+
+      fbxLoader.load('../fbx/material/CuteRobot.fbx', function (object) {
+        // Traverse through the object and handle materials
+        object.scale.set(0.01, 0.01, 0.01);
+        console.log(object);
+        object.traverse(function (child) {
+          if (child.isMesh) {
+            child.material.map = child.material.map || new THREE.Texture(); // Create a default texture if undefined
+            child.material.needsUpdate = true;
+          }
+        });
+
+        scene.add(object);
+      });
+      const animate = function () {
+        requestAnimationFrame(animate);
+        // cube.rotation.x += 0.01;
+        // cube.rotation.y += 0.01;
+        controls.update();
+        renderer.render(scene, camera);
+      };
+
+      animate();
+    </script>
+  </body>
+</html>
