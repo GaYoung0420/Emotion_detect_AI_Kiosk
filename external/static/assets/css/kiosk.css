@@ -332,7 +332,7 @@ body {
 }
 
 #canvas {
-  width: 233px;
+  width: 300px;
   height: 233px;
 }
 
@@ -347,7 +347,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  background: #808080;
 }
 
 .balloon_03 {
@@ -361,11 +361,11 @@ body {
 .balloon_03:after {
   border-top: 20px solid #ffffff;
   border-left: 0px solid transparent;
-  border-right: 20px solid transparent;
+  border-right: 30px solid transparent;
   border-bottom: 0px solid transparent;
   content: '';
   position: absolute;
-  top: 10px;
-  right: -15px;
+  top: 130px;
+  right: -25px;
   filter: drop-shadow(0px 2px 26px rgba(0, 0, 0, 0.25));
 }

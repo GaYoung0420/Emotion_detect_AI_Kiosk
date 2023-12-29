@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>my first three.js app</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
+      import { FBXLoader } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/loaders/FBXLoader.js';
+      import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js';
+      import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js';
+      import Stats from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/libs/stats.module.js';
+
+      //scene
+      const stats = new Stats();
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000,
+      );
+      scene.add(new THREE.AxesHelper(5));
+      scene.background = new THREE.Color('gray');
+      const light = new THREE.PointLight(0xffffff, 100);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+      const fbxLoader = new FBXLoader();
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({ color: 0x00ff80 });
+      const cube = new THREE.Mesh(geometry, material);
+      const ambientLight = new THREE.AmbientLight();
+      const textureLoader = new THREE.TextureLoader();
+      scene.add(ambientLight);
+      //   scene.add(cube);
+
+      camera.position.z = 5;
+      ambientLight.position.set(0.8, 1.4, 1.0);
+      // scene.add(light);
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.minDistance = 1;
+      controls.maxDistance = 500;
+
+      let modelReady = false;
+      const animationActions = [];
+      let mixer;
+      let activeAction;
+      let lastAction;
+      var animationAction;
+
+      const waving = await fbxLoader.loadAsync('../fbx/material/Waving(4).fbx');
+
+      // ADD AN ANIMATION MIXER TO LOAD THE FILE'S ANIMATION
+      var waving_mixer = new THREE.AnimationMixer(waving);
+      const waving_action = waving_mixer.clipAction(waving.animations[0]);
+      waving_action.play();
+
+      textureLoader.load('../fbx/material/CuteRobot.png', function (texture) {
+        // 로드된 텍스처를 사용하여 재질을 생성
+        var material = new THREE.MeshBasicMaterial({ map: texture });
+
+        waving.traverse(function (child) {
+          if (child.isMesh) {
+            console.log(child.material[0]);
+            child.material[0] = material;
+            child.material[0].needsUpdate = true;
+            child.geometry.computeVertexNormals();
+          }
+          child.castShadow = true;
+        });
+      });
+      // object.traverse를 사용하여 얼굴 텍스처 입히기
+      textureLoader.load(
+        '../fbx/material/CuteRobotFaceTexture_hi.png',
+        function (texture) {
+          // 로드된 텍스처를 사용하여 재질을 생성
+          var material = new THREE.MeshBasicMaterial({ map: texture });
+
+          // object.traverse를 사용하여 모든 메쉬에 새로운 재질을 적용
+          waving.traverse(function (child) {
+            if (child.isMesh) {
+              child.material[1] = material;
+              child.material[1].needsUpdate = true;
+            }
+          });
+        },
+      );
+
+      waving.scale.set(0.01, 0.01, 0.01);
+      waving.position.set(-0.01, 0.2, 0.75);
+      waving.rotation.set(-1.6, 0, 0);
+      camera.lookAt(waving.position);
+
+      // ADD THE BLOB'S BODY TO THE SCENE
+      scene.add(waving);
+
+      fbxLoader.load('../fbx/material/CuteRobot.fbx', function (object) {
+        // Traverse through the object and handle materials
+        object.scale.set(0.01, 0.01, 0.01);
+        console.log(object);
+        textureLoader.load('../fbx/material/CuteRobot.png', function (texture) {
+          // 로드된 텍스처를 사용하여 재질을 생성
+          var material = new THREE.MeshBasicMaterial({ map: texture });
+
+          object.traverse(function (child) {
+            if (child.isMesh) {
+              console.log(child.material[0]);
+              child.material[0] = material;
+              child.material[0].needsUpdate = true;
+              child.geometry.computeVertexNormals();
+            }
+            child.castShadow = true;
+          });
+        });
+
+        textureLoader.load(
+          '../fbx/material/CuteRobotFaceTexture_hi.png',
+          function (texture) {
+            // 로드된 텍스처를 사용하여 재질을 생성
+            var material = new THREE.MeshBasicMaterial({ map: texture });
+
+            // object.traverse를 사용하여 모든 메쉬에 새로운 재질을 적용
+            object.traverse(function (child) {
+              if (child.isMesh) {
+                child.material[1] = material;
+                child.material[1].needsUpdate = true;
+              }
+            });
+          },
+        );
+        // scene.add(object);
+      });
+
+      const clock = new THREE.Clock();
+
+      function animate() {
+
+        controls.update();
+        const delta = clock.getDelta();
+        if ( waving_mixer !== undefined ) waving_mixer.update( clock.getDelta() );
+
+        render();
+
+        // stats.update();
+        requestAnimationFrame(animate);
+
+      }
+
+      function render() {
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>

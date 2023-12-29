@@ -28,8 +28,8 @@
         1000,
       );
       scene.add(new THREE.AxesHelper(5));
-      //   scene.background = new THREE.Color('#fafafa');
-      const light = new THREE.PointLight(0xffffff, 50);
+        scene.background = new THREE.Color('gray');
+      const light = new THREE.PointLight(0xffffff, 100);
 
       const renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -43,8 +43,8 @@
       //   scene.add(cube);
 
       camera.position.z = 5;
-      light.position.set(0.8, 1.4, 1.0);
-      scene.add(light);
+      ambientLight.position.set(0.8, 1.4, 1.0);
+      // scene.add(light);
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.minDistance = 1;
       controls.maxDistance = 500;
