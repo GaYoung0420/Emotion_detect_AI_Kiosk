@@ -16,6 +16,7 @@ class App {
     this._renderer = renderer;
 
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color('white');
     this._scene = scene;
 
     this._setupCamera();
@@ -76,52 +77,88 @@ class App {
     this._controls.target.set(centerBox.x, centerBox.y, centerBox.z);
   }
 
-  _setupModel() {
+  async _setupModel() {
     this._clock = new THREE.Clock();
+
     const textureLoader = new THREE.TextureLoader();
-    const loader = new FBXLoader();
-    loader.load('../fbx/material/Standing_Greeting.fbx', (object) => {
-      textureLoader.load('../fbx/material/CuteRobot.png', function (texture) {
-        // 로드된 텍스처를 사용하여 재질을 생성
-        var material = new THREE.MeshBasicMaterial({ map: texture });
 
-        object.traverse(function (child) {
-          if (child.isMesh) {
-            console.log(child.material[0]);
-            child.material[0] = material;
-            child.material[0].needsUpdate = true;
-            child.geometry.computeVertexNormals();
-          }
-          child.castShadow = true;
-        });
-      });
-      // object.traverse를 사용하여 얼굴 텍스처 입히기
-      textureLoader.load(
-        '../fbx/material/CuteRobotFaceTexture_hi.png',
-        function (texture) {
-          // 로드된 텍스처를 사용하여 재질을 생성
-          var material = new THREE.MeshBasicMaterial({ map: texture });
+    const loadingManager = new THREE.LoadingManager();
+    loadingManager.setURLModifier(function (url) {
+      // this function is called for each asset request
 
-          // object.traverse를 사용하여 모든 메쉬에 새로운 재질을 적용
-          object.traverse(function (child) {
-            if (child.isMesh) {
-              child.material[1] = material;
-              child.material[1].needsUpdate = true;
-            }
-          });
-        },
-      );
-      this._mixer = new THREE.AnimationMixer(object);
-      const action = this._mixer.clipAction(object.animations[0]);
-      console.log(object.animations[0]);
-      action.play();
+      // if (url === './texture1.png') {
+      //   url = './texture2.png';
+      // }
 
-      this._scene.add(object);
-
-      this._zoomFit(object, this._camera, 'Z', true);
-
-      this._clock = new THREE.Clock();
+      return url;
     });
+    const loader = new FBXLoader();
+    const waving = await loader.loadAsync('../fbx/material/CuteRobot.fbx');
+    const waving_ani = await loader.loadAsync(
+      '../fbx/material/StandingIdle(2).fbx',
+    );
+
+    this._mixer = new THREE.AnimationMixer(waving);
+    const action = this._mixer.clipAction(waving_ani.animations[0]);
+    action.play();
+    //waving.children[0].material
+    // loader.setResourcePath('../fbx/material/CuteRobot.png');
+    // const texture1 = await textureLoader.loadAsync(
+    //   '../fbx/material/CuteRobot.png',
+    // );
+    // var material = new THREE.MeshBasicMaterial({ map: texture1 });
+    // var material_a = [];
+    // waving.traverse(function (child) {
+    //   if (child.isMesh) {
+    //     // child.material[0] = material;
+    //     // child.geometry.computeVertexNormals();
+    //   }
+    //   child.castShadow = true;
+    // });
+    // console.log(waving);
+
+    // console.log(waving.animations[0]);
+
+    // loader.load('../fbx/material/Dancing.fbx', (object) => {
+    //   this._mixer = new THREE.AnimationMixer(object);
+    //   const action = this._mixer.clipAction(object.animations[0]);
+    //   console.log(object.animations[0]);
+
+    // textureLoader.load('../fbx/material/CuteRobot.png', function (texture) {
+    //   // 로드된 텍스처를 사용하여 재질을 생성
+    //   var material = new THREE.MeshBasicMaterial({ map: texture });
+
+    //   object.traverse(function (child) {
+    //     if (child.isMesh) {
+    //       console.log(child.material[0]);
+    //       child.material[0] = material;
+    //       child.material[0].needsUpdate = true;
+    //       child.geometry.computeVertexNormals();
+    //     }
+    //     child.castShadow = true;
+    //   });
+    // });
+    // object.traverse를 사용하여 얼굴 텍스처 입히기
+    // textureLoader.load(
+    //   '../fbx/material/CuteRobotFaceTexture_hi.png',
+    //   function (texture) {
+    //     // 로드된 텍스처를 사용하여 재질을 생성
+    //     var material = new THREE.MeshBasicMaterial({ map: texture });
+
+    //     // object.traverse를 사용하여 모든 메쉬에 새로운 재질을 적용
+    //     object.traverse(function (child) {
+    //       if (child.isMesh) {
+    //         child.material[1] = material;
+    //         child.material[1].needsUpdate = true;
+    //       }
+    //     });
+    //   },
+    // );
+    // this._mixer = new THREE.AnimationMixer(waving);
+    // const action = this._mixer.clipAction(waving.animations[0]);
+    // action.play();
+
+    // });
     // loader.load('../fbx/material/Rumba.fbx', (object) => {
     //   this._mixer = new THREE.AnimationMixer(object);
     //   const action = this._mixer.clipAction(object.animations[0]);
@@ -134,6 +171,12 @@ class App {
 
     //   this._clock = new THREE.Clock();
     // });
+
+    this._scene.add(waving);
+
+    this._zoomFit(waving, this._camera, 'Z', true);
+
+    this._clock = new THREE.Clock();
   }
 
   _setupCamera() {
@@ -161,7 +204,6 @@ class App {
 
   update(time) {
     time *= 0.001; // second unit
-
     const delta = this._clock.getDelta();
     if (this._mixer) this._mixer.update(delta);
   }

@@ -369,3 +369,14 @@ body {
   right: -25px;
   filter: drop-shadow(0px 2px 26px rgba(0, 0, 0, 0.25));
 }
+
+.guide_container{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-family: NanumSquare_ac;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}

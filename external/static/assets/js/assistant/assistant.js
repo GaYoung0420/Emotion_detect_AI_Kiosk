@@ -52,7 +52,7 @@ scene.add(light2);
 scene.add(light2.target);
 
 let helper = new THREE.DirectionalLightHelper(light, 5);
-light.add(helper);
+// light.add(helper);
 // const ambientLight = new THREE.AmbientLight();
 // scene.add(ambientLight);
 
@@ -165,8 +165,8 @@ fbxLoader.load(
   },
 );
 
-const stats = new Stats();
-document.body.appendChild(stats.dom);
+// const stats = new Stats();
+// document.body.appendChild(stats.dom);
 
 const animations = {
   default: function () {
@@ -211,7 +211,7 @@ const animate = function () {
   if (modelReady) mixer.update(clock.getDelta());
 
   renderer.render(scene, camera);
-  stats.update();
+  // stats.update();
   // animations.samba();
 };
 
