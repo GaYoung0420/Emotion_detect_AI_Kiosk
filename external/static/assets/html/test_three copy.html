@@ -14,76 +14,76 @@
   </head>
   <body>
     <script type="module">
-            import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
-            import { FBXLoader } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/loaders/FBXLoader.js';
-            import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js';
-            import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js';
-            import Stats from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/libs/stats.module.js';
+      import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
+      import { FBXLoader } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/loaders/FBXLoader.js';
+      import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js';
+      import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js';
+      import Stats from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/libs/stats.module.js';
 
-            //scene
-            const stats = new Stats();
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(
-              75,
-              window.innerWidth / window.innerHeight,
-              0.1,
-              1000,
-            );
-            scene.add(new THREE.AxesHelper(5));
-            scene.background = new THREE.Color('white');
-            const light = new THREE.PointLight(0xffffff, 100);
+      //scene
+      const stats = new Stats();
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000,
+      );
+      scene.add(new THREE.AxesHelper(5));
+      scene.background = new THREE.Color('white');
+      const light = new THREE.PointLight(0xffffff, 100);
 
-            const renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            document.body.appendChild(renderer.domElement);
-            const fbxLoader = new FBXLoader();
-            const geometry = new THREE.BoxGeometry();
-            const material = new THREE.MeshBasicMaterial({ color: 0x00ff80 });
-            const cube = new THREE.Mesh(geometry, material);
-            const ambientLight = new THREE.AmbientLight();
-            const textureLoader = new THREE.TextureLoader();
-            scene.add(ambientLight);
-            //   scene.add(cube);
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+      const fbxLoader = new FBXLoader();
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({ color: 0x00ff80 });
+      const cube = new THREE.Mesh(geometry, material);
+      const ambientLight = new THREE.AmbientLight();
+      const textureLoader = new THREE.TextureLoader();
+      scene.add(ambientLight);
+      //   scene.add(cube);
 
-            camera.position.z = 5;
-            ambientLight.position.set(0.8, 1.4, 1.0);
-            // scene.add(light);
-            const controls = new OrbitControls(camera, renderer.domElement);
-            controls.minDistance = 1;
-            controls.maxDistance = 500;
+      camera.position.z = 5;
+      ambientLight.position.set(0.8, 1.4, 1.0);
+      // scene.add(light);
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.minDistance = 1;
+      controls.maxDistance = 500;
 
-            let modelReady = false;
-            const animationActions = [];
-            let mixer;
-            let activeAction;
-            let lastAction;
-            var animationAction;
+      let modelReady = false;
+      const animationActions = [];
+      let mixer;
+      let activeAction;
+      let lastAction;
+      var animationAction;
 
-            const waving = await fbxLoader.loadAsync('../fbx/material/Dancing.fbx');
+      const waving = await fbxLoader.loadAsync('../fbx/material/Dancing.fbx');
 
-            // ADD AN ANIMATION MIXER TO LOAD THE FILE'S ANIMATION
-            var waving_mixer = new THREE.AnimationMixer(waving);
-            const waving_action = waving_mixer.clipAction(waving.animations[0]);
-            waving_action.play();
+      // ADD AN ANIMATION MIXER TO LOAD THE FILE'S ANIMATION
+      var waving_mixer = new THREE.AnimationMixer(waving);
+      const waving_action = waving_mixer.clipAction(waving.animations[0]);
+      waving_action.play();
 
-            waving.scale.set(0.01, 0.01, 0.01);
-            waving.position.set(-0.01, 0.2, 0.75);
-            waving.rotation.set(-1.6, 0, 0);
-            camera.lookAt(waving.position);
-textureLoader.load(
-                '../fbx/material/CuteRobotFaceTexture_hi.png',
-                function (texture) {
-                  var material = new THREE.MeshBasicMaterial({ map: texture });
+      waving.scale.set(0.01, 0.01, 0.01);
+      waving.position.set(-0.01, 0.2, 0.75);
+      waving.rotation.set(-1.6, 0, 0);
+      camera.lookAt(waving.position);
+      textureLoader.load(
+        '../fbx/material/CuteRobotFaceTexture_hi.png',
+        function (texture) {
+          var material = new THREE.MeshBasicMaterial({ map: texture });
 
-                  waving.traverse(function (child) {
-                    if (child.isMesh) {
-                      child.material[1] = material;
-                      child.material[1].needsUpdate = true;
-                    }
-                  });
-                },
-              );
-            scene.add(waving);
+          waving.traverse(function (child) {
+            if (child.isMesh) {
+              child.material[1] = material;
+              child.material[1].needsUpdate = true;
+            }
+          });
+        },
+      );
+      scene.add(waving);
       /*
             fbxLoader.load('../fbx/material/CuteRobot.fbx', function (object) {
               object.scale.set(0.01, 0.01, 0.01);
@@ -118,26 +118,24 @@ textureLoader.load(
               // scene.add(object);
             });*/
 
-            const clock = new THREE.Clock();
+      const clock = new THREE.Clock();
 
-            function animate() {
+      function animate() {
+        controls.update();
+        const delta = clock.getDelta();
+        if (waving_mixer !== undefined) waving_mixer.update(clock.getDelta());
 
-              controls.update();
-              const delta = clock.getDelta();
-              if ( waving_mixer !== undefined ) waving_mixer.update( clock.getDelta() );
+        render();
 
-              render();
+        // stats.update();
+        requestAnimationFrame(animate);
+      }
 
-              // stats.update();
-              requestAnimationFrame(animate);
+      function render() {
+        renderer.render(scene, camera);
+      }
 
-            }
-
-            function render() {
-              renderer.render(scene, camera);
-            }
-
-            animate();
+      animate();
     </script>
   </body>
 </html>

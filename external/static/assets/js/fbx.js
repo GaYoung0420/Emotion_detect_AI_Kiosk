@@ -93,14 +93,18 @@ class App {
       return url;
     });
     const loader = new FBXLoader();
-    const waving = await loader.loadAsync('../fbx/material/CuteRobot.fbx');
-    const waving_ani = await loader.loadAsync(
-      '../fbx/material/StandingIdle(2).fbx',
-    );
+    // var loader = new GLTFLoader();
+    // var object = await loader.loadAsync('../fbx/untitled.glb');
 
-    this._mixer = new THREE.AnimationMixer(waving);
-    const action = this._mixer.clipAction(waving_ani.animations[0]);
-    action.play();
+    const waving = await loader.loadAsync('../fbx/material/Waving.fbx');
+    // const waving_ani = await loader.loadAsync(
+    //   '../fbx/material/StandingIdle(2).fbx',
+    // );
+
+    // this._mixer = new THREE.AnimationMixer(waving);
+    // const action = this._mixer.clipAction(waving_ani.animations[0]);
+    // action.play();
+
     //waving.children[0].material
     // loader.setResourcePath('../fbx/material/CuteRobot.png');
     // const texture1 = await textureLoader.loadAsync(
