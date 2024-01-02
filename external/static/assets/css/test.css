@@ -25,7 +25,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
-@use "@material";
+@use '@material';
 
 body {
   font-family: helvetica, arial, sans-serif;
@@ -36,19 +36,33 @@ body {
 }
 
 h1 {
-  font-style: italic;
-  color: #ff6f00;
   color: #007f8b;
+  font-family: 'NanumSquare';
+  font-size: 70px;
+  font-weight: 800;
 }
 
 h2 {
   clear: both;
+  font-weight: 800;
 }
 
 em {
   font-weight: bold;
 }
 
+#demos{
+  background-color: #f1f3f4;
+  border: solid gray 1px;
+  padding: 50px;
+  border-radius: 30px;
+}
+#detectResults{
+  width: auto;
+  font-family: 'NanumSquare';
+  font-size: 30px;
+  margin-top: -50px;
+}
 video {
   clear: both;
   display: block;
@@ -56,7 +70,11 @@ video {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
 }
-
+.text_info {
+  font-family: 'NanumSquare';
+  font-size: 35px;
+  font-weight: 650;
+}
 .section {
   opacity: 1;
   transition: opacity 500ms ease-in-out;
@@ -82,16 +100,20 @@ footer {
 
 .videoView {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
 .video-container {
-  position: relative;
+  /* position: relative; */
   height: auto;
   margin-bottom: 20px;
 }
-
+.video_container{
+  position: relative;
+}
 .video {
+  position: relative;
   width: 100%;
   height: auto;
   transform: rotateY(180deg);
