@@ -24,7 +24,6 @@ const {
 const demosSection = document.getElementById('demos');
 const imageBlendShapes = document.getElementById('image-blend-shapes');
 const videoBlendShapes = document.getElementById('video-blend-shapes');
-
 let faceLandmarker = undefined;
 let poseLandmarker = undefined;
 let gestureRecognizer = undefined;
@@ -33,26 +32,44 @@ let webcam1Running = false;
 let webcam2Running = false;
 let webcam_state = false;
 const videoWidth = 480;
-
+localStorage.clear();
 // Before we can use HandLandmarker class we must wait for it to finish
 // loading. Machine Learning models can be large and take a moment to
 // get everything needed to run.
 
-let deviceId1 = null;
-let deviceId2 = null;
+var video1 = null;
+var canvasElement1 = null;
+var canvasCtx1 = null;
+var video2 = null;
+var canvasElement2 = null;
+var canvasCtx2 = null;
+let webcam1_name = null;
+let webcam2_name = null;
 let number = 1;
 // Check if webcam access is supported.
 const hasGetUserMedia = () => !!navigator.mediaDevices?.getUserMedia;
+
+var set_device_name = (name) => {
+  if (webcam1_name == null) {
+    webcam1Running = true;
+    webcam1_name = name;
+  } else {
+    webcam2Running = true;
+    webcam2_name = name;
+  }
+};
 
 var getWebcams = function () {
   return navigator.mediaDevices.enumerateDevices().then((devices) => {
     devices.forEach((device) => {
       if (device.kind === 'videoinput') {
-        if (device.label === 'SPC-A1200MB Webcam (0c45:6340)')
-          webcam1Running = true;
-        else if (device.label === 'SC-FD110B PC Camera (1bcf:2284)')
-          webcam2Running = true;
+        if (device.label == 'SPC-A1200MB Webcam (0c45:6340)') {
+          set_device_name(device.label);
+        } else if (device.label == 'SC-FD110B PC Camera (1bcf:2284)') {
+          set_device_name(device.label);
+        }
       }
+
       if (webcam1Running == true && webcam2Running == true) {
         webcam_state = true;
       }
@@ -97,6 +114,7 @@ var startWebcamStream = function (webcamDevice) {
     // $('#right').append(
     //   '<div>LABEL = "SPC-A1200MB Webcam (0c45:6340)"<br> ID = WebCam"1"</div><video autoplay></video>',
     // );
+    console.log('successCallback');
     var container = document.getElementById('video-container' + number);
     var video = document.createElement('video');
     video.id = 'webcam' + number;
@@ -113,19 +131,24 @@ var startWebcamStream = function (webcamDevice) {
     container.appendChild(video);
     container.appendChild(canvas);
 
-    video.addEventListener('loadeddata', () => {
-      console.log('Video ' + number + ' loaded');
-      predictWebcam(canvas, canvas.getContext('2d'), video);
-    });
+    if (number == 1) {
+      video1 = document.getElementById('webcam1');
+      canvasElement1 = document.getElementById('output_canvas1');
+      canvasCtx1 = canvasElement1.getContext('2d');
+    } else if (number == 2) {
+      video2 = document.getElementById('webcam2');
+      canvasElement2 = document.getElementById('output_canvas2');
+      canvasCtx2 = canvasElement2.getContext('2d');
+    }
     number += 1;
-    console.log(
-      'Webcam stream with device ID = ' +
-        webcamDevice.deviceId +
-        ', LABEL = "' +
-        webcamDevice.label +
-        '" started',
-      'success',
-    );
+    // console.log(
+    //   'Webcam stream with device ID = ' +
+    //     webcamDevice.deviceId +
+    //     ', LABEL = "' +
+    //     webcamDevice.label +
+    //     '" started',
+    //   'success',
+    // );
   };
 
   var errorCallback = function (error) {
@@ -282,73 +305,17 @@ const enableCam = async () => {
       startWebcamStream(webcamDevice);
     });
   });
-  // const test = async () => {
-  //   await navigator.mediaDevices
-  //     .enumerateDevices()
-  //     .then((devices) => {
-  //       devices.forEach((device) => {
-  //         if (device.kind === 'videoinput') {
-  //           if (device.label === 'SPC-A1200MB Webcam (0c45:6340)')
-  //             deviceId1 = device.deviceId;
-  //           else if (device.label === 'SC-FD110B PC Camera (1bcf:2284)')
-  //             deviceId2 = device.deviceId;
-  //         }
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-  // test();
+  window.requestAnimationFrame(predictWebcam_func);
 
-  // // getUserMedia()를 지원하는지 확인하고 웹캠 스트림을 활성화합니다.
-  // if (hasGetUserMedia()) {
-
-  //   navigator.mediaDevices
-  //     .getUserMedia({
-  //       video: {
-  //         deviceId: deviceId1,
-  //       },
-  //     })
-  //     .then((stream) => {
-  //       console.log('deviceId1 : ' + deviceId1);
-  //       console.log(stream);
-
-  //       video1.srcObject = stream;
-  //       video1.addEventListener('loadeddata', () => {
-  //         console.log('Video 1 loaded');
-  //         // predictWebcam(canvasElement1, canvasCtx1, video1);
-  //       });
-  //       webcam1Running = true;
-  //     });
-
-  //   // "SC-FD110B PC Camera (1bcf:2284)"
-  //   // 웹캠 스트림을 활성화하고 예측 함수(predictWebcam)를 호출합니다.
-
-  //   navigator.mediaDevices
-  //     .getUserMedia({
-  //       video: {
-  //         deviceId: deviceId2,
-  //       },
-  //     })
-  //     .then((stream) => {
-  //       console.log('deviceId2 : ' + deviceId2);
-  //       console.log(stream);
-  //       video2.srcObject = stream;
-  //       video2.addEventListener('loadeddata', () => {
-  //         console.log('Video 2 loaded');
-  //         // predictWebcam(canvasElement2, canvasCtx2, video2);
-  //       });
-  //       webcam2Running = true;
-  //     });
-  // } else {
-  //   // getUserMedia()를 지원하지 않는 경우 경고 메시지를 출력합니다.
-  //   console.warn('getUserMedia() is not supported by your browser');
-  // }
+  // 웹캠이 실행 중일 경우, 브라우저가 준비될 때마다 이 함수를 다시 호출하여 지속적으로 예측합니다.
 };
-
-// enableCam();
-
+const predictWebcam_func = () => {
+  if (webcam_state == true && canvasCtx1 != null && canvasCtx2 != null) {
+    predictWebcam(canvasElement1, canvasCtx1, video1);
+    predictWebcam(canvasElement2, canvasCtx2, video2);
+  }
+  window.requestAnimationFrame(predictWebcam_func);
+};
 // faceapi.js에서 사용되는 여러 모델을 비동기적으로 로드합니다.
 Promise.all([
   faceapi.nets.tinyFaceDetector.loadFromUri('../models'),
@@ -368,15 +335,21 @@ let isJawOpen = false;
 let eyeBlinkStartTime = 0;
 let JawOpenStartTime = 0;
 
-let DetectRaisingArmPose = false; // 팔을 들고 있는 것
-let DetectPointingGesture = false; // 포인팅하는 손
-let DetectNegativeExpression; //부정적인 표정
-let DetectGrimaceFace = false; // 눈을 찡그림
-let DetectJawOpen = false; // 눈을 찡그림
+let detect_result_json = {
+  DetectRaisingArmPose: false, // 팔을 들고 있는지
+  DetectPointingGesture: false, // 손을 포인팅하고 있는지
+  emotion: {
+    type: null,
+    DetectNegativeExpression: false, //부정적인 표정을 짓고 있는지
+  },
+  DetectGrimaceFace: false, // 눈을 찡그리고 있는지
+  DetectJawOpen: false, // 입 벌리고 있는지
+};
 
 // 웹캠 비디오 스트림에서 얼굴과 손을 감지하고 해당 랜드마크를 캔버스에 그리는 함수
 async function predictWebcam(canvasElement, canvasCtx, video) {
   const drawingUtils = new DrawingUtils(canvasCtx);
+  let device_name = null;
 
   // 캔버스의 크기를 웹캠 비디오의 크기에 맞게 조정합니다.
   canvasElement.style.width = video.videoWidth;
@@ -395,90 +368,65 @@ async function predictWebcam(canvasElement, canvasCtx, video) {
   // 현재 시간을 기록합니다.
   let startTimeMs = performance.now();
   let nowInMs = Date.now();
-  // 비디오의 현재 시간이 이전과 다를 경우에만 감지 및 예측을 수행합니다.
-  if (lastVideoTime !== video.currentTime) {
-    lastVideoTime = video.currentTime;
 
-    // 웹캠 비디오에서 얼굴과 손을 감지하고 랜드마크를 가져옵니다.
-    results_gestureRecognizer = gestureRecognizer.recognizeForVideo(
-      video,
-      nowInMs,
-    );
+  if (video.id === 'webcam1') {
+    device_name = webcam1_name;
+  } else if (video.id === 'webcam2') {
+    device_name = webcam2_name;
   }
-  DetectRaisingArmPose = false; // 팔을 들고 있는 것
-  DetectPointingGesture = false; // 포인팅하는 손
-  DetectNegativeExpression = false; //부정적인 표정
-  DetectGrimaceFace = false; // 눈을 찡그림
-  DetectJawOpen = false; // 눈을 찡그림
+  select_predict(device_name);
 
-  results_faceLandmarker = faceLandmarker.detectForVideo(video, startTimeMs);
+  function select_predict(device_name) {
+    // 비디오의 현재 시간이 이전과 다를 경우에만 감지 및 예측을 수행합니다.
 
-  results_poseLandmarker = detectPoseLandmarks(
-    drawingUtils,
-    video,
-    canvasElement,
-    canvasCtx,
-  );
+    if (device_name == 'SC-FD110B PC Camera (1bcf:2284)') {
+      // detect face
+      results_faceLandmarker = faceLandmarker.detectForVideo(
+        video,
+        startTimeMs,
+      );
+      // 얼굴의 랜드마크를 캔버스에 그리는 함수
+      drawFaceMarker(results_faceLandmarker, drawingUtils);
 
-  // 손의 랜드마크를 캔버스에 그리는 함수
-  // drawGesturePredict(
-  //   results_gestureRecognizer,
-  //   drawingUtils,
-  //   canvasElement,
-  //   canvasCtx,
-  // );
+      // 감정 Detector
+      expressionDetection(video);
 
-  // 얼굴의 랜드마크를 캔버스에 그리는 함수
-  // drawFaceMarker(results_faceLandmarker, drawingUtils);
+      // 눈 찡그림 인식
+      isEyeBlinkDetectedFunc(results_faceLandmarker);
 
-  // console.log(DetectNegativeExpression);
+      // 입벌림 인식
+      isMouthOpen(results_faceLandmarker);
+    } else if (device_name == 'SPC-A1200MB Webcam (0c45:6340)') {
+      // detect body
+      if (lastVideoTime !== video.currentTime) {
+        lastVideoTime = video.currentTime;
 
-  // 감정 Detector
-  // expressionDetection(video);
-
-  // 눈 찡그림 인식
-  isEyeBlinkDetectedFunc(results_faceLandmarker);
-
-  isMouthOpen(results_faceLandmarker);
-
-  // 손을 포인팅하여 들고있는 자세 인식
-  isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker);
-
-  predictTroubleContext(video);
-
-  // 웹캠이 실행 중일 경우, 브라우저가 준비될 때마다 이 함수를 다시 호출하여 지속적으로 예측합니다.
-  if (webcam_state === true) {
-    window.requestAnimationFrame(() => {
-      const video1 = document.getElementById('webcam1');
-      const canvasElement1 = document.getElementById('output_canvas1');
-      const canvasCtx1 = canvasElement1.getContext('2d');
-
-      const video2 = document.getElementById('webcam2');
-      const canvasElement2 = document.getElementById('output_canvas2');
-      const canvasCtx2 = canvasElement2.getContext('2d');
-      predictWebcam(canvasElement1, canvasCtx1, video1);
-      predictWebcam(canvasElement2, canvasCtx2, video2);
-    });
+        // 웹캠 비디오에서 얼굴과 손을 감지하고 랜드마크를 가져옵니다.
+        results_gestureRecognizer = gestureRecognizer.recognizeForVideo(
+          video,
+          nowInMs,
+        );
+      }
+      results_poseLandmarker = detectPoseLandmarks(
+        drawingUtils,
+        video,
+        canvasElement,
+        canvasCtx,
+      );
+      // 손을 포인팅하여 들고있는 자세 인식
+      isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker);
+      // 손의 랜드마크를 캔버스에 그리는 함수
+      // drawGesturePredict(
+      //   results_gestureRecognizer,
+      //   drawingUtils,
+      //   canvasElement,
+      //   canvasCtx,
+      // );
+    }
   }
 }
 
-// 키오스크 사용시 어려움을 겪는 것을 확인하기 위한 함수
-var webcam1_result = {
-  DetectRaisingArmPose: false,
-  pointingGestureResult: false,
-  negativeExpressionResult: false,
-  grimaceFaceResult: false,
-  jawOpenResult: false,
-};
-
-var webcam2_result = {
-  DetectRaisingArmPose: false,
-  pointingGestureResult: false,
-  negativeExpressionResult: false,
-  grimaceFaceResult: false,
-  jawOpenResult: false,
-};
-function predictTroubleContext(video) {
+function displayResult(labelId, value) {
   /*
     1. 터치를 하려고 하는 자세를 확인 (행동)
       # isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker);
@@ -500,81 +448,9 @@ function predictTroubleContext(video) {
     let DetectJawOpen = false; // 눈을 찡그림
   
   */
-
-  // JavaScript 코드에서 결과를 HTML에 표시하는 부분
-  // 결과를 HTML 요소에 표시하고 true일 경우 텍스트 색상을 파란색으로 변경하는 함수
-
-  if (video.id === 'webcam1') {
-    webcam1_result.DetectRaisingArmPose = DetectRaisingArmPose;
-    webcam1_result.pointingGestureResult = DetectPointingGesture;
-    webcam1_result.negativeExpressionResult = DetectNegativeExpression;
-    webcam1_result.grimaceFaceResult = DetectGrimaceFace;
-    webcam1_result.jawOpenResult = DetectJawOpen;
-  } else if (video.id === 'webcam2') {
-    webcam2_result.DetectRaisingArmPose = DetectRaisingArmPose;
-    webcam2_result.pointingGestureResult = DetectPointingGesture;
-    webcam2_result.negativeExpressionResult = DetectNegativeExpression;
-    webcam2_result.grimaceFaceResult = DetectGrimaceFace;
-    webcam2_result.jawOpenResult = DetectJawOpen;
-  }
-
-  function displayResult(labelId) {
-    let value = false;
-    let webcam1_result_value = false;
-    let webcam2_result_value = false;
-    switch (labelId) {
-      case 'raisingArmPoseResult':
-        webcam1_result_value = webcam1_result.raisingArmPoseResult;
-        webcam2_result_value = webcam2_result.raisingArmPoseResult;
-        break;
-      case 'pointingGestureResult':
-        webcam1_result_value = webcam1_result.pointingGestureResult;
-        webcam2_result_value = webcam2_result.pointingGestureResult;
-        break;
-      case 'negativeExpressionResult':
-        webcam1_result_value = webcam1_result.negativeExpressionResult;
-        webcam2_result_value = webcam2_result.negativeExpressionResult;
-        break;
-      case 'grimaceFaceResult':
-        webcam1_result_value = webcam1_result.grimaceFaceResult;
-        webcam2_result_value = webcam2_result.grimaceFaceResult;
-        break;
-      case 'jawOpenResult':
-        console.log(
-          'webcam1_result.jawOpenResult : ' + webcam2_result.jawOpenResult,
-        );
-        console.log(
-          'webcam2_result.jawOpenResult : ' + webcam2_result.jawOpenResult,
-        );
-        webcam1_result_value = webcam1_result.jawOpenResult;
-        webcam2_result_value = webcam2_result.jawOpenResult;
-        break;
-      default:
-        break;
-    }
-    if (webcam1_result_value === true || webcam2_result_value === true) {
-      value = true;
-    }
-    console.log(value);
-    // const resultElement = document.getElementById(labelId);
-    $('#' + labelId).text(`${labelId}: ${value}`);
-    $('#' + labelId).css('color', value ? 'blue' : 'red');
-    // resultElement.textContent = `${labelId}: ${value}`;
-    // resultElement.style.color = value ? 'blue' : 'red';
-  }
-
-  // 함수 호출 예시
-  displayResult('raisingArmPoseResult');
-  displayResult('pointingGestureResult');
-  displayResult('negativeExpressionResult');
-  displayResult('grimaceFaceResult');
-  displayResult('jawOpenResult');
-
-  // 1. 터치를 할려고 하는가 (자세 확인)
-  // if (DetectRaisingArmPose) {
-  //   if (DetectGrimaceFace) {
-  //   }
-  // }
+  $('#' + labelId).text(`${labelId}: ${value}`);
+  $('#' + labelId).css('color', value ? 'blue' : 'red');
+  localStorage.setItem('Detect_Result', JSON.stringify(detect_result_json));
 }
 
 function isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker) {
@@ -607,14 +483,22 @@ function isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker) {
       rightElbow_position.y < rightIndex_position.y ||
       leftElbow_position.y < leftIndex_position.y
     ) {
-      DetectRaisingArmPose = true; // 팔을 들고 있는 것
+      detect_result_json.DetectRaisingArmPose = true; // 팔을 들고 있는 것
       // console.log("팔 들었음");
     }
     if (pointing_gesture.categoryName === 'Pointing_Up') {
-      DetectPointingGesture = true; // 포인팅하는 손
+      detect_result_json.DetectPointingGesture = true; // 포인팅하는 손
       // console.log("Pointing_Up");
     }
+  } else {
+    detect_result_json.DetectRaisingArmPose = false; // 팔을 들고 있는 것
+    detect_result_json.DetectPointingGesture = false; // 포인팅하는 손
   }
+  displayResult(
+    'raisingArmPoseResult',
+    detect_result_json.DetectRaisingArmPose,
+  );
+  displayResult('pointingGestureResult', detect_result_json.canvas);
 }
 
 // 눈 찡그림 인식
@@ -639,15 +523,16 @@ function isEyeBlinkDetectedFunc(results_faceLandmarker) {
       } else if (elapsedTime >= 1) {
         // 찡그림이 지속되고 3초 이상 경과한 경우
         // console.log("찡그림");
-        DetectGrimaceFace = true;
+        detect_result_json.DetectGrimaceFace = true;
       }
     } else {
       // 찡그림이 감지되지 않음
       isEyeBlinkDetected = false;
-      DetectGrimaceFace = false;
+      detect_result_json.DetectGrimaceFace = false;
       // console.log("찡그림X");
     }
   }
+  displayResult('grimaceFaceResult', detect_result_json.DetectGrimaceFace);
 }
 
 // 입 벌림 인식
@@ -669,15 +554,16 @@ function isMouthOpen(results_faceLandmarker) {
       //   isJawOpen = true;
       // } else if (elapsedTime >= 3) {
       //   // 입벌림이 지속되고 3초 이상 경과한 경우
-      DetectJawOpen = true;
+      detect_result_json.DetectJawOpen = true;
       // }
     } else {
       // 입벌림이 감지되지 않음
       isJawOpen = false;
-      DetectJawOpen = false;
+      detect_result_json.DetectJawOpen = false;
       // console.log("찡그림X");
     }
   }
+  displayResult('jawOpenResult', detect_result_json.DetectJawOpen);
 }
 
 // 표정 Recognition 하는 함수
@@ -703,6 +589,7 @@ async function expressionDetection(video) {
       return max.value > current.value ? max : current;
     }, expressionsResult[0]);
 
+    detect_result_json.emotion.type = maxExpression.name;
     if (
       (maxExpression.name === 'sad' ||
         maxExpression.name === 'angry' ||
@@ -711,16 +598,20 @@ async function expressionDetection(video) {
         maxExpression.name === 'surprised') &&
       maxExpression.value > 0.8
     ) {
-      DetectNegativeExpression = true;
+      detect_result_json.emotion.DetectNegativeExpression = true;
       // console.log(
       //   "부정적 표정 감지: ",
       //   maxExpression.name,
       //   maxExpression.value
       // );
     } else {
-      DetectNegativeExpression = false;
+      detect_result_json.emotion.DetectNegativeExpression = false;
     }
   }
+  displayResult(
+    'negativeExpressionResult',
+    detect_result_json.emotion.DetectNegativeExpression,
+  );
 }
 
 //////////////////////////////// Drawing ********************************
@@ -834,16 +725,20 @@ function detectPoseLandmarks(drawingUtils, video, canvasElement, canvasCtx) {
   let results_poseLandmarker;
   poseLandmarker.detectForVideo(video, startTimeMs, (result) => {
     // canvasCtx.save();
-    // canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    // for (const landmark of result.landmarks) {
-    //   drawingUtils.drawLandmarks(landmark, {
-    //     radius: (data) => DrawingUtils.lerp(data.from.z, -0.15, 0.1, 5, 1),
-    //   });
-    //   drawingUtils.drawConnectors(landmark, PoseLandmarker.POSE_CONNECTIONS);
-    // }
-    // canvasCtx.restore();
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    for (const landmark of result.landmarks) {
+      drawingUtils.drawLandmarks(landmark, {
+        radius: (data) => DrawingUtils.lerp(data.from.z, -0.15, 0.1, 5, 1),
+      });
+      drawingUtils.drawConnectors(landmark, PoseLandmarker.POSE_CONNECTIONS);
+    }
+    canvasCtx.restore();
     results_poseLandmarker = result;
   });
-
   return results_poseLandmarker;
 }
+
+document.addEventListener('click', () => {
+  console.log('click');
+  window.open('../html/kiosk_1_Touch_screen.html');
+});
