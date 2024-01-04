@@ -19,17 +19,35 @@ var move_baner = (select_value) => {
   }
 };
 
+var active_assistant = (value) => {
+  console.log(value);
+  select_value = value;
+  $('#checkbox').attr('checked', select_value);
+  move_baner(select_value);
+};
+
 $('#toggle').click(() => {
   select_value = $('input:checkbox[name=chatbot]:checked').val();
   move_baner(select_value);
 });
 
 // assistant text 수정
-var change_text_speak = (text) => {
-  console.log(guideData.guide[0].text[0]);
-  $('#guide_text').text(guideData.guide[0].text[0]);
+var change_text_speak = (index) => {
+  let guide_text = guideData.guide[0].text;
+
+  $('#guide_text').text(guide_text[index]);
+  if (index < guide_text.length) {
+    if (index == 0) active_assistant(true);
+    setTimeout(function () {
+      if (guide_text.length - 1 == index) {
+        active_assistant(false);
+      } else {
+        change_text_speak(index + 1);
+      }
+    }, 3000);
+  }
 };
-change_text_speak('하이');
+change_text_speak(0);
 
 // local storage가 바뀌면 실행되는 이벤트
 addEventListener('storage', (event) => {
@@ -37,9 +55,7 @@ addEventListener('storage', (event) => {
   if (detect_result != undefined) {
     //assistant가 움직이는 조건
     if (detect_result.DetectJawOpen) {
-      select_value = true;
-      $('#checkbox').attr('checked', select_value);
-      move_baner(select_value);
+      active_assistant(true);
       oldTime = Date.now();
 
       let timer = setInterval(() => {
@@ -54,9 +70,7 @@ addEventListener('storage', (event) => {
         console.log(sec);
 
         if (active_assistant_click == false && sec > 10) {
-          select_value = false;
-          $('#checkbox').attr('checked', select_value);
-          move_baner(select_value);
+          active_assistant(false);
           clearInterval(timer);
         }
       }, 1000);
