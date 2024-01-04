@@ -3,6 +3,8 @@ import { FBXLoader } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/lo
 import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js';
 import Stats from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/libs/stats.module.js';
+
+var guideData = JSON.parse(JSON.stringify(GuideFile));
 var select_value = null;
 var detect_result = null;
 var oldTime = null;
@@ -24,7 +26,8 @@ $('#toggle').click(() => {
 
 // assistant text 수정
 var change_text_speak = (text) => {
-  $('#guide_text').text(text);
+  console.log(guideData.guide[0].text[0]);
+  $('#guide_text').text(guideData.guide[0].text[0]);
 };
 change_text_speak('하이');
 

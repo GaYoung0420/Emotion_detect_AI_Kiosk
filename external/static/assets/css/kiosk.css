@@ -379,4 +379,10 @@ body {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  padding-left:5px;
+  padding-right:10px;
+}
+
+#guide_text{
+  width: 650px;
 }
