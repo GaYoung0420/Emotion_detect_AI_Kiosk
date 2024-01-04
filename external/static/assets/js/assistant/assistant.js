@@ -3,6 +3,10 @@ import { FBXLoader } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/lo
 import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js';
 import Stats from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/libs/stats.module.js';
+var select_value = null;
+var detect_result = null;
+var oldTime = null;
+var active_assistant_click = false;
 var move_baner = (select_value) => {
   if (select_value) {
     $('#baner').removeClass('fade_in');
@@ -14,10 +18,90 @@ var move_baner = (select_value) => {
 };
 
 $('#toggle').click(() => {
-  var select_value = $('input:checkbox[name=chatbot]:checked').val();
+  select_value = $('input:checkbox[name=chatbot]:checked').val();
   move_baner(select_value);
 });
 
+// assistant text 수정
+var change_text_speak = (text) => {
+  $('#guide_text').text(text);
+};
+change_text_speak('하이');
+
+// local storage가 바뀌면 실행되는 이벤트
+addEventListener('storage', (event) => {
+  detect_result = JSON.parse(localStorage.getItem('Detect_Result'));
+  if (detect_result != undefined) {
+    //assistant가 움직이는 조건
+    if (detect_result.DetectJawOpen) {
+      select_value = true;
+      $('#checkbox').attr('checked', select_value);
+      move_baner(select_value);
+      oldTime = Date.now();
+
+      let timer = setInterval(() => {
+        const currentTime = Date.now();
+        // 경과한 밀리초 가져오기
+        const diff = currentTime - oldTime;
+
+        // 초(second) 단위 변환하기
+        const sec = Math.floor(diff / 1000);
+
+        // HTML에 문자열 넣기
+        console.log(sec);
+
+        if (active_assistant_click == false && sec > 10) {
+          select_value = false;
+          $('#checkbox').attr('checked', select_value);
+          move_baner(select_value);
+          clearInterval(timer);
+        }
+      }, 1000);
+    } else {
+    }
+    // localStorage.setItem('Detect_Result', JSON.stringify(detect_result_json));
+  }
+});
+
+//고령층이 어려워함을 detecting하기 위한 조건 함수
+var detect_condition = (detect_result) => {
+  /*
+    1. 터치를 하려고 하는 자세를 확인 (행동)
+      # isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker);
+      - 팔꿈치(14 - right elbow or 13 - left elbow)가 손(20 - right index, 19 - left index)보다 아래에 위치하면 손을 들고 있는 자세
+      - Pointing gesture를 취하고 있으면 터치를 할려고하는 자세를 확인할 수 있음
+    2. 표정의 detect(emotion deteting)
+      # expressionDetection()
+      - 부정적인 감정들("sad", "angry", "fearful", "disgusted", "surprised")을 detect
+      # isEyeBlinkDetectedFunc(results_faceLandmarker)
+      - 눈 찌뿌리는 것을 detect
+      # isMouthOpen(results_faceLandmarker)
+      - 입 벌리고 있는 것을 detect
+    3. 터치 시간
+  
+  */
+  let DetectRaisingArmPose = detect_result.DetectRaisingArmPose; // 팔을 들고 있는 것
+  let DetectPointingGesture = detect_result.DetectPointingGesture; // 포인팅하는 손
+  let DetectNegativeExpression = detect_result.DetectNegativeExpression; //부정적인 표정
+  let DetectGrimaceFace = detect_result.DetectGrimaceFace; // 눈을 찡그림
+  let DetectJawOpen = detect_result.DetectJawOpen; // 눈을 찡그림
+};
+
+$('#assistant_container').click(() => {
+  active_assistant_click = true;
+});
+
+var move_baner = (select_value) => {
+  if (select_value) {
+    $('#baner').removeClass('fade_in');
+    $('#baner').addClass('fade_out');
+  } else {
+    $('#baner').removeClass('fade_out');
+    $('#baner').addClass('fade_in');
+  }
+};
+
+// ******************** three.js assistant ********************************
 const canvas = document.querySelector('#canvas');
 const renderer = new THREE.WebGLRenderer({ canvas });
 const textureLoader = new THREE.TextureLoader();

@@ -427,27 +427,6 @@ async function predictWebcam(canvasElement, canvasCtx, video) {
 }
 
 function displayResult(labelId, value) {
-  /*
-    1. 터치를 하려고 하는 자세를 확인 (행동)
-      # isPointingUpKiosk(results_gestureRecognizer, results_poseLandmarker);
-      - 팔꿈치(14 - right elbow or 13 - left elbow)가 손(20 - right index, 19 - left index)보다 아래에 위치하면 손을 들고 있는 자세
-      - Pointing gesture를 취하고 있으면 터치를 할려고하는 자세를 확인할 수 있음
-    2. 표정의 detect(emotion deteting)
-      # expressionDetection()
-      - 부정적인 감정들("sad", "angry", "fearful", "disgusted", "surprised")을 detect
-      # isEyeBlinkDetectedFunc(results_faceLandmarker)
-      - 눈 찌뿌리는 것을 detect
-      # isMouthOpen(results_faceLandmarker)
-      - 입 벌리고 있는 것을 detect
-    3. 터치 시간
-
-    let DetectRaisingArmPose = false; // 팔을 들고 있는 것
-    let DetectPointingGesture = false; // 포인팅하는 손
-    let DetectNegativeExpression; //부정적인 표정
-    let DetectGrimaceFace = false; // 눈을 찡그림
-    let DetectJawOpen = false; // 눈을 찡그림
-  
-  */
   $('#' + labelId).text(`${labelId}: ${value}`);
   $('#' + labelId).css('color', value ? 'blue' : 'red');
   localStorage.setItem('Detect_Result', JSON.stringify(detect_result_json));
